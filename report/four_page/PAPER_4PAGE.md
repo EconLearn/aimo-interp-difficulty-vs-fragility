@@ -3,7 +3,7 @@
 Jude Wallis (Independent researcher)
 
 *Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 20 October 2026 (UTC); four-page
-version (draft 30). The full report (draft 29, `REPORT.pdf`) is its supplementary material: "Supplement X" points to
+version (draft 30). The full report (draft 29, `report/REPORT_full.pdf` in the repository) is its supplementary material: "Supplement X" points to
 its section or appendix X. Numbers come from our research ledger (entry in brackets) or Figure 1's script; hidden cases
 appear as counts only. Number labels are defined in Appendix A.*
 
@@ -214,7 +214,7 @@ seen).
 
 ## Appendix A. Supplementary material and reproducibility details
 
-**Reproducibility.** v111, v112, v115, v116, v121 and v122 rebuild byte for byte from `release_public_v111/` (v115 /
+**Reproducibility.** v111, v112, v115, v116, v121 and v122 rebuild byte for byte from the repository's root folder (v115 /
 v116 and v121 / v122 from its folders `v115_v116/` and `v121_v122/`; md5s below; every command in its README) [549, 589,
 627]. **Training data**: `training/build_calib.py` rebuilds `calib.json` from the organisers' public parquet (Hugging
 Face `aimo-interp/train-main-v2`, revision `23791d9b`), and `training/refit_low16.py` refits `decision.json` from it and
@@ -237,8 +237,8 @@ range. The prediction's ledger row (`work/miners18/FROZEN_PREDICTION_ledger543.t
 `ffd7c3fcc370631dbc7501bd713444df47f067ede871a672c15ead8aa91a2ec6`, computed on 18 October after the board runs of that
 day, with no external timestamp [566].
 
-**Supplementary material.** The full report (draft 29, `REPORT.pdf`, 38 pages; Markdown source `PAPER_DRAFT_v29.md`)
-holds every detail this version omits; its supplement folder `report_supplement/` holds the full text of its longer
+**Supplementary material.** The full report (draft 29, 38 pages; `report/REPORT_full.pdf` and `report/REPORT_full.md` in the
+repository) holds every detail this version omits; its supplement folder `report_supplement/` holds the full text of its longer
 appendix parts. Where to look: the audit in full, Supplement E.13, and the board draws against it, the supplement's
 Figure 1; every board upload, Supplement A; board-feedback use, Supplement A.2; the 88 negative results with their bars,
 Supplement D and E.6; the worked T10 example, Supplement E.12; decode paths, Supplement E.3; the final-shape mocks and

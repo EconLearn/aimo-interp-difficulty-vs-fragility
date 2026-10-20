@@ -1,0 +1,31 @@
+# Figure 1, draft 30: agreement by label, easy vs hard templates (computed, post hoc; held files only)
+rows 71 (19 non-robust); hard 37 rows on 17 templates (18 non-robust); easy 34 rows on 10 templates (33 robust)
+
+## within-configuration AUC (value, rows, non-robust rows, within-configuration pairs)
+deployed agreement, dress read K 32        all 0.929 (71, 19, 155) | hard 0.875 (37, 18, 56) | easy 1.000 (34, 1, 6)
+agreement, 80 pooled attempts              all 0.948 (71, 19, 155) | hard 0.929 (37, 18, 56) | easy 1.000 (34, 1, 6)
+key-scored accuracy, 80 pooled attempts    all 0.935 (71, 19, 155) | hard 0.911 (37, 18, 56) | easy 1.000 (34, 1, 6)
+hard rows: 80 pooled attempts (2.5x the deployed K 32) add 0.054 AUC; the key-scored share 0.036
+single held reads (K 8 or 16), hard rows: 0.875, 0.920, 0.875, 0.946, 0.955, 0.884; range 0.875 to 0.955
+
+## the entry (v95 rules) leave-one-template-out on the dress read (lane G run_policy)
+right 60/71; hard 30/37; easy 30/34; errors on hard rows 7 of 11
+   T05 Qwen     robust     region easy agreement 0.554
+   T16 Skywork  robust     region hard agreement 0.562
+   T13 Skywork  non-robust region hard agreement 0.647
+   T08 Olmo     robust     region easy agreement 0.819
+   T05 DeepSeek robust     region easy agreement 0.554
+   T19 DeepSeek non-robust region hard agreement 0.819
+   T25 high     non-robust region hard agreement 0.169
+   T26 high     non-robust region hard agreement 0.262
+   T09 low      robust     region hard agreement 0.655
+   T10 low      non-robust region hard agreement 0.762
+   T12 medium   robust     region easy agreement 0.456
+key-scored share in place of agreement (ceiling): right 62/71; hard 32/37; rows changed: T19 DeepSeek fixed; T10 low fixed
+
+## hard rows with agreement 0.562 to 0.819 (0.56 to 0.82): 8 robust, 9 non-robust
+   robust: T16 Skywork, T09 high, T21 high, T10 high, T09 low, T21 medium, T09 medium, T10 medium
+   non-robust: T11 Qwen, T13 Qwen, T13 Skywork, T10 Olmo, T13 Olmo, T19 DeepSeek, T13 DeepSeek, T10 low, T11 low
+T13 rows: Qwen non-robust, Skywork non-robust, Olmo non-robust, DeepSeek non-robust; agreement 0.647
+
+saved /Users/judewallis/algo tester/newcontests/aimo/figures/agreement_by_label_v30.png

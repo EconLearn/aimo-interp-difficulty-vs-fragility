@@ -41,7 +41,7 @@ cases across server states.
 \begingroup
 \renewcommand\thefootnote{}
 \footnotetext{Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 20 October 2026
-(UTC); four-page version (draft 30). The full report (draft 29) is the supplementary material: ``Supplement X'' refers
+(UTC); four-page version (draft 30). The full report (draft 29, \texttt{report/REPORT\_full.pdf} in the repository) is the supplementary material: ``Supplement X'' refers
 to its section or appendix X. Every number traces to an entry of our dated research ledger or to Figure~\ref{fig:agree}'s
 script: Appendix~\ref{app:supp} lists the entries by section, and the supplement cites them at each number. Hidden cases
 appear as counts only; number labels (board, public rows, server, computed, mock, model-based, local proxy, guess) are
@@ -341,7 +341,7 @@ checked in the publisher's record; abstract not seen).\par}
 \section{Supplementary material and reproducibility details}
 \label{app:supp}
 
-\textbf{Reproducibility.} v111, v112, v115, v116, v121 and v122 rebuild byte for byte from \path{release_public_v111/}
+\textbf{Reproducibility.} v111, v112, v115, v116, v121 and v122 rebuild byte for byte from the repository's root folder
 (v115\,/\,v116 and v121\,/\,v122 from its folders \path{v115_v116/} and \path{v121_v122/}; md5s below; every command in
 its README). \textbf{Training data}: \path{training/build_calib.py} rebuilds \texttt{calib.json} from the organisers'
 public parquet (Hugging Face \path{aimo-interp/train-main-v2}, revision \texttt{23791d9b}), and
@@ -380,8 +380,8 @@ sha256
 \end{center}
 computed on 18 October after the board runs of that day, with no external timestamp.
 
-\textbf{Supplementary material.} The full report (draft 29, \texttt{REPORT.pdf}, 38 pages) holds every detail this
-version omits; its supplement folder \path{report_supplement/} holds the full text of its longer appendix parts. Where
+\textbf{Supplementary material.} The full report (draft 29, 38 pages; \texttt{report/REPORT\_full.pdf} in the repository) holds every detail this
+version omits; its supplement folder \texttt{report/report\_supplement/} holds the full text of its longer appendix parts. Where
 to look: the audit in full, Supplement E.13, and the board draws against it, the supplement's Figure 1; every board
 upload, Supplement A; board-feedback use, Supplement A.2; the 88 negative results with their bars, Supplement D and
 E.6; the worked T10 example, Supplement E.12; decode paths, Supplement E.3; the final-shape mocks and the pre-mortem,
