@@ -1,8 +1,8 @@
 # AIMO Interpretability Challenge 2026: entry v111 (main track) and v112 (small track)
 
 Code for our entry to the AIMO Interpretability Challenge (NeurIPS 2026, Codabench 16180). The technical report
-("Auditing a behavioural difficulty reading for generalisation: robustness prediction inside a fixed GPU budget, with
-pre-registered negative results") describes the method and every measurement behind it.
+("Difficulty is not fragility: an audited robustness predictor and 70 negative results"; four-page version and the full
+report with its supplement in `report/`) describes the method and every measurement behind it.
 
 v111 and v112 are our first candidate nominees for the final evaluation (all six: "Candidate nominees" below). They are v95 (main) and v96 (small), whose code we
 released earlier as `release_public_v95/` and which is copied unchanged into `v95_v96/` here for the comparisons, with

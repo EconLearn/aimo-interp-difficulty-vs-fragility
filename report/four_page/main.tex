@@ -1,0 +1,404 @@
+% Four-page version of the AIMO Interpretability Challenge 2026 technical report (draft 30, 20 October 2026).
+% LaTeX twin of ../PAPER_4PAGE_v30.md; the full report (draft 29) is the supplementary material. Draft 29's four-page
+% twin (../report4/main.tex) is kept unchanged.
+%
+% Style file: neurips_2026.sty comes from the official NeurIPS 2026 template on Overleaf
+% (Overleaf -> New Project -> Templates -> NeurIPS 2026). Replace that project's main.tex with this file, upload
+% agreement_by_label_v30.png next to it, and compile with pdfLaTeX. The bibliography is inline (thebibliography),
+% so no BibTeX run is needed.
+%
+% All author placeholders were filled on 20 October 2026 from the author's answers.
+% No placeholders remain (the Outcome paragraph states that the final is scored after the report deadline).
+\documentclass{article}
+
+\usepackage[preprint]{neurips_2026}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx,booktabs,hyperref}
+\usepackage{url}
+
+\title{Difficulty is not fragility: an audited robustness predictor and 70 negative results}
+
+\author{\textbf{Jude Wallis (Independent researcher)}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We predict, inside a fixed GPU budget, whether a configuration's accuracy on a math problem survives the organisers'
+perturbations, and find that difficulty is not fragility. A stronger model's answer agreement reads a problem's
+difficulty and ranks the 71 labelled public rows at within-configuration AUC 0.929, mostly because 33 of 34 rows on
+easy templates are robust. On the 37 rows of hard templates the AUC is 0.875, robust and non-robust rows mix at the
+same agreement, and 2.5 times more attempts or a perfect answer key add at most 0.054 AUC and 2 rows. What is left is
+fragility, and no in-budget attempt to read it passed a bar set before its data: of 88 negative results, 70 failed and
+2 were unclear. Leave-one-template-out our entry gets 60 of 71 public and 18 of 24 fresh rows, its board-chosen layer
+gained no more than keep-if-better selection on coin flips, and a 21-case validation board total varies by about 1.3
+cases across server states.
+\end{abstract}
+
+\begingroup
+\renewcommand\thefootnote{}
+\footnotetext{Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 20 October 2026
+(UTC); four-page version (draft 30). The full report (draft 29) is the supplementary material: ``Supplement X'' refers
+to its section or appendix X. Every number traces to an entry of our dated research ledger or to Figure~\ref{fig:agree}'s
+script: Appendix~\ref{app:supp} lists the entries by section, and the supplement cites them at each number. Hidden cases
+appear as counts only; number labels (board, public rows, server, computed, mock, model-based, local proxy, guess) are
+defined in Appendix~\ref{app:supp}.}
+\endgroup
+
+\section{Introduction}
+\label{sec:intro}
+
+The AIMO Interpretability Challenge \citep{stefanik2026} asks, for each \emph{case}, a (problem, configuration) pair,
+whether the configuration's accuracy survives perturbation of the problem. The configurations are Qwen3.5-4B,
+Skywork-OR1-Math-7B, Olmo-3-7B-Think and DeepSeek-R1-0528-Qwen3-8B (the small track), and gpt-oss-120b at low, medium
+and high effort. A case is robust iff the largest accuracy drop over the organisers' families of perturbed texts is at
+most 0.10, non-robust iff at least 0.25, and exists only if the configuration solves the original robustly. An entry
+sees only the original text, runs each case in its own process on one GPU and faces 30 to 50 new problems in the final
+at about 170\,s each.
+
+We show that \textbf{difficulty is not fragility}: a stronger model's reading of difficulty carries most of the public
+ranking but saturates on hard problems, where the label turns on fragility and none of our in-budget readings passed a
+pre-set bar (Sections~\ref{sec:label} and~\ref{sec:neg}). Edited or re-instantiated problems are known to cut accuracy
+\citep{mirzadeh2025,huang2025a,mondorf2026}; whether probes and interpretations predict unseen behaviour is asked by
+\citet{belinkov2022}, \citet{li2025} and \citet{huang2025b}. We ask it of a whole entry, with a selection null from
+adaptive data analysis \citep{dwork2015,blum2015,roelofs2019}.
+
+\section{Data and the entry}
+\label{sec:data}
+
+\textbf{Data.} 82 public rows over 28 templates, 71 labelled (52 robust); \emph{fresh rows} are the 24 labelled rows on
+12 AIME-2026 templates; 9 of 12 Skywork rows added on 15 October are labelled (7 robust). The validation boards hold 21
+main cases (10 robust) and 14 small cases (7 robust). The site invites iterating on them; when we did, each upload was a
+method variant with a public-row reason, never constant answers per configuration or per-case probes, but board counts
+per configuration carry hidden-label information, which we used while choosing three routes (Supplement A.2);
+Section~\ref{sec:audit} audits that use.
+
+\textbf{The entry reads behaviour only.} \emph{Stand-in} (Qwen, DeepSeek, gpt-oss low and medium cases): gpt-oss-120b
+at low effort makes 4 to 32 attempts; their \emph{agreement} (the probability that two attempts that ended on their own
+agree), a Qwen3.5-4B quick finish and an effort code enter a logistic rule with 10 coefficients (\texttt{decision.json}).
+\emph{Own runs} (Skywork, Olmo): robust iff at least 1 (Skywork) or 2 (Olmo) of 3 attempts of the judged model end on
+their own inside a 9,000- or 10,000-token cap. \emph{Prior} (gpt-oss high): robust, as 13 of 15 public rows are.
+\emph{The entry} is v95 (main) and v96 (small); v111 and v112 are their rebuilds for the final.
+
+\section{Difficulty is not fragility}
+\label{sec:label}
+
+\textbf{Two meanings of difficulty.} The judged model's solve rate carries almost none of the label: in our fit of the
+label recipe the chance of a non-robust label is flat, 0.18 to 0.21, for solve rates from 0.5 to 1.0, and sampling
+noise explains only about 3\% of non-robust labels (computed); on T13 every small model solves the problem and every
+one is labelled non-robust. Difficulty read by a stronger model carries far more: within each configuration, the
+stand-in's agreement at K~32 ranks the 71 public rows at AUC 0.929.
+
+\textbf{That reading saturates on hard templates} (Figure~\ref{fig:agree}; computed, post hoc, one server read). Its
+AUC comes mostly from the 10 easy templates, where 33 of 34 rows are robust. On the 17 \emph{hard} templates, which a
+2,000-token reader never finishes (37 rows, 18 non-robust), it is 0.875, and between agreement 0.56 and 0.82, 8 robust
+and 9 non-robust rows mix. 80 pooled attempts give 0.929 and their accuracy against the answer key 0.911, inside the
+0.875 to 0.955 of single held reads; leave-one-template-out (LOTO), the key fixes 2 hard rows. Decisions built on
+agreement get 0.743 of hard rows right (LOTO accuracy, mean of six reads); 7 of our entry's 11 LOTO errors are hard
+rows.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{agreement_by_label_v30.png}
+\caption{The stand-in's agreement on each labelled public row (one server read, K~32), by label, on easy and hard
+templates. Diamonds: T13. Shading: the range where both labels occur. Script
+\texttt{figures/make\_agreement\_by\_label\_v30.py}.}
+\label{fig:agree}
+\end{figure}
+
+\textbf{What fragility can look like.} On two harsher expert-style T10 texts, gpt-oss low's wrong answers are exactly
+those of a mutant of the correct method that skips a triangle bound, equivalent at the original numbers (850 = 850;
+\citealp{papadakis2015}). gpt-oss medium shares the slip yet is labelled robust, so our texts are harsher than the
+organisers'.
+
+\section{A generalisation audit}
+\label{sec:audit}
+
+\textbf{What was fitted, and when.} The only label-fitted part, \texttt{decision.json}, was fitted on the 71 public
+rows on 5 October, before the board-iteration period of 10 to 11 October; a LOTO refit changes 1 of 71 answers. Three
+choices from that period (the gpt-oss high prior and both own runs) decide 8 of 21 main and 6 of 14 small cases; about
+ten hand-set values (caps, K, thresholds) cannot be cross-validated. Table~\ref{tab:audit} gives out-of-sample
+accuracy.
+
+\begin{table}[t]
+\caption{The entry's rules on public rows (same server read), LOTO with \texttt{decision.json} refitted per held-out
+template (template-bootstrap 95\% intervals; the 80-row line pre-registered), the board this predicts (model-based) and
+the board observed (OFFICIAL, one draw each).}
+\label{tab:audit}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{0.25\linewidth}p{0.37\linewidth}p{0.18\linewidth}p{0.14\linewidth}@{}}
+\toprule
+Rows, LOTO & Accuracy & Predicted board (90\% range) & Board \\
+\midrule
+All 71 (in-sample 61) & 60/71 = 0.845 [0.75, 0.92] & main 17.0 (13 to 20) & 16 (v95), 17 (v111) \\
+24 fresh AIME-2026 rows & 18/24 = 0.750 [0.59, 0.91] & main 15.7 (11 to 20) & 16, 17 \\
+34 small-model rows & 0.817 at the board's class mix & small 11.4 (8 to 14) & 10 (v96), 9 (v112) \\
+80 rows, 8 reads pooled & 68.75/80 = 0.859 (65 to 71 per read; balanced 0.826; always-robust 0.738) & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{The board-chosen layer against a selection null.} Keeping a change only when the board rises gains +3.9 in
+expectation (90\% range 1 to 8) if every changed answer is a coin flip and +7.3 (3 to 12) if each is right 70\% of the
+time (model-based). The three routes kept +3, inferred from board counts (Supplement A.2), inside both ranges: the test
+cannot separate them, and \textbf{the board-chosen layer adds no demonstrable accuracy}. Moving Skywork's cases to the
+stand-in gains on the original public rows in four of five reads, and three of the six LOTO fresh-row errors sit on
+board-chosen routes. On 9 Skywork rows labelled later (7 robust), the own run gets 9 of 9 on one read but 7, the
+always-robust count, on another, and the stand-in about 7.3 over eight reads, so they cannot separate the routes.
+
+\textbf{A frozen prediction.} We expect v111 to get \textbf{about 16 of 21 main cases right on new problems} (90\% range
+11 to 20), not our best draw's 19. Guess ranges for final accuracy, frozen on 17 October (assumptions, rule and hash in
+Appendix~\ref{app:supp}), are 0.72 to 0.82 for v111 and 0.62 to 0.76 for v112; Section~\ref{sec:noise}'s noise alone
+gives them only about 0.4 to 0.5 and 0.55 to 0.7 coverage (computed). \textbf{Outcome.} The final is scored after this report's deadline, so the outcome is not known at submission; we will report each nominee's accuracy against these ranges, read with the coverage note, whichever way it falls.
+
+\section{How much a board score moves}
+\label{sec:noise}
+
+From our own logs, without hidden labels (computed): a reading repeats exactly within one server state (23 of 23
+same-problem groups), but across states a stand-in call flips with probability about 0.26 (90\% interval 0.14 to 0.45;
+12 flips in 46 comparisons). One board total thus varies by about 1.3 cases on main and 1.0 on small, matching four
+earlier draws of the same rules (19, 17, 18, 16). \textbf{A 21-case board cannot order entries whose readings resample
+and that differ by two cases or fewer}: 17 against 15 arises with probability 0.41 with no real difference. On 30 to 50
+new problems, reading noise and problem sampling give about 0.07 to 0.09 accuracy per run.
+
+\section{Negative results}
+\label{sec:neg}
+
+Of 88 negative results (Supplement D), \textbf{70 failed a bar written before their data} in our dated,
+author-controlled ledger (no external timestamp), 2 were unclear (Supplement D, judging substance, counts
+Table~\ref{tab:neg}'s last row as failed), 13 had no bar or a post hoc one, and 3 were not built or run; some are
+engineering levers or board bets. In Table~\ref{tab:neg}, a difficulty variant adds nothing over
+agreement and no fragility reading passed.
+
+\begin{table}[t]
+\caption{Seven informative readings (server: contest server; local proxy: 4-bit weights on a Mac).}
+\label{tab:neg}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{0.33\linewidth}p{0.095\linewidth}p{0.20\linewidth}p{0.215\linewidth}p{0.09\linewidth}@{}}
+\toprule
+Reading & Measures & Bar, set first & Result & Verdict \\
+\midrule
+Probe on Qwen3.5-4B prompt states (server) & internal state & balanced accuracy $\geq 0.80$ & 0.669 (stand-in 0.844)
+& failed \\
+Probes for the rating below: Qwen3.5-4B states on text, solution, thinking (local proxy); gpt-oss-120b (server) &
+internal state & Spearman $\geq 0.60$, 28 templates & 0.277, 0.454, 0.304; 0.030 & failed \\
+Token confidence for agreement, four forms (\citealp{fu2025}; server) & difficulty & +2 rows of 71; +1 on a second
+read & $-3$, 0, $-12$, $-9$; second read $-1$, 0, $-7$, $-3$ & failed \\
+Five blinded Claude raters: would new numbers make a dormant condition bind? Five in-hour versions & fragility & AUC
+$\geq 0.70$, 37 hard rows; one bar per version & 0.646; none of five passed & failed \\
+STD: own steps against own brute force on new numbers; three blind writers & fragility & 11 of 12 7B rows; AUC
+$\geq 0.80$; Spearman $\geq 0.40$ & 9, 11, 10 of 12; AUC 0.724, 0.900, 0.789 & each failed a bar \\
+Premise reliance; instance-binding depth (local proxy) & fragility & Spearman with the rating $\leq -0.30$; sabotage
+loses & +0.150 (11 of 34 problems defined); $-0.038$ (27); sabotage did not lose & failed \\
+Answer-keeping organiser-style rewrites, gpt-oss low (server, 7 rows) & fragility & drop $\geq 0.20$ on non-robust
+rows & +0.03, +0.10; AUC 0.30 & unclear (0.10 is the boundary) \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\parbox{\linewidth}{\footnotesize At these sizes 80\% power needs a true Spearman of about 0.51 (28 templates) or an
+AUC of about 0.77 (19 against 18 rows) (Supplement D): ``failed'' means not shown, not absent. One read of the 80-row
+bench scores 65 to 71, so +1- and +2-row gates sit within read-to-read spread.}
+\end{table}
+
+\textbf{Probes} held signal inside their 325-problem training pool (nested Spearman 0.346) that did not transfer to the
+28 templates: \textbf{we make no White-Box claim}. \textbf{STD}, written by an author who had read the raters' notes,
+scored 12 of 12 7B rows, blind 9 to 11: \textbf{a reading computed through a solver's own steps needs a blind
+replication.}
+
+\section{Efficiency under a 170\,s per-case budget}
+\label{sec:eff}
+
+For the per-case harness of 15 October the entry rebuilt the work per case. Our decode paths share one K/V read across
+a KV head's query heads and write K and V in place; in pre-registered server benches a step takes 0.42x (Skywork) and
+0.48x (Olmo) of the default time, gpt-oss-120b 54.9 against 225.2\,ms. Per-case-safe variants (v115, v116) answered
+every board case in at most 148\,s, under the final's 170\,s.
+
+\section{Limitations and lessons}
+\label{sec:limits}
+
+\textbf{Limitations.} Reading noise is measured coarsely (3 server states); fresh rows were seen while hand-set values
+were chosen; the own runs rest on thin, post hoc support (3 Skywork and 9 Olmo rows when chosen); the rating rubric's
+author had seen the labels; raters and blind writers are Claude subagents; the final is mocked, not run.
+\textbf{Lessons.} Split a reading's score by where the label varies; refit label-fitted parts LOTO and compare board
+gains with a selection null (\texttt{audit.py}), which moved our expectation from our best draw (19) to about 16 of 21;
+set bars above read-to-read noise.
+
+\section*{AI Use Statement}
+
+\textbf{Generative AI was used for most of this work.} We used Anthropic's Claude through Claude Code, a tool in which
+Claude writes and runs code, reads and edits files and starts further Claude instances (subagents). The Claude models used were Claude Opus 5.5, Claude Opus 5 and Claude Fable 5.1. Claude was used for:
+\begin{itemize}
+\item \textbf{ideation}: research directions, hypotheses and the design of each pre-registered test (bars, controls,
+  outcome branches);
+\item \textbf{coding}: the entries, decode paths, mocks, fault injection, the analysis and audit scripts, the release
+  folders and the figure scripts;
+\item \textbf{experiments and analysis}: local runs, the statistics and the research ledger; operating the competition
+  site in a logged-in browser session of the competition account, to read server logs and, from 18 October, to upload
+  entries and research runs;
+\item \textbf{literature}: search and reading (statuses in the References);
+\item \textbf{writing}: this report, its supplement and its consistency checks; Claude instances also reviewed drafts
+  and code.
+\end{itemize}
+Claude instances were also the five blinded raters and the three blind program writers of Section~\ref{sec:neg} (a
+limitation; Section~\ref{sec:limits}). No Claude model runs inside the entries, which use only the open models of
+Section~\ref{sec:intro}.
+
+\textbf{Tasks done without generative AI.} The author set the goals and limits of the work; authorised every upload, including those Claude carried out from 18 October, and every use of compute; made the final decisions, including the nominations; provided and managed the competition account and all other accounts; sent every message to the organisers (Claude drafted some of them); and submits this report.
+
+\textbf{Review and responsibility.} The author reviewed this report and its results before submission and takes full responsibility for the final content of this paper, including AI-assisted text, claims, code and other artefacts.
+
+\begin{thebibliography}{12}
+
+\bibitem[Belinkov(2022)]{belinkov2022}
+Belinkov.
+\newblock Probing classifiers: Promises, shortcomings, and advances.
+\newblock \emph{Computational Linguistics}, 48(1), 2022.
+\newblock Status: listed.
+
+\bibitem[Blum and Hardt(2015)]{blum2015}
+Blum and Hardt.
+\newblock The Ladder: A reliable leaderboard for machine learning competitions.
+\newblock In \emph{ICML}, 2015.
+\newblock Status: abstract.
+
+\bibitem[Dwork et~al.(2015)]{dwork2015}
+Dwork et~al.
+\newblock The reusable holdout: Preserving validity in adaptive data analysis.
+\newblock \emph{Science}, 2015.
+\newblock Status: abstract.
+
+\bibitem[Fu et~al.(2025)]{fu2025}
+Fu, Wang, Tian, and Zhao.
+\newblock Deep think with confidence (DeepConf).
+\newblock arXiv:2508.15260, 2025.
+\newblock Status: abstract.
+
+\bibitem[Huang et~al.(2025a)]{huang2025a}
+Huang et~al.
+\newblock MATH-Perturb: Benchmarking LLMs' math reasoning abilities against hard perturbations.
+\newblock In \emph{ICML}, 2025a. arXiv:2502.06453.
+\newblock Status: abstract.
+
+\bibitem[Huang et~al.(2025b)]{huang2025b}
+Huang, Tao, Icard, Yang, and Potts.
+\newblock Internal causal mechanisms robustly predict language model out-of-distribution behaviors.
+\newblock In \emph{ICML}, 2025b.
+\newblock Status: listed.
+
+\bibitem[Li et~al.(2025)]{li2025}
+Li, Kaufmann, Wattenberg, Alvarez-Melis, and Saphra.
+\newblock Can interpretation predict behavior on unseen data?
+\newblock arXiv:2507.06445, 2025.
+\newblock Status: listed.
+
+\bibitem[Mirzadeh et~al.(2025)]{mirzadeh2025}
+Mirzadeh et~al.
+\newblock GSM-Symbolic: Understanding the limitations of mathematical reasoning in large language models.
+\newblock In \emph{ICLR}, 2025.
+\newblock Status: listed.
+
+\bibitem[Mondorf et~al.(2026)]{mondorf2026}
+Mondorf, Bell, Dodge, and Hupkes.
+\newblock LPDS: Evaluating LLM robustness through logic-preserving difficulty scaling.
+\newblock arXiv:2605.15393, 2026.
+\newblock Status: read.
+
+\bibitem[Papadakis et~al.(2015)]{papadakis2015}
+Papadakis et~al.
+\newblock Trivial compiler equivalence: A large scale empirical study of a simple, fast and effective equivalent
+mutant detection technique.
+\newblock In \emph{ICSE}, 2015.
+\newblock Status: record.
+
+\bibitem[Roelofs et~al.(2019)]{roelofs2019}
+Roelofs et~al.
+\newblock A meta-analysis of overfitting in machine learning.
+\newblock In \emph{NeurIPS}, 2019.
+\newblock Status: abstract.
+
+\bibitem[{\v{S}}tef{\'a}nik et~al.(2026)]{stefanik2026}
+{\v{S}}tef{\'a}nik, Mondorf, Waldis, et~al.
+\newblock AIMO Interpretability Challenge (the organisers' proposal).
+\newblock arXiv:2607.13899, 2026.
+\newblock Status: read.
+
+\end{thebibliography}
+
+{\small\noindent Status: \emph{read} (we read the paper), \emph{abstract} (abstract page only), \emph{listed}
+(details from the organisers' proposal's bibliography; we did not open the work), \emph{record} (authors and venue
+checked in the publisher's record; abstract not seen).\par}
+
+\appendix
+
+\section{Supplementary material and reproducibility details}
+\label{app:supp}
+
+\textbf{Reproducibility.} v111, v112, v115, v116, v121 and v122 rebuild byte for byte from \path{release_public_v111/}
+(v115\,/\,v116 and v121\,/\,v122 from its folders \path{v115_v116/} and \path{v121_v122/}; md5s below; every command in
+its README). \textbf{Training data}: \path{training/build_calib.py} rebuilds \texttt{calib.json} from the organisers'
+public parquet (Hugging Face \path{aimo-interp/train-main-v2}, revision \texttt{23791d9b}), and
+\path{training/refit_low16.py} refits \texttt{decision.json} from it and our four public-template server logs
+(\path{training/runs/}). \textbf{Board scores}: each zip runs unchanged in the organisers' per-case harness; a rerun in
+another server state varies by about 1.3 cases on main and 1.0 on small (Section~\ref{sec:noise}).
+\textbf{Licence}: code under the MIT License; report text under CC BY 4.0. \textbf{Repository}: \url{https://github.com/EconLearn/aimo-interp-difficulty-vs-fragility}.
+
+\textbf{Candidate nominee files} (md5 of each zip; board OFFICIAL, one draw each; the nomination plan is in Supplement
+10).
+
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{0.20\linewidth}p{0.22\linewidth}p{0.40\linewidth}p{0.12\linewidth}@{}}
+\toprule
+Role & File & md5 & Board \\
+\midrule
+The entry rebuilt for the final, main; small & \texttt{aimo\_v111\_main.zip}; \texttt{aimo\_v112\_small.zip} &
+\texttt{9686c9cec06ec4dc40f9b728f7ef17db}; \texttt{8b404890d71bc5483ccce18f88887636} & 17 of 21; 9 of 14 \\
+Per-case-safe variants (own runs stop at 160\,s) & \texttt{aimo\_v115\_main.zip}; \texttt{aimo\_v116\_small.zip} &
+\texttt{ad191e2e2262b0a918ec1aaf83bcf9c7}; \texttt{d3ada3a4b8ff05b5876582246008bbf9} & 15 of 21; 9 of 14 \\
+The same with every reading's seed shifted & \texttt{aimo\_v121\_main.zip}; \texttt{aimo\_v122\_small.zip} &
+\texttt{22ced3169a4d73b5cfe9b7ceb0d815b6}; \texttt{4de6852eee8d4c3e6ccb07576c422a31} & 15 of 21; 9 of 14 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Frozen prediction} (Section~\ref{sec:audit}). Assumed: a roughly balanced class mix, a validation-like
+configuration mix and a server at most 1.2x slower than our mock. By a rule fixed before any final result, the forecast
+holds on a track if the final accuracy of v111 (main) or v112 (small), or of another nominee if only that one is
+scored, lies in its range. The prediction's ledger row (\path{work/miners18/FROZEN_PREDICTION_ledger543.txt}) has
+sha256
+\begin{center}
+\small\texttt{ffd7c3fcc370631dbc7501bd713444df47f067ede871a672c15ead8aa91a2ec6},
+\end{center}
+computed on 18 October after the board runs of that day, with no external timestamp.
+
+\textbf{Supplementary material.} The full report (draft 29, \texttt{REPORT.pdf}, 38 pages) holds every detail this
+version omits; its supplement folder \path{report_supplement/} holds the full text of its longer appendix parts. Where
+to look: the audit in full, Supplement E.13, and the board draws against it, the supplement's Figure 1; every board
+upload, Supplement A; board-feedback use, Supplement A.2; the 88 negative results with their bars, Supplement D and
+E.6; the worked T10 example, Supplement E.12; decode paths, Supplement E.3; the final-shape mocks and the pre-mortem,
+Supplement E.15 and E.17; token confidence, the 80-row rescore, the key-headroom check and the fragility vectors,
+Supplement E.18; the decision rule's coefficients, Supplement F.4; scripts, including \texttt{audit.py}, Supplement F.7.
+Figure~\ref{fig:agree} is made by \path{figures/make_agreement_by_label_v30.py} from held logs (lane G's loader and the
+server read of 15 October); it writes its numbers to \path{figures/make_agreement_by_label_v30.out}.
+
+\textbf{Number labels.} \emph{Board}: the OFFICIAL hidden validation score, counts only, one draw each. \emph{Public
+rows}: the labelled public rows (in-sample where our rule was fitted on them). \emph{Server}: a research run on the
+contest server. \emph{Computed}: offline, from logs or outputs we hold. \emph{Mock}: a rehearsal on a virtual clock
+(time, coverage and validity, not accuracy). \emph{Model-based}: a simulation. \emph{Local proxy}: a run on a Mac with
+4-bit weights standing in for a judged model. \emph{Guess}: a judgement, given as a range.
+
+\textbf{Ledger entries.} The numbers of each section come from these entries of our dated research ledger (the
+supplement cites them at each number). The ledger holds internal notes and is not published as it stands; a redacted
+extract of the cited entries is available on request.
+{\small Section 1: 2, 178, 464, 513, 537; Section 2: 3, 278, 382, 446, 509, 617, 99, 270, 329b, 272b, 269, 339, 336, 540; Section 3: 416, 197, 266, 611, 440, 267b, 278, 446, 318; Section 4: 509, 618, 471, 560, 564, 617, 393, 543; Section 5: 585, 393; Section 6: 394, 499, 506, 516, 555, 614, 447, 457, 461, 470, 477, 479, 491, 521, 523, 528, 619, 302, 309, 618, 616, 489; Section 7: 464, 468, 471, 476, 360, 186, 365, 193, 575, 576; Section 8: 585, 339, 387, 447, 453, 538; AI Use Statement: 556, 601; References: 583; Appendix A: 549, 589, 627, 585, 540, 560, 564, 573, 575, 576, 588, 608, 568, 566.\par}
+
+\end{document}
