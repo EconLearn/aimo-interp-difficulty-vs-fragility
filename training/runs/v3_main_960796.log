@@ -1,0 +1,56 @@
+[v3m   113.0s] oss_low: batch 32 rows (K 16), 1855 steps, 105.3s, 57 ms/step
+[v3m   154.8s] qwen_nothink: batch 8 rows (K 4), 2010 steps, 39.6s, 20 ms/step
+[v3m   154.8s] call 1 (Qwen/Qwen3.5-4B:default): 2 cases, agreement 2/2, finish 2/2, predicted robust 1/2
+[v3m   643.8s] oss_low_3000: batch 96 rows (K 8), 3005 steps, 484.1s, 161 ms/step
+[v3m   643.8s] oss_low_3000 T17 drop +0.00 | pair_nat 1.00 natural 1.00 | 1771n0 1549n0 1302n0 1095n0 1155n0 1033n0 1285n0 1280n0
+[v3m   643.8s] oss_low_3000 T18 drop +0.00 | pair_nat 1.00 natural 1.00 | 989n0 1087n0 995n0 957n0 1174n0 911n0 1112n0 1097n0
+[v3m   643.8s] oss_low_3000 T19 drop +0.19 | pair_nat 0.75 natural 1.00 | 1060n0 2027n0 2446n0 1366n0 2177n0 1189n0 970n0 2180n1
+[v3m   643.8s] oss_low_3000 T20 drop +0.30 | pair_nat 0.11 natural 0.88 | 3005f0 2685n1 2657n2 1501n3 2172n2 2420n4 1958n0 892n2
+[v3m   643.8s] oss_low_3000 T21 drop +0.01 | pair_nat 0.39 natural 1.00 | 1782n0 1695n0 2017n0 1441n1 1200n2 1340n0 2146n0 1946n1
+[v3m   643.8s] oss_low_3000 T22 drop +0.18 | pair_nat 0.21 natural 1.00 | 328n0 1363n1 1873n0 530n2 1553n3 697n0 684n4 1609n0
+[v3m   643.8s] oss_low_3000 T23 drop +0.12 | pair_nat 0.04 natural 1.00 | 2505n0 1101n1 2643nx 478n2 643n3 895n3 1285n4 1947n5
+[v3m   643.8s] oss_low_3000 T24 drop +0.26 | pair_nat 0.25 natural 1.00 | 1696n0 1202n1 325n0 1483n0 459n2 1103n3 453n2 206n0
+[v3m   643.8s] oss_low_3000 T25 drop +0.40 | pair_nat 0.11 natural 1.00 | 1568n0 2572n1 2083n2 800n3 2297n4 1603n0 1536n5 936n0
+[v3m   643.8s] oss_low_3000 T26 drop +0.56 | pair_nat 0.39 natural 1.00 | 582n0 881n0 644n0 2224n1 2255n1 1975n0 1729n2 896n0
+[v3m   643.8s] oss_low_3000 T27 drop +0.16 | pair_nat 0.21 natural 1.00 | 1283n0 1473n1 2287n2 1645n0 1868n0 1924n3 2287n4 1328n0
+[v3m   643.8s] oss_low_3000 T28 drop +0.44 | pair_nat 0.25 natural 1.00 | 79nx 63n0 87n1 93n2 62n0 69n0 68n0 69n1
+[v3m   643.8s] oss_low_3000: read 12/12 public templates
+[v3m  1344.2s] oss_medium_5000: batch 76 rows (K 4), 4304 steps, 700.1s (cut by clock), 163 ms/step
+[v3m  1344.2s] oss_medium_5000 T10 drop +0.15 | pair_nat 0.50 natural 0.75 | 4004n0 4304cx 4050n0 3570n0
+[v3m  1344.2s] oss_medium_5000 T11 drop +0.28 | pair_nat 0.50 natural 0.75 | 2097n0 4181n0 3223n0 4304cx
+[v3m  1344.2s] oss_medium_5000 T12 drop +0.13 | pair_nat 0.00 natural 0.25 | 4278n0 4304cx 4304cx 4304cx
+[v3m  1344.2s] oss_medium_5000 T13 drop +0.57 | pair_nat 0.50 natural 1.00 | 2038n0 2205n1 1944n0 1983n0
+[v3m  1344.2s] oss_medium_5000 T14 drop +0.41 | pair_nat 0.17 natural 0.75 | 3881n0 4304cx 3347n1 4006n0
+[v3m  1344.2s] oss_medium_5000 T15 drop +0.00 | pair_nat 1.00 natural 1.00 | 1448n0 1599n0 838n0 1062n0
+[v3m  1344.2s] oss_medium_5000 T16 drop +0.00 | pair_nat 1.00 natural 1.00 | 2284n0 2080n0 3226n0 2975n0
+[v3m  1344.2s] oss_medium_5000 T17 drop +0.00 | pair_nat 1.00 natural 1.00 | 1451n0 1572n0 1435n0 1494n0
+[v3m  1344.2s] oss_medium_5000 T18 drop +0.00 | pair_nat 1.00 natural 1.00 | 1311n0 1445n0 1258n0 1355n0
+[v3m  1344.2s] oss_medium_5000 T19 drop +0.19 | pair_nat 0.17 natural 0.50 | 3520n0 4304cx 4304cx 2335n0
+[v3m  1344.2s] oss_medium_5000 T20 drop +0.30 | pair_nat 0.00 natural 0.00 | 4304cx 4304cx 4304cx 4304cx
+[v3m  1344.2s] oss_medium_5000 T21 drop +0.01 | pair_nat 1.00 natural 1.00 | 2141n0 1972n0 2290n0 1899n0
+[v3m  1344.2s] oss_medium_5000 T22 drop +0.18 | pair_nat 0.00 natural 0.25 | 3505n0 4304cx 4304cx 4304cx
+[v3m  1344.2s] oss_medium_5000 T23 drop +0.12 | pair_nat 0.00 natural 0.00 | 4304cx 4304cx 4304cx 4304cx
+[v3m  1344.2s] oss_medium_5000 T24 drop +0.26 | pair_nat 0.00 natural 0.25 | 4304cx 4304cx 4304cx 4109n0
+[v3m  1344.2s] oss_medium_5000 T25 drop +0.40 | pair_nat 0.00 natural 0.00 | 4304cx 4304cx 4304cx 4304cx
+[v3m  1344.2s] oss_medium_5000 T26 drop +0.56 | pair_nat 0.00 natural 0.00 | 4304cx 4304cx 4304cx 4304cx
+[v3m  1344.2s] oss_medium_5000 T27 drop +0.16 | pair_nat 0.00 natural 0.25 | 4304cx 4304cx 4304cx 3052n0
+[v3m  1344.2s] oss_medium_5000 T28 drop +0.44 | pair_nat 0.00 natural 0.00 | 4304cx 4304cx 4304cx 4304cx
+[v3m  1344.2s] oss_medium_5000: read 19/19 public templates
+[v3m  1423.3s] oss_low: batch 32 rows (K 16), 1580 steps, 78.9s, 50 ms/step
+[v3m  1465.4s] qwen_nothink: batch 8 rows (K 4), 2010 steps, 39.9s, 20 ms/step
+[v3m  1465.4s] call 2 (Skywork/Skywork-OR1-Math-7B:default): 3 cases, agreement 2/2, finish 3/3, predicted robust 1/3
+[v3m  1565.2s] oss_low: batch 32 rows (K 16), 1850 steps, 94.9s, 51 ms/step
+[v3m  1607.8s] qwen_nothink: batch 8 rows (K 4), 2016 steps, 40.3s, 20 ms/step
+[v3m  1607.8s] call 3 (allenai/Olmo-3-7B-Think:default): 2 cases, agreement 2/2, finish 2/2, predicted robust 0/2
+[v3m  1711.5s] oss_low: batch 32 rows (K 16), 1855 steps, 98.8s, 53 ms/step
+[v3m  1753.6s] qwen_nothink: batch 8 rows (K 4), 2016 steps, 39.9s, 20 ms/step
+[v3m  1753.6s] call 4 (deepseek-ai/DeepSeek-R1-0528-Qwen3-8B:default): 3 cases, agreement 2/2, finish 3/3, predicted robust 1/3
+[v3m  1887.5s] oss_low: batch 48 rows (K 16), 1854 steps, 128.9s, 70 ms/step
+[v3m  1932.3s] qwen_nothink: batch 12 rows (K 4), 2011 steps, 42.5s, 21 ms/step
+[v3m  1932.3s] call 5 (openai/gpt-oss-120b:high): 3 cases, agreement 3/3, finish 3/3, predicted robust 1/3
+[v3m  2123.3s] oss_low: batch 64 rows (K 16), 1853 steps, 186.0s, 100 ms/step
+[v3m  2175.8s] qwen_nothink: batch 16 rows (K 4), 2016 steps, 50.3s, 25 ms/step
+[v3m  2175.8s] call 6 (openai/gpt-oss-120b:low): 5 cases, agreement 4/4, finish 5/5, predicted robust 0/5
+[v3m  2258.1s] oss_low: batch 16 rows (K 16), 1860 steps, 77.3s, 42 ms/step
+[v3m  2299.0s] qwen_nothink: batch 4 rows (K 4), 2009 steps, 38.6s, 19 ms/step
+[v3m  2299.0s] call 7 (openai/gpt-oss-120b:medium): 3 cases, agreement 1/1, finish 3/3, predicted robust 1/3

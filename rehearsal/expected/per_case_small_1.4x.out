@@ -1,0 +1,16 @@
+[ingestion] MOCK per-case harness: bundle=submission_small shape=small seed=1 slow=1.4x cases=14 job_budget_s=4020
+case 1/14 id=c0000 model=Qwen/Qwen3.5-4B effort=default: ok in 157.0s (budget 4020s) [oss K32]
+case 2/14 id=c0001 model=Qwen/Qwen3.5-4B effort=default: ok in 157.0s (budget 3863s) [oss K32]
+case 3/14 id=c0002 model=Qwen/Qwen3.5-4B effort=default: ok in 157.0s (budget 3706s) [oss K32]
+case 4/14 id=c0003 model=Qwen/Qwen3.5-4B effort=default: ok in 157.0s (budget 3549s) [oss K32]
+case 5/14 id=c0004 model=Qwen/Qwen3.5-4B effort=default: ok in 157.0s (budget 3392s) [oss K32]
+case 6/14 id=c0005 model=Skywork/Skywork-OR1-Math-7B effort=default: ok in 201.0s (budget 3235s) [own_skywork K3]
+case 7/14 id=c0006 model=Skywork/Skywork-OR1-Math-7B effort=default: ok in 201.0s (budget 3034s) [own_skywork K3]
+case 8/14 id=c0007 model=Skywork/Skywork-OR1-Math-7B effort=default: ok in 201.0s (budget 2833s) [own_skywork K3]
+case 9/14 id=c0008 model=allenai/Olmo-3-7B-Think effort=default: ok in 234.0s (budget 2632s) [own_olmo K3]
+case 10/14 id=c0009 model=allenai/Olmo-3-7B-Think effort=default: ok in 234.0s (budget 2398s) [own_olmo K3]
+case 11/14 id=c0010 model=allenai/Olmo-3-7B-Think effort=default: ok in 234.0s (budget 2164s) [own_olmo K3]
+case 12/14 id=c0011 model=deepseek-ai/DeepSeek-R1-0528-Qwen3-8B effort=default: ok in 157.0s (budget 1930s) [oss K32]
+case 13/14 id=c0012 model=deepseek-ai/DeepSeek-R1-0528-Qwen3-8B effort=default: ok in 157.0s (budget 1773s) [oss K32]
+case 14/14 id=c0013 model=deepseek-ai/DeepSeek-R1-0528-Qwen3-8B effort=default: ok in 157.0s (budget 1616s) [oss K32]
+done: cases 14, ok 14, invalid 0, timeouts 0, skipped 0, elapsed 2561 s of 4020 s | per configuration: Qwen 5x 157-157s (mean 157); Skywork 3x 201-201s (mean 201); Olmo 3x 234-234s (mean 234); DeepSeek 3x 157-157s (mean 157)

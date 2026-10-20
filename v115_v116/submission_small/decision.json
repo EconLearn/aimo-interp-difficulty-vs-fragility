@@ -1,0 +1,69 @@
+{
+ "primary_feature": "pair_nat",
+ "primary_cap": 3000,
+ "fitted_on": "71 public rows; agreement = mean of two gpt-oss-low K 8 reads at 3,000 (v2+v3, v4); qfin = Qwen3.5-4B thinking off, K 4, 2,000; Skywork strength 1",
+ "full": {
+  "features": [
+   "pair_nat",
+   "qfin",
+   "strength"
+  ],
+  "beta": [
+   -1.26953,
+   -1.78167,
+   -1.07545,
+   -1.21235
+  ],
+  "mu": [
+   0.71375,
+   0.38028,
+   1.6338
+  ],
+  "sd": [
+   0.3,
+   0.48546,
+   0.80909
+  ],
+  "note": "leave-one-template-out accuracy 0.845 +/- 0.053 (public mix) / 0.844 +/- 0.059 (50-50); gpt-oss 30/37 small 30/34"
+ },
+ "agreement_only": {
+  "features": [
+   "pair_nat",
+   "strength"
+  ],
+  "beta": [
+   -0.85811,
+   -2.17914,
+   -1.27835
+  ],
+  "mu": [
+   0.71375,
+   1.6338
+  ],
+  "sd": [
+   0.3,
+   0.80909
+  ],
+  "note": "leave-one-template-out accuracy 0.845 +/- 0.053 (public mix) / 0.827 +/- 0.065 (50-50); gpt-oss 31/37 small 29/34"
+ },
+ "finish_only": {
+  "features": [
+   "qfin",
+   "strength"
+  ],
+  "beta": [
+   -0.77921,
+   -1.87279,
+   -0.52962
+  ],
+  "mu": [
+   0.38028,
+   1.6338
+  ],
+  "sd": [
+   0.48546,
+   0.80909
+  ],
+  "note": "leave-one-template-out accuracy 0.732 +/- 0.075 (public mix) / 0.784 +/- 0.062 (50-50); gpt-oss 27/37 small 25/34"
+ }
+}

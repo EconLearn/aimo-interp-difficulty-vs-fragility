@@ -1,0 +1,22 @@
+# Generalisation audit (audit.py). Labels: accuracy = measured on the given out-of-sample calls; predicted board and selection null = model-based.
+rows 71 (label 0: 52, label 1: 19) on 27 templates; fresh rows 24 on 12 templates
+
+## Table 1. Out-of-sample accuracy against the board (template-cluster bootstrap, 10,000 resamples)
+| Board | Row set | Rows | Accuracy [95%] | At the board's class mix [95%] | Predicted board, expected (90% range) | Observed | P(score <= observed) |
+|---|---|---|---|---|---|---|---|
+| main (21 cases, 10 label 0) | all | 71 | 60/71 = 0.845 [0.746, 0.922] | 0.807 [0.699, 0.898] | 17.0 (13 to 20) | 16, 19 | 0.39, 0.90 |
+| main (21 cases, 10 label 0) | fresh | 24 | 18/24 = 0.750 [0.591, 0.905] | 0.747 [0.600, 0.904] | 15.7 (11 to 20) | 16, 19 | 0.58, 0.94 |
+| small (14 cases, 7 label 0) | small | 34 | 28/34 = 0.824 [0.667, 0.946] | 0.817 [0.662, 0.955] | 11.4 (8 to 14) | 10, 9, 8 | 0.27, 0.13, 0.06 |
+| small (14 cases, 7 label 0) | small+fresh | 16 | 12/16 = 0.750 [0.500, 1.000] | 0.762 [0.539, 1.000] | 10.7 (7 to 14) | 10, 9, 8 | 0.39, 0.25, 0.15 |
+
+reruns on the same hidden cases: mean 17.50, SD 1.29 (reading noise only); binomial SD of a new 21-case set at p 0.807: 1.81 (case sampling as well)
+
+## Table 2. Keep-if-better selection against a null (model-based; 200,000 simulations)
+candidates (changed, right): v11 threshold shift (5, 1); v13 Qwen K 8 (1, 0); v57 OR form (2, 1); v58 low re-read (1, 0); v60 high prior (2, 1); v62 Olmo own run (1, 1); v65 Skywork own run (2, 2)
+changed answers 14, right 6; observed kept board gain +3
+| Each changed answer right with probability | Expected kept gain | 90% range | P(kept gain >= observed) |
+|---|---|---|---|
+| 0.5 | +3.94 | 1 to 8 | 0.72 |
+| 0.6 | +5.47 | 2 to 10 | 0.89 |
+| 0.7 | +7.27 | 3 to 12 | 0.98 |
+Reading: a kept gain inside the coin-flip range cannot show that the kept changes generalise (nor that they do not).

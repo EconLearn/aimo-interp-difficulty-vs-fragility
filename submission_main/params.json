@@ -1,0 +1,122 @@
+{
+ "reading": {
+  "name": "oss_low",
+  "model": "openai/gpt-oss-120b",
+  "chat": {
+   "reasoning_effort": "low"
+  },
+  "K_min": 4,
+  "K_max": 32,
+  "cap": 3000,
+  "rows_max": 112,
+  "compact": true,
+  "seg": 128,
+  "time": {
+   "a_ms": 36.0,
+   "b_ms": 0.3,
+   "used_compact": 0.6
+  },
+  "K_top": 32,
+  "top_levels": [
+   32
+  ],
+  "time_slow": {
+   "a_ms": 33.2,
+   "b_ms": 0.885,
+   "used_compact": 0.48
+  }
+ },
+ "research": [],
+ "research_until_seconds": 0,
+ "expected_calls": 7,
+ "total_seconds": 3200,
+ "reserve_per_call_seconds": 150,
+ "finish": {
+  "name": "qwen_nothink",
+  "model": "Qwen/Qwen3.5-4B",
+  "chat": {
+   "enable_thinking": false
+  },
+  "K": 4,
+  "cap": 2000,
+  "rows_max": 128
+ },
+ "future_new_factor": 0.25,
+ "primary_time_share": 0.8,
+ "entry_mode": "full",
+ "first_call_seconds": 300,
+ "sky": {
+  "name": "own_olmo",
+  "model": "allenai/Olmo-3-7B-Think",
+  "chat": {},
+  "cap": 10000,
+  "K_max": 3,
+  "rows_max": 16,
+  "compact": false,
+  "seg": 256,
+  "time": {
+   "a_ms": 8.0,
+   "b_ms": 7.5
+  },
+  "total_seconds": 3300,
+  "reserve_later_seconds": 150,
+  "apply_cfgs": [
+   "allenai/Olmo-3-7B-Think:default"
+  ],
+  "combine": "replace",
+  "min_ended": 2,
+  "seed_base": 500000,
+  "fast7b": true,
+  "time_fast": {
+   "a_ms": 12.0,
+   "b_ms": 1.8
+  }
+ },
+ "prior_robust": [
+  "openai/gpt-oss-120b:high"
+ ],
+ "owns": [
+  {
+   "name": "own_skywork",
+   "model": "Skywork/Skywork-OR1-Math-7B",
+   "chat": {},
+   "cap": 9000,
+   "K_max": 3,
+   "rows_max": 90,
+   "compact": false,
+   "seg": 256,
+   "time": {
+    "a_ms": 8.0,
+    "b_ms": 4.6
+   },
+   "total_seconds": 3300,
+   "reserve_later_seconds": 150,
+   "apply_cfgs": [
+    "Skywork/Skywork-OR1-Math-7B:default"
+   ],
+   "combine": "replace",
+   "min_ended": 1,
+   "seed_base": 400000,
+   "share": 0.45,
+   "fast7b": false,
+   "time_fast": {
+    "a_ms": 20.0,
+    "b_ms": 0.3
+   }
+  }
+ ],
+ "fast7b": true,
+ "first_call_K_max": 16,
+ "first_call_cap_min_problems": 10,
+ "case_mode_max_problems": 1,
+ "case_target_seconds": 210,
+ "own_case_target_seconds": 400,
+ "case_margin_seconds": 10,
+ "case_qfin_min_K": 16,
+ "oss_load_seconds_est": 30,
+ "env_cap_factor": 0.8,
+ "env_cap_min_seconds": 60,
+ "own_load_seconds_est": 25,
+ "qfin_skip_moot": true,
+ "qfin_skip_cut": true
+}

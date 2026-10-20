@@ -1,0 +1,48 @@
+[v2m   153.1s] oss_low: batch 32 rows (K 16), 1846 steps, 145.4s, 79 ms/step
+[v2m   154.3s] oss_low_3000: out of memory, batch now 7 problems
+[v2m   530.8s] oss_low_3000: batch 56 rows (K 8), 2876 steps, 376.5s, 131 ms/step
+[v2m   534.4s] oss_low_3000: out of memory, batch now 3 problems
+[v2m   758.6s] oss_low_3000: batch 24 rows (K 8), 3005 steps, 224.2s, 75 ms/step
+[v2m   988.7s] oss_low_3000: batch 24 rows (K 8), 3010 steps, 230.1s, 76 ms/step
+[v2m  1103.2s] oss_low_3000: batch 24 rows (K 8), 1436 steps, 114.5s (cut by clock), 80 ms/step
+oss_low_3000 T01 drop +0.02 | pair_nat 0.75 natural 1.00 | 2876n0 1287n1 1335n1 1085n1 1410n1 1111n1 1347n1 1707n1
+oss_low_3000 T02 drop -0.00 | pair_nat 0.75 natural 1.00 | 1128n0 1579n0 1591n0 1819n1 1691n0 1601n0 1106n0 2101n0
+oss_low_3000 T03 drop +0.00 | pair_nat 1.00 natural 1.00 | 1519n0 1361n0 1180n0 1106n0 929n0 1131n0 1495n0 1022n0
+oss_low_3000 T04 drop +0.01 | pair_nat 1.00 natural 1.00 | 740n0 1926n0 1212n0 1507n0 1604n0 1422n0 1421n0 1286n0
+oss_low_3000 T05 drop +0.05 | pair_nat 0.39 natural 1.00 | 1108n0 1957n1 1364n1 1754n1 1713n1 1605n2 1879n1 1014n2
+oss_low_3000 T06 drop +0.01 | pair_nat 1.00 natural 1.00 | 1158n0 1705n0 1990n0 1330n0 1394n0 1371n0 1149n0 1364n0
+oss_low_3000 T07 drop +0.01 | pair_nat 1.00 natural 1.00 | 536n0 503n0 559n0 571n0 808n0 587n0 573n0 604n0
+oss_low_3000 T08 drop +0.06 | pair_nat 0.75 natural 1.00 | 1213n0 1261n0 1178n0 1287n0 1216n0 1635n0 1530n0 1224n1
+oss_low_3000 T09 drop +0.03 | pair_nat 0.75 natural 0.88 | 2377n0 1774n0 1856n0 3005f0 1881n0 1720n0 2611n0 2733n0
+oss_low_3000 T10 drop +0.15 | pair_nat 0.75 natural 1.00 | 1403n0 1455n0 1831n0 1689n0 1775n0 1340n0 1280n0 748n1
+oss_low_3000 T11 drop +0.28 | pair_nat 0.36 natural 0.88 | 3010f0 1416n1 1284n1 1116n2 1274n1 1483n1 1204n1 2138n3
+oss_low_3000 T12 drop +0.13 | pair_nat 0.54 natural 1.00 | 1851n0 2608n1 1536n2 1771n2 1594n2 1614n2 1893n2 1700n2
+oss_low_3000 T13 drop +0.57 | pair_nat 0.75 natural 1.00 | 1622n0 1644n0 1617n0 1538n0 1663n0 1621n0 1775n1 1550n0
+oss_low_3000 T14 drop +0.41 | pair_nat 0.00 natural 0.25 | 851n0 1436cx 1436cx 1436c1 1436cx 1436cx 852n1 1436cx
+oss_low_3000 T15 drop +0.00 | pair_nat 1.00 natural 1.00 | 646n0 1387n0 1277n0 673n0 922n0 618n0 730n0 820n0
+oss_low_3000 T16 drop +0.00 | pair_nat 0.21 natural 0.75 | 1272n0 980n1 1436cx 1436cx 1420n0 1124n2 1139n0 1304n0
+[v2m  1104.3s] oss_medium_5000: out of memory, batch now 9 problems
+[v2m  1717.7s] oss_medium_5000: batch 36 rows (K 4), 4813 steps, 613.4s, 127 ms/step
+[v2m  1903.2s] oss_medium_5000: batch 16 rows (K 4), 2331 steps, 184.0s (cut by clock), 79 ms/step
+oss_medium_5000 T01 drop +0.02 | pair_nat 1.00 natural 1.00 | 2007n0 1907n0 4567n0 3260n0
+oss_medium_5000 T02 drop -0.00 | pair_nat 1.00 natural 1.00 | 3425n0 1722n0 2538n0 2428n0
+oss_medium_5000 T03 drop +0.00 | pair_nat 1.00 natural 1.00 | 2070n0 1523n0 1621n0 1721n0
+oss_medium_5000 T04 drop +0.01 | pair_nat 1.00 natural 1.00 | 2430n0 2938n0 1627n0 3340n0
+oss_medium_5000 T05 drop +0.05 | pair_nat 1.00 natural 1.00 | 4813n0 3037n0 3499n0 4258n0
+oss_medium_5000 T06 drop +0.01 | pair_nat 1.00 natural 1.00 | 1837n0 1963n0 1701n0 1837n0
+oss_medium_5000 T07 drop +0.01 | pair_nat 1.00 natural 1.00 | 1654n0 938n0 950n0 937n0
+oss_medium_5000 T08 drop +0.06 | pair_nat 1.00 natural 1.00 | 2138n0 2252n0 1846n0 2394n0
+oss_medium_5000 T09 drop +0.03 | pair_nat 1.00 natural 1.00 | 2843n0 3414n0 3086n0 3555n0
+oss_medium_5000 T10 drop +0.15 | pair_nat 0.00 natural 0.00 | 2331cx 2331cx 2331cx 2331cx
+oss_medium_5000 T11 drop +0.28 | pair_nat 0.00 natural 0.25 | 2331cx 2331cx 2331cx 2175n0
+oss_medium_5000 T12 drop +0.13 | pair_nat 0.00 natural 0.00 | 2331cx 2331cx 2331cx 2331cx
+oss_medium_5000 T13 drop +0.57 | pair_nat 0.17 natural 0.50 | 2331cx 2088n0 2214n0 2331cx
+[v2m  2027.6s] oss_low: batch 32 rows (K 16), 1658 steps, 124.1s, 75 ms/step
+[v2m  2167.8s] oss_low: batch 32 rows (K 16), 1857 steps, 140.0s, 75 ms/step
+[v2m  2307.5s] oss_low: batch 32 rows (K 16), 1850 steps, 139.5s, 75 ms/step
+[v2m  2489.8s] oss_low: batch 48 rows (K 16), 1860 steps, 182.1s, 98 ms/step
+[v2m  2491.0s] oss_low: out of memory, batch now 4 problems
+[v2m  2491.2s] oss_low: out of memory, batch now 2 problems
+[v2m  2630.0s] oss_low: batch 32 rows (K 16), 1850 steps, 138.8s, 75 ms/step
+[v2m  2784.2s] oss_low: batch 32 rows (K 16), 1855 steps, 154.2s, 83 ms/step
+[v2m  2879.3s] oss_low: batch 16 rows (K 16), 1850 steps, 94.9s, 51 ms/step

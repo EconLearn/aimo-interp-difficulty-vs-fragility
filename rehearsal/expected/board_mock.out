@@ -1,0 +1,24 @@
+main  budget  4020 seed 1 1.0x | v95_v96/submission_main  3339s ok 21/21 (to 0, skip 0) | submission_main  2790s ok 21/21 (to 0, skip 0) | identical 21/21
+main  budget  4020 seed 1 1.4x | v95_v96/submission_main  3837s ok 21/21 (to 0, skip 0) | submission_main  3172s ok 21/21 (to 0, skip 0) | identical 21/21
+main  budget  4020 seed 1 1.6x | v95_v96/submission_main  3986s ok 21/21 (to 0, skip 0) | submission_main  3320s ok 21/21 (to 0, skip 0) | identical 21/21
+main  budget  4020 seed 2 1.0x | v95_v96/submission_main  3339s ok 21/21 (to 0, skip 0) | submission_main  2874s ok 21/21 (to 0, skip 0) | identical 21/21
+main  budget  4020 seed 2 1.4x | v95_v96/submission_main  3837s ok 21/21 (to 0, skip 0) | submission_main  3172s ok 21/21 (to 0, skip 0) | identical 21/21
+main  budget  4020 seed 2 1.6x | v95_v96/submission_main  3986s ok 21/21 (to 0, skip 0) | submission_main  3320s ok 21/21 (to 0, skip 0) | identical 21/21
+main  budget  3390 seed 1 1.0x | v95_v96/submission_main  3339s ok 21/21 (to 0, skip 0) | submission_main  2790s ok 21/21 (to 0, skip 0) | identical 21/21
+main  budget  3390 seed 1 1.4x | v95_v96/submission_main  3390s ok 17/21 (to 1, skip 3) | submission_main  3172s ok 21/21 (to 0, skip 0) | identical 17/21 | 18:low None->[False]; 19:medium None->[False]; 20:low None->[False]; 21:high None->[True]
+main  budget  3390 seed 1 1.6x | v95_v96/submission_main  3390s ok 17/21 (to 1, skip 3) | submission_main  3320s ok 21/21 (to 0, skip 0) | identical 17/21 | 18:low None->[False]; 19:medium None->[False]; 20:low None->[False]; 21:high None->[True]
+main  budget  3390 seed 2 1.0x | v95_v96/submission_main  3339s ok 21/21 (to 0, skip 0) | submission_main  2874s ok 21/21 (to 0, skip 0) | identical 21/21
+main  budget  3390 seed 2 1.4x | v95_v96/submission_main  3390s ok 17/21 (to 1, skip 3) | submission_main  3172s ok 21/21 (to 0, skip 0) | identical 17/21 | 18:low None->[False]; 19:medium None->[False]; 20:low None->[False]; 21:high None->[True]
+main  budget  3390 seed 2 1.6x | v95_v96/submission_main  3390s ok 17/21 (to 1, skip 3) | submission_main  3320s ok 21/21 (to 0, skip 0) | identical 17/21 | 18:low None->[False]; 19:medium None->[False]; 20:low None->[False]; 21:high None->[True]
+small budget  4020 seed 1 1.0x | v95_v96/submission_small  2574s ok 14/14 (to 0, skip 0) | submission_small  2237s ok 14/14 (to 0, skip 0) | identical 14/14
+small budget  4020 seed 1 1.4x | v95_v96/submission_small  3065s ok 14/14 (to 0, skip 0) | submission_small  2561s ok 14/14 (to 0, skip 0) | identical 14/14
+small budget  4020 seed 1 1.6x | v95_v96/submission_small  3248s ok 14/14 (to 0, skip 0) | submission_small  2640s ok 14/14 (to 0, skip 0) | identical 12/14 | 10:Olmo [False]->[True]; 11:Olmo [False]->[True]
+small budget  4020 seed 2 1.0x | v95_v96/submission_small  2574s ok 14/14 (to 0, skip 0) | submission_small  2237s ok 14/14 (to 0, skip 0) | identical 14/14
+small budget  4020 seed 2 1.4x | v95_v96/submission_small  3065s ok 14/14 (to 0, skip 0) | submission_small  2561s ok 14/14 (to 0, skip 0) | identical 14/14
+small budget  4020 seed 2 1.6x | v95_v96/submission_small  3248s ok 14/14 (to 0, skip 0) | submission_small  2640s ok 14/14 (to 0, skip 0) | identical 12/14 | 9:Olmo [False]->[True]; 10:Olmo [False]->[True]
+small budget  2200 seed 1 1.0x | v95_v96/submission_small  2200s ok 12/14 (to 1, skip 1) | submission_small  2200s ok 13/14 (to 1, skip 0) | identical 12/14 | 13:DeepSeek None->[False]; 14:DeepSeek None->None
+small budget  2200 seed 1 1.4x | v95_v96/submission_small  2200s ok 10/14 (to 1, skip 3) | submission_small  2200s ok 11/14 (to 1, skip 2) | identical 12/14 | 11:Olmo None->[False]; 12:DeepSeek None->None
+small budget  2200 seed 1 1.6x | v95_v96/submission_small  2200s ok 9/14 (to 1, skip 4) | submission_small  2200s ok 11/14 (to 1, skip 2) | identical 11/14 | 10:Olmo None->[True]; 11:Olmo None->[True]; 12:DeepSeek None->None
+small budget  2200 seed 2 1.0x | v95_v96/submission_small  2200s ok 12/14 (to 1, skip 1) | submission_small  2200s ok 13/14 (to 1, skip 0) | identical 12/14 | 13:DeepSeek None->[False]; 14:DeepSeek None->None
+small budget  2200 seed 2 1.4x | v95_v96/submission_small  2200s ok 10/14 (to 1, skip 3) | submission_small  2200s ok 11/14 (to 1, skip 2) | identical 12/14 | 11:Olmo None->[True]; 12:DeepSeek None->None
+small budget  2200 seed 2 1.6x | v95_v96/submission_small  2200s ok 9/14 (to 1, skip 4) | submission_small  2200s ok 11/14 (to 1, skip 2) | identical 10/14 | 9:Olmo [False]->[True]; 10:Olmo None->[True]; 11:Olmo None->[True]; 12:DeepSeek None->None

@@ -1,0 +1,316 @@
+[v4m    14.2s] qwen_snap: compacting loop failed (AttributeError: 'LinearAttentionLayer' object has no attribute 'batch_select_indices'); ordinary generation from here
+[v4m    25.3s] qwen_snap: batch 224 rows (K 16), 36 steps, 11.1s, 308 ms/step, 0.05 s/attempt
+[v4m    40.2s] qwen_snap: batch 224 rows (K 16), 11 steps, 14.9s (cut by clock), 1358 ms/step, 0.07 s/attempt
+[v4m    40.2s] qwen_snap T01 drop +0.02 | pair_nat 0.00 natural 0.94 | 2nx 3nx 3nx 4nx 4nx 31f39 4nx 3nx 3nx 3nx 4nx 3nx 4nx 2nx 4nx 4nx
+[v4m    40.2s] qwen_snap T02 drop -0.00 | pair_nat 0.00 natural 1.00 | 2nx 2nx 2nx 2nx 2nx 4nx 3nx 2nx 3nx 4nx 2nx 3nx 2nx 3nx 3nx 2nx
+[v4m    40.2s] qwen_snap T03 drop +0.00 | pair_nat 0.00 natural 0.75 | 3nx 3nx 31f21 3nx 31f62 4nx 4nx 5nx 3nx 3nx 5nx 4nx 31f59 4nx 32f159 3nx
+[v4m    40.2s] qwen_snap T04 drop +0.01 | pair_nat 0.00 natural 0.94 | 12nx 3nx 3nx 3nx 4nx 6nx 36f26.36 3nx 3nx 3nx 8nx 3nx 3nx 3nx 3nx 3nx
+[v4m    40.2s] qwen_snap T05 drop +0.05 | pair_nat 0.00 natural 1.00 | 4nx 3nx 3nx 3nx 2nx 4nx 2nx 3nx 3nx 3nx 3nx 3nx 3nx 2nx 2nx 3nx
+[v4m    40.2s] qwen_snap T06 drop +0.01 | pair_nat 0.00 natural 0.94 | 4nx 3nx 4nx 3nx 3nx 3nx 4nx 4nx 4nx 4nx 3nx 4nx 3nx 32f137 4nx 4nx
+[v4m    40.2s] qwen_snap T07 drop +0.01 | pair_nat 0.00 natural 0.94 | 3nx 3nx 3nx 5nx 1nx 3nx 3nx 3nx 3nx 3nx 4nx 31f12 3nx 3nx 3nx 4nx
+[v4m    40.2s] qwen_snap T08 drop +0.06 | pair_nat 0.00 natural 1.00 | 4nx 2nx 3nx 2nx 3nx 3nx 3nx 3nx 1nx 3nx 3nx 2nx 3nx 3nx 2nx 2nx
+[v4m    40.2s] qwen_snap T09 drop +0.03 | pair_nat 0.00 natural 1.00 | 4nx 4nx 4nx 2nx 3nx 4nx 4nx 4nx 3nx 4nx 4nx 4nx 3nx 4nx 4nx 3nx
+[v4m    40.2s] qwen_snap T10 drop +0.15 | pair_nat 0.00 natural 0.94 | 4nx 3nx 4nx 8nx 4nx 4nx 5nx 32f424 5nx 5nx 5nx 6nx 6nx 4nx 4nx 4nx
+[v4m    40.2s] qwen_snap T11 drop +0.28 | pair_nat 0.00 natural 0.94 | 4nx 4nx 4nx 4nx 4nx 4nx 33f250 4nx 4nx 4nx 2nx 1nx 4nx 4nx 4nx 4nx
+[v4m    40.2s] qwen_snap T12 drop +0.13 | pair_nat 0.00 natural 0.69 | 30f8 31f64 4nx 5nx 3nx 4nx 30f8 33f1900 16n14579 7nx 3nx 31f68 4nx 5nx 5nx 5nx
+[v4m    40.2s] qwen_snap T13 drop +0.57 | pair_nat 0.00 natural 0.94 | 6nx 3nx 3nx 1nx 2nx 31f66 8nx 5nx 2nx 5nx 4nx 4nx 1nx 4nx 10nx 6nx
+[v4m    40.2s] qwen_snap T14 drop +0.41 | pair_nat 0.00 natural 1.00 | 2nx 4nx 3nx 2nx 2nx 2nx 3nx 3nx 3nx 4nx 3nx 2nx 2nx 4nx 2nx 3nx
+[v4m    40.2s] qwen_snap T15 drop +0.00 | pair_nat 0.00 natural 1.00 | 4nx 5nx 6nx 3nx 3nx 2nx 3nx 4nx 2nx 4nx 2nx 3nx 4nx 3nx 5nx 3nx
+[v4m    40.2s] qwen_snap T16 drop +0.00 | pair_nat 0.00 natural 1.00 | 3nx 3nx 3nx 3nx 3nx 3nx 3nx 3nx 3nx 3nx 3nx 3nx 3nx 3nx 3nx 3nx
+[v4m    40.2s] qwen_snap T17 drop +0.00 | pair_nat 0.00 natural 0.94 | 2nx 11cx 3nx 2nx 3nx 3nx 3nx 2nx 2nx 2nx 3nx 3nx 2nx 3nx 3nx 2nx
+[v4m    40.2s] qwen_snap T18 drop +0.00 | pair_nat 0.00 natural 1.00 | 2nx 3nx 3nx 3nx 3nx 4nx 3nx 3nx 0nx 3nx 3nx 4nx 3nx 3nx 3nx 3nx
+[v4m    40.2s] qwen_snap T19 drop +0.19 | pair_nat 0.00 natural 0.88 | 5nx 4nx 4nx 5nx 4nx 11cx 4nx 4nx 4nx 4nx 5nx 11cx 4nx 5nx 4nx 5nx
+[v4m    40.2s] qwen_snap T20 drop +0.30 | pair_nat 0.00 natural 1.00 | 3nx 3nx 3nx 3nx 3nx 4nx 4nx 3nx 4nx 4nx 3nx 3nx 3nx 4nx 3nx 3nx
+[v4m    40.2s] qwen_snap T21 drop +0.01 | pair_nat 0.00 natural 0.94 | 2nx 2nx 2nx 4nx 3nx 3nx 2nx 3nx 4nx 11cx 2nx 2nx 5nx 4nx 4nx 4nx
+[v4m    40.2s] qwen_snap T22 drop +0.18 | pair_nat 0.00 natural 0.62 | 6nx 4nx 3nx 11cx 3nx 6nx 3nx 4nx 11cx 11cx 11cx 3nx 11cx 3nx 3nx 11cx
+[v4m    40.2s] qwen_snap T23 drop +0.12 | pair_nat 0.00 natural 0.81 | 2nx 3nx 3nx 11cx 3nx 4nx 1nx 9nx 3nx 2nx 10n13 11cx 6nx 4nx 11cx 2nx
+[v4m    40.2s] qwen_snap T24 drop +0.26 | pair_nat 0.00 natural 0.94 | 1nx 6nx 6nx 2nx 6nx 3nx 6nx 6nx 6nx 6nx 3nx 6nx 11cx 5nx 4nx 5nx
+[v4m    40.2s] qwen_snap T25 drop +0.40 | pair_nat 0.00 natural 1.00 | 4nx 4nx 3nx 4nx 4nx 10nx 3nx 3nx 1nx 7nx 4nx 3nx 3nx 3nx 4nx 4nx
+[v4m    40.2s] qwen_snap T26 drop +0.56 | pair_nat 0.00 natural 1.00 | 3nx 2nx 2nx 2nx 3nx 2nx 2nx 3nx 2nx 2nx 2nx 2nx 2nx 2nx 2nx 4nx
+[v4m    40.2s] qwen_snap T27 drop +0.16 | pair_nat 0.00 natural 0.81 | 4nx 3nx 3nx 3nx 1nx 3nx 11cx 3nx 11cx 3nx 1nx 3nx 11cx 0nx 3nx 1nx
+[v4m    40.2s] qwen_snap T28 drop +0.44 | pair_nat 0.00 natural 0.75 | 10nx 4nx 2nx 7nx 11cx 5nx 10nx 3nx 11cx 3nx 11cx 11cx 4nx 8nx 3nx 4nx
+[v4m    40.2s] qwen_snap: read 28/28 public texts
+[v4m    60.4s] oss_low_snap: batch 224 rows (K 16), 24 steps, 15.1s, 629 ms/step, 0.07 s/attempt, row-steps 5376 = 100% of uncompacted
+[v4m    60.6s] oss_low_snap: out of memory, batch now 7 problems
+[v4m    65.9s] oss_low_snap: out of memory, batch now 3 problems
+[v4m    70.1s] oss_low_snap: batch 48 rows (K 16), 24 steps, 4.2s, 176 ms/step, 0.09 s/attempt, row-steps 1152 = 100% of uncompacted
+[v4m    75.7s] oss_low_snap: batch 48 rows (K 16), 24 steps, 5.6s, 234 ms/step, 0.12 s/attempt, row-steps 1152 = 100% of uncompacted
+[v4m    79.4s] oss_low_snap: batch 48 rows (K 16), 24 steps, 3.7s, 153 ms/step, 0.08 s/attempt, row-steps 1152 = 100% of uncompacted
+[v4m    81.7s] oss_low_snap: batch 48 rows (K 16), 1 steps, 2.3s (cut by clock), 2285 ms/step, 0.05 s/attempt, row-steps 48 = 100% of uncompacted
+[v4m    81.7s] oss_low_snap T01 drop +0.02 | pair_nat 0.00 natural 0.00 | 24f0 24f0 24f0 24f72 24f0 24f0 24f144 24f0 24fI_am..._ 24f0_ 24f0 24f0 24f0 24f0 24f0_ 24f144
+[v4m    81.7s] oss_low_snap T02 drop -0.00 | pair_nat 0.39 natural 1.00 | 2n0 2n0 2n0 2n0 2n0 2n2 2nNaN 2n0 2nNaN 2nNaN 2n0 2n0 2nNaN 2n0 2nNaN 2n2
+[v4m    81.7s] oss_low_snap T03 drop +0.00 | pair_nat 0.08 natural 0.69 | 3n3950 24f55 3n3150 3n4950 24f1550 3n4950 24f45 24f55 3n4950 3n3150 24f55 3n4950 3n3950 3n7550 3n2150 3n3150
+[v4m    81.7s] oss_low_snap T04 drop +0.01 | pair_nat 0.00 natural 0.25 | 24f312_ 24f312_.0_ 5n312.5 24f3120 3n104 24f3120 24f312_displaystyle__frac__ 24f312_displaystyle 24f312_ 24f3120 24f2880 17n288.352_______________ 24f3120 11n312_displaystyle__frac_. 24f3360_ 24f2600
+[v4m    81.7s] oss_low_snap T05 drop +0.05 | pair_nat 1.00 natural 1.00 | 2n0 2n0 2n0 2n0 2n0 2n0 2n0 2n0 2n0 2n0 2n0 2n0 2n0 2n0 2n0 2n0
+[v4m    81.7s] oss_low_snap T06 drop +0.01 | pair_nat 0.11 natural 0.88 | 24f96 3n72 2n96 24f144 2n96 3n48 3n288 2n48 3n128 3n48 3n144 2n144 2n144 2n72 8n144 3n96
+[v4m    81.7s] oss_low_snap T07 drop +0.01 | pair_nat 0.01 natural 0.38 | 24fWe_need_to_solve__In_bas 4nx 3n0_ 24f0 24f46 3n46_ 24f28___..._..._...______.. 3n0_ 24fx 24f______ 24f0 11n___displaystyle_0_displa 3n55_ 24f0_ 24fWe_need_sum_of_integer_b 24f___the_________...______
+[v4m    81.7s] oss_low_snap T08 drop +0.06 | pair_nat 0.00 natural 0.12 | 2n3 24f5 24f5 24f5 24f5 24f5 24f5 24f5 24f5 24f5 24f5 4n5 24f5 24f5 24f5 24f5
+[v4m    81.7s] oss_low_snap T09 drop +0.03 | pair_nat 0.00 natural 0.06 | 24f0 24f0 24f0 24f0 24f0 24f0 24f0 24f0 24f_____________ 24fx 24f0 24f0 24f856_ 24f0 3n1_ 24f0
+[v4m    81.7s] oss_low_snap T10 drop +0.15 | pair_nat 0.13 natural 0.56 | 3n425 24f425 24f425 2n425 2n425 2n0 24f425 24f425 2n425 2n0 24f425 2n425 2n425 24f425 24f0 2n625
+[v4m    81.7s] oss_low_snap T11 drop +0.28 | pair_nat 0.12 natural 1.00 | 2n9 2n598 2n983 2n906 2n904 2n983 2n983 2n749 2n0 2n983 2n2 2n875 2n998 2n983 2n3 2n983
+[v4m    81.7s] oss_low_snap T12 drop +0.13 | pair_nat 0.07 natural 0.44 | 24f0 24f0 2nNaN 2n0 3n0 24f0 24f0 24f0 24f0 2n0 2nNaN 2nNaN 2nNaN 24f0 24f0 24f0
+[v4m    81.7s] oss_low_snap T13 drop +0.57 | pair_nat 0.00 natural 0.00 | 24f0 24f0 24f0 24f0_ 24f0 24f0 24f0 24f0 24f0 24f0 24f0_ 24f0 24f0 24f0 24f0 24f0
+[v4m    81.7s] oss_low_snap T14 drop +0.41 | pair_nat 0.00 natural 0.06 | 24f0 24f0 24f0 24f0 24f0 24f0 24f0 24f0 24f0 24f0 24f0 24f0 24f0 24f0 2n0 24f0
+[v4m    81.7s] oss_low_snap T15 drop +0.00 | pair_nat 0.01 natural 0.94 | 3n5600 2n40 3n660 2n780 3n4600 3n210 8n440 2n78 2n78 3n340 3n1400 2n240 24f240 2n0 3n1260 3n260
+[v4m    81.7s] oss_low_snap T16 drop +0.00 | pair_nat 0.06 natural 0.69 | 3n97 2n93 24f99 13n99 2n99 2n73 2n62 2n71 24f99 24f99 2n85 24f97 24f96 9n99 2n99 5n62
+[v4m    81.7s] oss_low_snap T17 drop +0.00 | pair_nat 0.00 natural 0.06 | 24f2 24f2 24f0 24f1 24f1 24f2 24f1 24f2 24f2 24f1 24f0 24f8 24f2 3n8 24f0 24f0
+[v4m    81.7s] oss_low_snap T18 drop +0.00 | pair_nat 0.12 natural 0.50 | 3n12 2nNaN 2nNaN 2nNaN 24fNaN 24fNaN 2nNaN 24fNaN 24fNaN 24f13 2nNaN 24fNaN 24fNaN 3nNaN 24fNaN 3n56
+[v4m    81.7s] oss_low_snap T19 drop +0.19 | pair_nat 0.88 natural 1.00 | 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 3n2079 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN
+[v4m    81.7s] oss_low_snap T20 drop +0.30 | pair_nat 0.26 natural 0.94 | 3n1250 2n65 2n125 3n1250 3n1250 2n65 2n125 2n125 3n1250 3n125 2n125 2n125 2n65 2n65 24f125 3n1250
+[v4m    81.7s] oss_low_snap T21 drop +0.01 | pair_nat 0.88 natural 0.94 | 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 24fNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN
+[v4m    81.7s] oss_low_snap T22 drop +0.18 | pair_nat 0.65 natural 0.81 | 2nNaN 2nNaN 2nNaN 2nNaN 24fNaN 2nNaN 2nNaN 2nNaN 24fNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 2nNaN 24fNaN
+[v4m    81.7s] oss_low_snap T23 drop +0.12 | pair_nat 0.06 natural 0.94 | 2nNaN 24f10 2n34 2n44 2n34 2nNaN 2nNaN 2n10 2n12 2n34 2n22 2n13 2n9 2n41 2n13 2n68
+[v4m    81.7s] oss_low_snap T24 drop +0.26 | pair_nat 0.00 natural 0.00 | 1cx 1cx 1cx 1cx 1cNa 1cx 1cx 1cx 1cx 1cNa 1cx 1cx 1cNa 1cx 1cx 1cx
+[v4m    81.7s] oss_low_snap T25 drop +0.40 | pair_nat 0.00 natural 0.00 | 1cx 1cx 1cx 1cx 1cNa 1cx 1cx 1cNa 1cNa 1cx 1cNa 1cx 1cNa 1cx 1cNa 1cx
+[v4m    81.7s] oss_low_snap T26 drop +0.56 | pair_nat 0.00 natural 0.00 | 1cx 1cx 1cx 1cx 1cx 1cx 1cx 1cx 1cx 1cx 1cx 1cx 1cx 1cx 1cx 1cx
+[v4m    81.7s] oss_low_snap: read 26/28 public texts
+[v4m    90.5s] oss_low_ans: compacting-loop check PASSED (row removed True, tokens equal after removal 1.00/1.00; 8.8s)
+[v4m   326.8s] oss_low_ans: batch 112 rows (K 8), 2736 steps, 236.0s, 86 ms/step, 2.11 s/attempt, row-steps 171618 = 56% of uncompacted
+[v4m   328.7s] oss_low_ans: out of memory, batch now 7 problems
+[v4m   502.3s] oss_low_ans: batch 56 rows (K 8), 3000 steps, 173.6s, 58 ms/step, 3.10 s/attempt, row-steps 79728 = 47% of uncompacted
+[v4m   658.1s] oss_low_ans: batch 56 rows (K 8), 3000 steps, 155.8s, 52 ms/step, 2.78 s/attempt, row-steps 72632 = 43% of uncompacted
+[v4m   658.1s] oss_low_ans T01 drop +0.02 | pair_nat 1.00 natural 1.00 | 1345n50 1631n50 945n50 1091n50 1325n50 1303n50 1559n50 1466n50
+[v4m   658.1s] oss_low_ans T02 drop -0.00 | pair_nat 1.00 natural 1.00 | 1314n201 1280n201 1900n201 1675n201 1026n201 1226n201 1354n201 1983n201
+[v4m   658.1s] oss_low_ans T03 drop +0.00 | pair_nat 1.00 natural 1.00 | 923n190 623n190 948n190 1113n190 972n190 1065n190 1310n190 1213n190
+[v4m   658.1s] oss_low_ans T04 drop +0.01 | pair_nat 1.00 natural 1.00 | 1749n50 1323n50 1175n50 1259n50 1033n50 1609n50 1110n50 1505n50
+[v4m   658.1s] oss_low_ans T05 drop +0.05 | pair_nat 0.54 natural 1.00 | 1811n_9_ 1459n50 1751n50 1415n50 1618n50 1179n9 1187n50 1161n50
+[v4m   658.1s] oss_low_ans T06 drop +0.01 | pair_nat 1.00 natural 1.00 | 1364n504 1276n504 1156n504 1000n504 1223n504 1086n504 1268n504 1179n504
+[v4m   658.1s] oss_low_ans T07 drop +0.01 | pair_nat 1.00 natural 1.00 | 554n70 560n70 732n70 568n70 722n70 532n70 647n70 571n70
+[v4m   658.1s] oss_low_ans T08 drop +0.06 | pair_nat 1.00 natural 1.00 | 1076n77 1981n77 1269n77 1397n77 1233n77 1447n77 1507n77 1389n77
+[v4m   658.1s] oss_low_ans T09 drop +0.03 | pair_nat 0.75 natural 1.00 | 1963n902 1717n902 2058n902 2539n993 2736n902 2449n902 1820n902 2030n902
+[v4m   658.1s] oss_low_ans T10 drop +0.15 | pair_nat 0.75 natural 1.00 | 1397n850 1348n850 1851n850 178n275 1712n850 1276n850 1432n850 2002n850
+[v4m   658.1s] oss_low_ans T11 drop +0.28 | pair_nat 0.54 natural 1.00 | 1785n999 2324n669 1770n669 2044n669 2476n669 1138n669 2158n669 1563n680
+[v4m   658.1s] oss_low_ans T12 drop +0.13 | pair_nat 0.32 natural 1.00 | 1429n1 1634n768 1882n768 1606n1 1902n1 1460n8 2703n768 2149n768
+[v4m   658.1s] oss_low_ans T13 drop +0.57 | pair_nat 0.43 natural 1.00 | 1824n22032 1726n22032 1643n22032 1466n26244 1548n22032 1485n26244 1477n26244 1630n26244
+[v4m   658.1s] oss_low_ans T14 drop +0.41 | pair_nat 0.14 natural 1.00 | 2045n924 1533n821 2240n1232 536n0 1623n1232 1945n821 2216n1232 2359n126485
+[v4m   658.1s] oss_low_ans T15 drop +0.00 | pair_nat 1.00 natural 1.00 | 853n178 837n178 718n178 865n178 507n178 1126n178 1126n178 695n178
+[v4m   658.1s] oss_low_ans T16 drop +0.00 | pair_nat 0.54 natural 1.00 | 1173n70 1302n65 1334n70 1632n71 1201n70 1511n70 1962n70 1117n70
+[v4m   658.1s] oss_low_ans T17 drop +0.00 | pair_nat 1.00 natural 1.00 | 1334n441 1222n441 957n441 1185n441 1298n441 1308n441 1203n441 1437n441
+[v4m   658.1s] oss_low_ans T18 drop +0.00 | pair_nat 1.00 natural 1.00 | 938n277 949n277 1115n277 1310n277 1098n277 1377n277 929n277 1055n277
+[v4m   658.1s] oss_low_ans T19 drop +0.19 | pair_nat 0.75 natural 0.88 | 1231n714 3000fx 1051n714 1136n714 1192n714 1223n714 1008n714 1176n714
+[v4m   658.1s] oss_low_ans T20 drop +0.30 | pair_nat 0.04 natural 0.88 | 3000fx 1720nNaN 1234n124 624n125 2390n62 2614n245 1004n120 2360n120
+[v4m   658.1s] oss_low_ans T21 drop +0.01 | pair_nat 0.54 natural 1.00 | 1546n143 1794n143 1937n143 1241nNaN 1412n1001 1338n143 1932n143 2178n143
+[v4m   658.1s] oss_low_ans T22 drop +0.18 | pair_nat 0.04 natural 0.88 | 1994n59 1504n83 2100n90 1551n64 2212n83 708nNaN 3000fx 1845n56
+[v4m   658.1s] oss_low_ans T23 drop +0.12 | pair_nat 0.14 natural 1.00 | 2830nNaN 664nNaN 1068n68 1209n7 2639n223 492nNaN 595n7 399n34
+[v4m   658.1s] oss_low_ans T24 drop +0.26 | pair_nat 0.07 natural 1.00 | 770nNaN 393n32192 1220n0 1311n5 330n2 1082n5 1059n4 397n0
+[v4m   658.1s] oss_low_ans T25 drop +0.40 | pair_nat 0.04 natural 1.00 | 2727n287 1538n1453 1444n37 1459nNaN 1383nNaN 1288n14 1873n1655 1694n207
+[v4m   658.1s] oss_low_ans T26 drop +0.56 | pair_nat 0.25 natural 1.00 | 1390n0 1601n1 657n0 1883n16 1098n1 707n0 1128n1 1895n16
+[v4m   658.1s] oss_low_ans T27 drop +0.16 | pair_nat 0.07 natural 1.00 | 1027n12 726n7 1590n271 1367n3 740n12 1184n733 2388n5581 1867n271
+[v4m   658.1s] oss_low_ans T28 drop +0.44 | pair_nat 0.07 natural 1.00 | 87n35 539n14 307n42 574n1 91nNaN 71n42 812nANSWER___35 192n35
+[v4m   658.1s] oss_low_ans: read 28/28 public texts
+[v4m   704.1s] oss_low_renum: rewrites for 28/28 public templates, 56 usable of 56, 46.0s
+[v4m   940.8s] oss_low_renum: batch 112 rows (K 8), 3000 steps, 236.4s, 79 ms/step, 2.11 s/attempt, row-steps 171128 = 51% of uncompacted
+[v4m  1159.8s] oss_low_renum: batch 112 rows (K 8), 3000 steps, 219.0s, 73 ms/step, 1.96 s/attempt, row-steps 142832 = 43% of uncompacted
+[v4m  1159.8s] oss_low_renum T01 drop +0.02 | pair_nat 1.00 natural 1.00 variants 2 | 2031nNaN 1948nNaN 2591nNaN 1630nNaN 1348nNaN 1618nNaN 1389nNaN 2534nNaN
+[v4m  1159.8s] oss_low_renum T01 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T02 drop -0.00 | pair_nat 0.75 natural 1.00 variants 2 | 271n0 613n0 367n0 621n_0 432n0 519n0 686n0 398n0
+[v4m  1159.8s] oss_low_renum T02 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T03 drop +0.00 | pair_nat 0.43 natural 1.00 variants 2 | 868n100 1027n215 1019n100 1096n215 1287n100 1012n215 780n100 1205n215
+[v4m  1159.8s] oss_low_renum T03 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T04 drop +0.01 | pair_nat 0.36 natural 1.00 variants 2 | 1277n28+_663 1210n30+_779 1014nNaN 1010nNaN 778nNaN 1194nNaN 795nNaN 1974n579_10
+[v4m  1159.8s] oss_low_renum T04 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T05 drop +0.05 | pair_nat 0.11 natural 1.00 variants 2 | 1233n___frac_95__2__+__sqrt_9 966nNaN 1186n_displaystyle__frac_95__ 1691nNaN 1556nx 843nNaN 1401n95_2_+_sqrt_94_ 2190n34.5_+_2_17._Represent_a
+[v4m  1159.8s] oss_low_renum T05 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T06 drop +0.01 | pair_nat 0.43 natural 1.00 variants 2 | 930n272 1451n896 1151n272 1090n896 1092n272 556n896 1027n272 1206n896
+[v4m  1159.8s] oss_low_renum T06 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T07 drop +0.01 | pair_nat 0.43 natural 1.00 variants 2 | 607n20 1079n28 453n20 1445n28 651n20 862n28 550n20 968n28
+[v4m  1159.8s] oss_low_renum T07 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T08 drop +0.06 | pair_nat 0.43 natural 1.00 variants 2 | 1512n88 1028n104 1645n88 1475n104 1705n88 1124n104 1816n88 1636n104
+[v4m  1159.8s] oss_low_renum T08 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T09 drop +0.03 | pair_nat 0.11 natural 0.50 variants 2 | 2582nNaN 3000fx 2415nNaN 2815n301 3000fx 3000fx 2422nNaN 3000fx
+[v4m  1159.8s] oss_low_renum T09 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T10 drop +0.15 | pair_nat 0.75 natural 1.00 variants 2 | 1534n0 1482nNaN 1582n0 996n0 1879n0 1118n0 1436n0 1758n0
+[v4m  1159.8s] oss_low_renum T10 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T11 drop +0.28 | pair_nat 0.00 natural 0.38 variants 2 | 3000fx 3000fx 3000fx 3000fx 1088n125 1171n625 3000fx 1066nNaN
+[v4m  1159.8s] oss_low_renum T11 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T12 drop +0.13 | pair_nat 0.21 natural 1.00 variants 2 | 1894n1 1821n8 1295n1 2406n4288 1254n1 1929n6144 2505n1024 1206n1
+[v4m  1159.8s] oss_low_renum T12 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T13 drop +0.57 | pair_nat 0.32 natural 1.00 variants 2 | 725n0 2584n69 856n0 1956n78 778n0 1662n69 763n0 1640n69
+[v4m  1159.8s] oss_low_renum T13 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T14 drop +0.41 | pair_nat 0.14 natural 1.00 variants 2 | 1831n681 1151nNaN 1864n1041 1099ninfinitely_many 1262n681 1301nNaN 2757n727 1264nNaN
+[v4m  1159.8s] oss_low_renum T14 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T15 drop +0.00 | pair_nat 0.43 natural 1.00 variants 2 | 543n39 638n37 635n39 719n37 729n39 488n37 549n39 719n37
+[v4m  1159.8s] oss_low_renum T15 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T16 drop +0.00 | pair_nat 1.00 natural 1.00 variants 2 | 1319n67 1512n67 1166n67 1241n67 1561n67 1318n67 709n67 782n67
+[v4m  1159.8s] oss_low_renum T16 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T17 drop +0.00 | pair_nat 0.43 natural 1.00 variants 2 | 1105n6859 826n19 1574n6859 1478n19 1214n6859 1352n19 1155n6859 1337n19
+[v4m  1159.8s] oss_low_renum T17 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T18 drop +0.00 | pair_nat 0.43 natural 1.00 variants 2 | 451n61 1103n73 949n61 1056n73 939n61 1007n73 938n61 934n73
+[v4m  1159.8s] oss_low_renum T18 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T19 drop +0.19 | pair_nat 0.11 natural 0.88 variants 2 | 172n247 314n243 3000fx 2659n734 2834n736 2016nNaN 1667nNaN 1394nNaN
+[v4m  1159.8s] oss_low_renum T19 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T20 drop +0.30 | pair_nat 0.00 natural 0.88 variants 2 | 2780n88 2836n49 1804nNaN 1814n42 2861n90 2554n144 849n13 3000fx
+[v4m  1159.8s] oss_low_renum T20 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T21 drop +0.01 | pair_nat 1.00 natural 1.00 variants 2 | 1611n143 1453n143 1269n143 2028n143 1322n143 1497n143 1105n143 2003n143
+[v4m  1159.8s] oss_low_renum T21 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T22 drop +0.18 | pair_nat 0.54 natural 1.00 variants 2 | 409nNaN 2241n67 211nNaN 940n123 51nNaN 426nNaN 172nNaN 1151nNaN
+[v4m  1159.8s] oss_low_renum T22 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T23 drop +0.12 | pair_nat 0.14 natural 1.00 variants 2 | 621nNaN 2207n9 1112nNaN 1969n1 1889n1 2468n49 1399n33 2117n1
+[v4m  1159.8s] oss_low_renum T23 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T24 drop +0.26 | pair_nat 0.14 natural 1.00 variants 2 | 677n3219 530n3219 253n3219 476n5 988n15 871n6 896n5 1066n7
+[v4m  1159.8s] oss_low_renum T24 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T25 drop +0.40 | pair_nat 0.14 natural 1.00 variants 2 | 861n59 1756nNaN 981nNaN 1935n3779 976nNaN 947n179 1507n635 1420n3779
+[v4m  1159.8s] oss_low_renum T25 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T26 drop +0.56 | pair_nat 0.04 natural 1.00 variants 2 | 1844n7 162nNaN 1055n16 1249n5 1107n5 1292n4 144n0 2870n80
+[v4m  1159.8s] oss_low_renum T26 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T27 drop +0.16 | pair_nat 0.04 natural 1.00 variants 2 | 1141n445 1956n47 1816n3433 1518n54 1645n201 1619n9 2263n445 1168n6
+[v4m  1159.8s] oss_low_renum T27 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum T28 drop +0.44 | pair_nat 0.18 natural 1.00 variants 2 | 57n0 59n42 58n42 86n26 96n68 102n26 58n0 84n26
+[v4m  1159.8s] oss_low_renum T28 text: [problem text omitted from the public release]
+[v4m  1159.8s] oss_low_renum: read 28/28 public texts
+[v4m  1416.9s] oss_low_sib: batch 108 rows (K 4), 2947 steps, 256.9s, 87 ms/step, 2.38 s/attempt, row-steps 153220 = 48% of uncompacted
+[v4m  1416.9s] oss_low_sib T01:x2 drop +0.02 | pair_nat 1.00 natural 1.00 | 1633n200 1210n200 2947n200 1202n200
+[v4m  1416.9s] oss_low_sib T02:e102 drop -0.00 | pair_nat 0.50 natural 1.00 | 1247n203 1116n203 2295n3 1484n203
+[v4m  1416.9s] oss_low_sib T04:x3 drop +0.01 | pair_nat 1.00 natural 1.00 | 1622n150 1343n150 1367n150 1531n150
+[v4m  1416.9s] oss_low_sib T05:up5 drop +0.05 | pair_nat 0.17 natural 1.00 | 1365n__50__ 1506n50 1074n9 1187n50
+[v4m  1416.9s] oss_low_sib T06:x3 drop +0.01 | pair_nat 1.00 natural 1.00 | 1142n4536 1028n4536 1327n4536 1035n4536
+[v4m  1416.9s] oss_low_sib T07:hi drop +0.01 | pair_nat 1.00 natural 1.00 | 566n49 611n49 495n49 532n49
+[v4m  1416.9s] oss_low_sib T07:lo drop +0.01 | pair_nat 1.00 natural 1.00 | 1279n21 670n21 348n21 514n21
+[v4m  1416.9s] oss_low_sib T08:x2 drop +0.06 | pair_nat 1.00 natural 1.00 | 1198n75 1327n75 1140n75 1507n75
+[v4m  1416.9s] oss_low_sib T11:e101 drop +0.28 | pair_nat 0.17 natural 1.00 | 1714n703 2218n311 1101n692 2040n692
+[v4m  1416.9s] oss_low_sib T13:e16r1 drop +0.57 | pair_nat 0.50 natural 1.00 | 1420n21097 1373n21097 897n21097 1445n_21097
+[v4m  1416.9s] oss_low_sib T13:e16r5 drop +0.57 | pair_nat 0.50 natural 1.00 | 1829n20808 1877n20808 1721n20808 1710n__20808__
+[v4m  1416.9s] oss_low_sib T13:e16r7 drop +0.57 | pair_nat 0.33 natural 1.00 | 1664n20808 1960n20808_ 1577n20808_ 1047n20808
+[v4m  1416.9s] oss_low_sib T13:e16r11 drop +0.57 | pair_nat 0.50 natural 1.00 | 1991nN___20808 911n20808 1890n20808 1649n20808
+[v4m  1416.9s] oss_low_sib T15:p9 drop +0.00 | pair_nat 1.00 natural 1.00 | 718n160 631n160 720n160 767n160
+[v4m  1416.9s] oss_low_sib T15:p11 drop +0.00 | pair_nat 1.00 natural 1.00 | 637n196 822n196 653n196 711n196
+[v4m  1416.9s] oss_low_sib T16:b101 drop +0.00 | pair_nat 1.00 natural 1.00 | 1640n71 1260n71 1486n71 1727n71
+[v4m  1416.9s] oss_low_sib T18:x3 drop +0.00 | pair_nat 1.00 natural 1.00 | 694n781 1118n781 744n781 1365n781
+[v4m  1416.9s] oss_low_sib T19:x3 drop +0.19 | pair_nat 0.17 natural 1.00 | 1968n6426 1426n22707 2132n12342 1573n6426
+[v4m  1416.9s] oss_low_sib T23:x2 drop +0.12 | pair_nat 0.00 natural 1.00 | 680n68 2007n131 773nNaN 1518n56
+[v4m  1416.9s] oss_low_sib T25:x3 drop +0.40 | pair_nat 0.50 natural 1.00 | 1163nNaN 2426nNaN 1331nNaN 2350n44
+[v4m  1416.9s] oss_low_sib T26:not drop +0.56 | pair_nat 0.50 natural 1.00 | 494n2048 2281n2032 589n2048 364n2048
+[v4m  1416.9s] oss_low_sib T27:not drop +0.16 | pair_nat 0.00 natural 1.00 | 2110n422 1901n1765 2524n11051 2567n5513
+[v4m  1416.9s] oss_low_sib T08:prod drop +0.06 | pair_nat 1.00 natural 1.00 | 1324n292 1331n292 1138n292 1543n292
+[v4m  1416.9s] oss_low_sib T18:prod drop +0.00 | pair_nat 1.00 natural 1.00 | 1256n6300 1002n6300 1296n6300 917n6300
+[v4m  1416.9s] oss_low_sib T23:prod drop +0.12 | pair_nat 0.50 natural 1.00 | 1139n10 706nNaN 831n10 663n10
+[v4m  1416.9s] oss_low_sib T25:prod drop +0.40 | pair_nat 0.50 natural 1.00 | 1475nNaN 2832n15 1143nNaN 2104nNaN
+[v4m  1416.9s] oss_low_sib T27:prod drop +0.16 | pair_nat 0.00 natural 1.00 | 2177n3696 2028n5544 1984n9240 1118n11
+[v4m  1416.9s] oss_low_sib: read 27/27 public texts
+[v4m  1457.6s] oss_low_domain: rewrites for 28/28 public templates, 56 usable of 56, 40.6s
+[v4m  1715.5s] oss_low_domain: batch 112 rows (K 4), 3000 steps, 257.7s, 86 ms/step, 2.30 s/attempt, row-steps 168160 = 50% of uncompacted
+[v4m  1715.5s] oss_low_domain T01 drop +0.02 | pair_nat 1.00 natural 1.00 variants 2 | 2061n50 1044n50 1256n50 1670n50
+[v4m  1715.6s] oss_low_domain T01 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T02 drop -0.00 | pair_nat 1.00 natural 1.00 variants 2 | 1987n201 1975n201 2123n201 1815n201
+[v4m  1715.6s] oss_low_domain T02 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T03 drop +0.00 | pair_nat 1.00 natural 1.00 variants 2 | 1187n190 1124n190 1212n190 1213n190
+[v4m  1715.6s] oss_low_domain T03 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T04 drop +0.01 | pair_nat 1.00 natural 1.00 variants 2 | 1032n50 710n50 1029n50 595n50
+[v4m  1715.6s] oss_low_domain T04 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T05 drop +0.05 | pair_nat 0.50 natural 1.00 variants 2 | 883n9 1405n50 1271n50 1362n50
+[v4m  1715.6s] oss_low_domain T05 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T06 drop +0.01 | pair_nat 1.00 natural 1.00 variants 2 | 2315n504 1476n504 1310n504 1240n504
+[v4m  1715.6s] oss_low_domain T06 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T07 drop +0.01 | pair_nat 1.00 natural 1.00 variants 2 | 613n70 518n70 534n70 599n70
+[v4m  1715.6s] oss_low_domain T07 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T08 drop +0.06 | pair_nat 0.17 natural 1.00 variants 2 | 1948n1 2264n8 1291n1 1467n77
+[v4m  1715.6s] oss_low_domain T08 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T09 drop +0.03 | pair_nat 0.33 natural 1.00 variants 2 | 2335n902 2853nNaN 2511n902 1414nNaN
+[v4m  1715.6s] oss_low_domain T09 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T10 drop +0.15 | pair_nat 0.50 natural 1.00 variants 2 | 2386n850 1902n850 690n17 1440n850
+[v4m  1715.6s] oss_low_domain T10 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T11 drop +0.28 | pair_nat 0.17 natural 0.75 variants 2 | 1758n669 1667n669 3000fx 2256nNaN
+[v4m  1715.6s] oss_low_domain T11 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T12 drop +0.13 | pair_nat 0.50 natural 1.00 variants 2 | 1185n1 1058n768 2025n768 2135n768
+[v4m  1715.6s] oss_low_domain T12 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T13 drop +0.57 | pair_nat 0.50 natural 1.00 variants 2 | 1447n26244 1589n22032 1762n26244 1217n26244
+[v4m  1715.6s] oss_low_domain T13 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T14 drop +0.41 | pair_nat 0.17 natural 1.00 variants 2 | 1571n1235 2280n821 1326n1235 2019n1232
+[v4m  1715.6s] oss_low_domain T14 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T15 drop +0.00 | pair_nat 1.00 natural 1.00 variants 2 | 609n178 737n178 689n178 553n178
+[v4m  1715.6s] oss_low_domain T15 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T16 drop +0.00 | pair_nat 0.50 natural 1.00 variants 2 | 1574n70 1491n70 1510n65 1470n70
+[v4m  1715.6s] oss_low_domain T16 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T17 drop +0.00 | pair_nat 1.00 natural 1.00 variants 2 | 1513n441 1381n441 1387n441 1317n441
+[v4m  1715.6s] oss_low_domain T17 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T18 drop +0.00 | pair_nat 1.00 natural 1.00 variants 2 | 952n277 951n277 1391n277 997n277
+[v4m  1715.6s] oss_low_domain T18 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T19 drop +0.19 | pair_nat 0.50 natural 1.00 variants 2 | 2737nNaN 26n729 1969nNaN 26nNaN
+[v4m  1715.6s] oss_low_domain T19 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T20 drop +0.30 | pair_nat 0.00 natural 0.75 variants 2 | 3000fx 2356n49 1956n125 1231nNaN
+[v4m  1715.6s] oss_low_domain T20 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T21 drop +0.01 | pair_nat 1.00 natural 1.00 variants 2 | 1283n143 1312n143 1416n143 1796n143
+[v4m  1715.6s] oss_low_domain T21 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T22 drop +0.18 | pair_nat 0.17 natural 1.00 variants 2 | 1542n21 724n50 1061n38 680n50
+[v4m  1715.6s] oss_low_domain T22 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T23 drop +0.12 | pair_nat 0.00 natural 1.00 variants 2 | 2155n31 1935nNaN 2463n9 210n7
+[v4m  1715.6s] oss_low_domain T23 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T24 drop +0.26 | pair_nat 0.17 natural 1.00 variants 2 | 605n19 431n5 727n2 330n5
+[v4m  1715.6s] oss_low_domain T24 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T25 drop +0.40 | pair_nat 0.00 natural 0.50 variants 2 | 2397n37 3000fx 2210n145 3000fx
+[v4m  1715.6s] oss_low_domain T25 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T26 drop +0.56 | pair_nat 0.17 natural 1.00 variants 2 | 928n0 971n0 819n6 1833n16
+[v4m  1715.6s] oss_low_domain T26 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T27 drop +0.16 | pair_nat 0.00 natural 1.00 variants 2 | 1047n155 728n1 1667n1007 2275n271
+[v4m  1715.6s] oss_low_domain T27 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain T28 drop +0.44 | pair_nat 0.00 natural 1.00 variants 2 | 119n42 2195n22 225n0 460n14
+[v4m  1715.6s] oss_low_domain T28 text: [problem text omitted from the public release]
+[v4m  1715.6s] oss_low_domain: read 28/28 public texts
+[v4m  1770.6s] oss_low_nosol: rewrites for 28/28 public templates, 54 usable of 56, 55.0s
+[v4m  1771.9s] oss_low_nosol: out of memory, batch now 14 problems
+[v4m  1908.5s] oss_low_nosol: batch 56 rows (K 4), 2904 steps, 136.6s, 47 ms/step, 2.44 s/attempt, row-steps 62386 = 38% of uncompacted
+[v4m  2051.5s] oss_low_nosol: batch 56 rows (K 4), 2919 steps, 143.0s, 49 ms/step, 2.55 s/attempt, row-steps 52968 = 32% of uncompacted
+[v4m  2051.5s] oss_low_nosol T01 drop +0.02 | pair_nat 0.50 natural 1.00 variants 2 | 1680nNaN 2028nNaN 2891n16 2904nNaN
+[v4m  2051.5s] oss_low_nosol T01 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T02 drop -0.00 | pair_nat 0.33 natural 1.00 variants 2 | 1340n3 920n201 1042n3 1370n201
+[v4m  2051.5s] oss_low_nosol T02 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T03 drop +0.00 | pair_nat 0.17 natural 1.00 variants 2 | 2197n190 1055nNaN 1490n190 868n0
+[v4m  2051.5s] oss_low_nosol T03 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T04 drop +0.01 | pair_nat 0.50 natural 1.00 variants 2 | 382nNaN 353nNaN 566nNaN_ 147nNaN
+[v4m  2051.5s] oss_low_nosol T04 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T05 drop +0.05 | pair_nat 0.17 natural 1.00 variants 2 | 2025n0 768n-9 730n0 1456n-50
+[v4m  2051.5s] oss_low_nosol T05 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T06 drop +0.01 | pair_nat 1.00 natural 1.00 variants 2 | 346nNaN 549nNaN 263nNaN 804nNaN
+[v4m  2051.5s] oss_low_nosol T06 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T07 drop +0.01 | pair_nat 1.00 natural 1.00 variants 1 | 458n0 547n0 443n0 528n0
+[v4m  2051.5s] oss_low_nosol T07 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T08 drop +0.06 | pair_nat 0.17 natural 1.00 variants 1 | 1508n91 892n77 1800n77 329n1
+[v4m  2051.5s] oss_low_nosol T08 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T09 drop +0.03 | pair_nat 0.33 natural 1.00 variants 2 | 1633n902 758nNaN 2170n902 674nNaN
+[v4m  2051.5s] oss_low_nosol T09 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T10 drop +0.15 | pair_nat 0.33 natural 1.00 variants 2 | 1081n0 1315n850 1555n0 1100n850
+[v4m  2051.5s] oss_low_nosol T10 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T11 drop +0.28 | pair_nat 0.50 natural 1.00 variants 2 | 1435n669 1106n0 1770n669 1543n669
+[v4m  2051.5s] oss_low_nosol T11 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T12 drop +0.13 | pair_nat 1.00 natural 1.00 variants 2 | 444n1 859n1 583n1 712n1
+[v4m  2051.5s] oss_low_nosol T12 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T13 drop +0.57 | pair_nat 0.50 natural 1.00 variants 2 | 177n0 180n0 157n0 1861nNaN
+[v4m  2051.5s] oss_low_nosol T13 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T14 drop +0.41 | pair_nat 0.50 natural 1.00 variants 2 | 569n_0 1004n0 650n0 714n0
+[v4m  2051.5s] oss_low_nosol T14 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T15 drop +0.00 | pair_nat 0.17 natural 1.00 variants 2 | 592n0 319n0 621nNaN 393n_0
+[v4m  2051.5s] oss_low_nosol T15 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T16 drop +0.00 | pair_nat 0.17 natural 1.00 variants 2 | 1050n70 323n0 750n137 332n0
+[v4m  2051.5s] oss_low_nosol T16 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T17 drop +0.00 | pair_nat 0.17 natural 1.00 variants 2 | 563n1 1663n3321 586n_1 2302n3321
+[v4m  2051.5s] oss_low_nosol T17 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T18 drop +0.00 | pair_nat 0.50 natural 1.00 variants 2 | 1499n149 1105nNaN 1017nNaN 1030nNaN
+[v4m  2051.5s] oss_low_nosol T18 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T19 drop +0.19 | pair_nat 0.17 natural 1.00 variants 2 | 1595n714 2388nNaN 1277n714 2919n413
+[v4m  2051.5s] oss_low_nosol T19 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T20 drop +0.30 | pair_nat 0.33 natural 1.00 variants 2 | 2288nNaN 588n7 2475nNaN 582n7
+[v4m  2051.5s] oss_low_nosol T20 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T21 drop +0.01 | pair_nat 0.17 natural 1.00 variants 2 | 878nx 803n143 499nNaN 61nNaN
+[v4m  2051.5s] oss_low_nosol T21 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T22 drop +0.18 | pair_nat 0.00 natural 1.00 variants 2 | 541n81 1244n95 429n43 150nNaN
+[v4m  2051.5s] oss_low_nosol T22 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T23 drop +0.12 | pair_nat 0.17 natural 1.00 variants 2 | 538n13 478nNaN 324n65 513nNaN
+[v4m  2051.5s] oss_low_nosol T23 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T24 drop +0.26 | pair_nat 0.00 natural 1.00 variants 2 | 227nNaN 107n0 658n18 360n2
+[v4m  2051.5s] oss_low_nosol T24 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T25 drop +0.40 | pair_nat 1.00 natural 1.00 variants 2 | 581nNaN 438nNaN 560nNaN 479nNaN
+[v4m  2051.5s] oss_low_nosol T25 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T26 drop +0.56 | pair_nat 1.00 natural 1.00 variants 2 | 165n0 1223n0 372n0 759n0
+[v4m  2051.5s] oss_low_nosol T26 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T27 drop +0.16 | pair_nat 0.17 natural 1.00 variants 2 | 1517n271 2037n941 1012n7 1539n271
+[v4m  2051.5s] oss_low_nosol T27 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol T28 drop +0.44 | pair_nat 0.33 natural 1.00 variants 2 | 220n14 1313n35 254n14 1483n35
+[v4m  2051.5s] oss_low_nosol T28 text: [problem text omitted from the public release]
+[v4m  2051.5s] oss_low_nosol: read 28/28 public texts
+[v4m  2051.5s] call 1 (Qwen/Qwen3.5-4B:default): 2 cases, research run, all answered robust
+[v4m  2051.5s] call 2 (Skywork/Skywork-OR1-Math-7B:default): 3 cases, research run, all answered robust
+[v4m  2051.5s] call 3 (allenai/Olmo-3-7B-Think:default): 2 cases, research run, all answered robust
+[v4m  2051.5s] call 4 (deepseek-ai/DeepSeek-R1-0528-Qwen3-8B:default): 3 cases, research run, all answered robust
+[v4m  2051.5s] call 5 (openai/gpt-oss-120b:high): 3 cases, research run, all answered robust
+[v4m  2051.5s] call 6 (openai/gpt-oss-120b:low): 5 cases, research run, all answered robust
+[v4m  2051.5s] call 7 (openai/gpt-oss-120b:medium): 3 cases, research run, all answered robust

@@ -1,0 +1,280 @@
+submission_main (log tag v129m) own-run clock rehearsal; mock MOCK_OWN=1; virtual clock; harness limit 3,600 s
+
+===== speed 1.0x
+--- board exact (21 cases, 16 problems) seed 1: cases 21, problems 16 | invalid 0/21 | calls 6 | virtual end 1915 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   2 problems   2 new(oss)   2 K_oss 32 |    188 s, ends    188 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   2 K_oss 32 |    631 s, ends    819 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 960s, predicted 511s, took 448s, time scale 1.00, with a reading 3), own 445 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   2 problems   2 new(oss)   2 K_oss 32 |    415 s, ends   1233 s | own_olmo K 2xK3+0xK1 (new problems 2, read 2 (K 3: 2, K 1: 0), window 1675s, predicted 262s, took 228s, time scale 1.00, with a reading 2), own 228 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   2 K_oss 32 |    184 s, ends   1417 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   4 K_oss 32 |    338 s, ends   1755 s
+  call 7 gpt-oss-120b:medium              cases   3 problems   3 new(oss)   1 K_oss 32 |    160 s, ends   1915 s
+--- board exact seed 2: cases 21, problems 16 | invalid 0/21 | calls 6 | virtual end 1915 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   2 problems   2 new(oss)   2 K_oss 32 |    188 s, ends    188 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   2 K_oss 32 |    631 s, ends    819 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 960s, predicted 511s, took 448s, time scale 1.00, with a reading 3), own 445 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   2 problems   2 new(oss)   2 K_oss 32 |    415 s, ends   1233 s | own_olmo K 2xK3+0xK1 (new problems 2, read 2 (K 3: 2, K 1: 0), window 1675s, predicted 262s, took 228s, time scale 1.00, with a reading 2), own 228 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   2 K_oss 32 |    184 s, ends   1417 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   4 K_oss 32 |    338 s, ends   1755 s
+  call 7 gpt-oss-120b:medium              cases   3 problems   3 new(oss)   1 K_oss 32 |    160 s, ends   1915 s
+--- board random 2-5 per call seed 3: cases 20, problems 15 | invalid 0/20 | calls 6 | virtual end 1830 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   3 problems   3 new(oss)   3 K_oss 32 |    211 s, ends    211 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   3 K_oss 32 |    654 s, ends    865 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 940s, predicted 511s, took 448s, time scale 1.00, with a reading 3), own 445 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   2 problems   2 new(oss)   2 K_oss 32 |    414 s, ends   1280 s | own_olmo K 2xK3+0xK1 (new problems 2, read 2 (K 3: 2, K 1: 0), window 1628s, predicted 262s, took 228s, time scale 1.00, with a reading 2), own 228 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   5 problems   5 new(oss)   3 K_oss 32 |    207 s, ends   1487 s
+  call 6 gpt-oss-120b:low                 cases   2 problems   2 new(oss)   2 K_oss 32 |    184 s, ends   1670 s
+  call 7 gpt-oss-120b:medium              cases   2 problems   2 new(oss)   1 K_oss 32 |    160 s, ends   1830 s
+--- board random seed 4: cases 27, problems 17 | invalid 0/27 | calls 6 | virtual end 2217 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   3 problems   3 new(oss)   3 K_oss 32 |    211 s, ends    211 s
+  call 2 Skywork-OR1-Math-7B:default      cases   4 problems   4 new(oss)   2 K_oss 32 |    755 s, ends    966 s | own_skywork K 4xK3+0xK1 (new problems 4, read 4 (K 3: 4, K 1: 0), window 950s, predicted 654s, took 572s, time scale 1.00, with a reading 4), own 569 s, cut batches 0 | cases read with 3 complete attempts 4, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   4 problems   4 new(oss)   3 K_oss 32 |    546 s, ends   1512 s | own_olmo K 4xK3+0xK1 (new problems 4, read 4 (K 3: 4, K 1: 0), window 1504s, predicted 386s, took 336s, time scale 1.00, with a reading 4), own 336 s, cut batches 0 | cases read with 3 complete attempts 4, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   2 K_oss 32 |    184 s, ends   1696 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   2 K_oss 32 |    184 s, ends   1879 s
+  call 7 gpt-oss-120b:medium              cases   4 problems   4 new(oss)   4 K_oss 32 |    338 s, ends   2217 s
+--- final 30 problems x 7, 93% included, seed 5: cases 189, problems 30 | invalid 0/189 | calls 6 | virtual end 3027 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 4 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  28 problems  28 new(oss)  28 K_oss 16 |    875 s, ends    875 s
+  call 2 Skywork-OR1-Math-7B:default      cases  25 problems  25 new(oss)   1 K_oss  4 |    717 s, ends   1592 s | own_skywork K 0xK3+12xK1 (new problems 25, read 12 (K 3: 0, K 1: 12), window 668s, predicted 654s, took 572s, time scale 1.00, with a reading 12), own 569 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 12, none 13
+  call 3 Olmo-3-7B-Think:default          cases  27 problems  27 new(oss)   1 K_oss 10 |    949 s, ends   2541 s | own_olmo K 2xK3+25xK1 (new problems 27, read 27 (K 3: 2, K 1: 25), window 937s, predicted 918s, took 798s, time scale 1.00, with a reading 27), own 798 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 25, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  27 problems  27 new(oss)   0 K_oss  4 |      0 s, ends   2541 s
+  call 6 gpt-oss-120b:low                 cases  27 problems  27 new(oss)   0 K_oss  4 |    174 s, ends   2716 s
+  call 7 gpt-oss-120b:medium              cases  29 problems  29 new(oss)   0 K_oss  4 |    311 s, ends   3027 s
+--- final 30 x 7, 93%, seed 6: cases 194, problems 30 | invalid 0/194 | calls 6 | virtual end 2896 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 16 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  30 problems  30 new(oss)  30 K_oss 16 |   1012 s, ends   1012 s
+  call 2 Skywork-OR1-Math-7B:default      cases  27 problems  27 new(oss)   0 K_oss  4 |    572 s, ends   1584 s | own_skywork K 0xK3+12xK1 (new problems 27, read 12 (K 3: 0, K 1: 12), window 672s, predicted 654s, took 572s, time scale 1.00, with a reading 12), own 569 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 12, none 15
+  call 3 Olmo-3-7B-Think:default          cases  27 problems  27 new(oss)   0 K_oss  4 |    801 s, ends   2385 s | own_olmo K 2xK3+25xK1 (new problems 27, read 27 (K 3: 2, K 1: 25), window 1093s, predicted 918s, took 798s, time scale 1.00, with a reading 27), own 798 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 25, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  29 problems  29 new(oss)   0 K_oss  4 |      0 s, ends   2385 s
+  call 6 gpt-oss-120b:low                 cases  28 problems  28 new(oss)   0 K_oss  4 |    174 s, ends   2560 s
+  call 7 gpt-oss-120b:medium              cases  26 problems  26 new(oss)   0 K_oss  4 |    337 s, ends   2896 s
+--- final 30 x 7, all included: cases 210, problems 30 | invalid 0/210 | calls 6 | virtual end 2914 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 16 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  30 problems  30 new(oss)  30 K_oss 16 |   1012 s, ends   1012 s
+  call 2 Skywork-OR1-Math-7B:default      cases  30 problems  30 new(oss)   0 K_oss  4 |    572 s, ends   1584 s | own_skywork K 0xK3+12xK1 (new problems 30, read 12 (K 3: 0, K 1: 12), window 672s, predicted 654s, took 572s, time scale 1.00, with a reading 12), own 569 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 12, none 18
+  call 3 Olmo-3-7B-Think:default          cases  30 problems  30 new(oss)   0 K_oss  4 |    819 s, ends   2403 s | own_olmo K 1xK3+29xK1 (new problems 30, read 30 (K 3: 1, K 1: 29), window 1093s, predicted 938s, took 816s, time scale 1.00, with a reading 30), own 816 s, cut batches 0 | cases read with 3 complete attempts 1, 1-2 29, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  30 problems  30 new(oss)   0 K_oss  4 |      0 s, ends   2403 s
+  call 6 gpt-oss-120b:low                 cases  30 problems  30 new(oss)   0 K_oss  4 |    174 s, ends   2578 s
+  call 7 gpt-oss-120b:medium              cases  30 problems  30 new(oss)   0 K_oss  4 |    337 s, ends   2914 s
+--- sweep 3 problems x 7, all included: cases 21, problems 3 | invalid 0/21 | calls 6 | virtual end 943 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   3 problems   3 new(oss)   3 K_oss 32 |    211 s, ends    211 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   0 K_oss  4 |    448 s, ends    658 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 1033s, predicted 511s, took 448s, time scale 1.00, with a reading 3), own 445 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   3 problems   3 new(oss)   0 K_oss  4 |    285 s, ends    943 s | own_olmo K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 2019s, predicted 324s, took 282s, time scale 1.00, with a reading 3), own 282 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   0 K_oss  4 |      0 s, ends    943 s
+  call 6 gpt-oss-120b:low                 cases   3 problems   3 new(oss)   0 K_oss  4 |      0 s, ends    943 s
+  call 7 gpt-oss-120b:medium              cases   3 problems   3 new(oss)   0 K_oss  4 |      0 s, ends    943 s
+--- sweep 5 problems x 7, all included: cases 35, problems 5 | invalid 0/35 | calls 6 | virtual end 1454 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   5 problems   5 new(oss)   5 K_oss 32 |    365 s, ends    365 s
+  call 2 Skywork-OR1-Math-7B:default      cases   5 problems   5 new(oss)   0 K_oss  4 |    696 s, ends   1061 s | own_skywork K 5xK3+0xK1 (new problems 5, read 5 (K 3: 5, K 1: 0), window 963s, predicted 797s, took 696s, time scale 1.00, with a reading 5), own 693 s, cut batches 0 | cases read with 3 complete attempts 5, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   5 problems   5 new(oss)   0 K_oss  4 |    393 s, ends   1454 s | own_olmo K 5xK3+0xK1 (new problems 5, read 5 (K 3: 5, K 1: 0), window 1616s, predicted 449s, took 390s, time scale 1.00, with a reading 5), own 390 s, cut batches 0 | cases read with 3 complete attempts 5, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   5 problems   5 new(oss)   0 K_oss  4 |      0 s, ends   1454 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   0 K_oss  4 |      0 s, ends   1454 s
+  call 7 gpt-oss-120b:medium              cases   5 problems   5 new(oss)   0 K_oss  4 |      0 s, ends   1454 s
+--- sweep 7 problems x 7, all included: cases 49, problems 7 | invalid 0/49 | calls 6 | virtual end 1920 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   7 problems   7 new(oss)   7 K_oss 32 |    520 s, ends    520 s
+  call 2 Skywork-OR1-Math-7B:default      cases   7 problems   7 new(oss)   0 K_oss  4 |    779 s, ends   1299 s | own_skywork K 5xK3+2xK1 (new problems 7, read 7 (K 3: 5, K 1: 2), window 894s, predicted 892s, took 779s, time scale 1.00, with a reading 7), own 776 s, cut batches 0 | cases read with 3 complete attempts 5, 1-2 2, none 0
+  call 3 Olmo-3-7B-Think:default          cases   7 problems   7 new(oss)   0 K_oss  4 |    621 s, ends   1920 s | own_olmo K 7xK3+0xK1 (new problems 7, read 7 (K 3: 7, K 1: 0), window 1378s, predicted 711s, took 618s, time scale 1.00, with a reading 7), own 618 s, cut batches 0 | cases read with 3 complete attempts 7, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   7 problems   7 new(oss)   0 K_oss  4 |      0 s, ends   1920 s
+  call 6 gpt-oss-120b:low                 cases   7 problems   7 new(oss)   0 K_oss  4 |      0 s, ends   1920 s
+  call 7 gpt-oss-120b:medium              cases   7 problems   7 new(oss)   0 K_oss  4 |      0 s, ends   1920 s
+--- sweep 10 problems x 7, all included: cases 70, problems 10 | invalid 0/70 | calls 6 | virtual end 2344 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  10 problems  10 new(oss)  10 K_oss 16 |    570 s, ends    570 s
+  call 2 Skywork-OR1-Math-7B:default      cases  10 problems  10 new(oss)   0 K_oss  4 |    869 s, ends   1439 s | own_skywork K 3xK3+7xK1 (new problems 10, read 10 (K 3: 3, K 1: 7), window 871s, predicted 845s, took 737s, time scale 1.00, with a reading 10), own 734 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 7, none 0
+  call 3 Olmo-3-7B-Think:default          cases  10 problems  10 new(oss)   0 K_oss  4 |    783 s, ends   2222 s | own_olmo K 10xK3+0xK1 (new problems 10, read 10 (K 3: 10, K 1: 0), window 1238s, predicted 897s, took 780s, time scale 1.00, with a reading 10), own 780 s, cut batches 0 | cases read with 3 complete attempts 10, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  10 problems  10 new(oss)   0 K_oss  4 |      0 s, ends   2222 s
+  call 6 gpt-oss-120b:low                 cases  10 problems  10 new(oss)   0 K_oss  4 |    123 s, ends   2344 s
+  call 7 gpt-oss-120b:medium              cases  10 problems  10 new(oss)   0 K_oss  4 |      0 s, ends   2344 s
+--- sweep 15 problems x 7, all included: cases 105, problems 15 | invalid 0/105 | calls 6 | virtual end 2803 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  15 problems  15 new(oss)  15 K_oss 16 |    734 s, ends    734 s
+  call 2 Skywork-OR1-Math-7B:default      cases  15 problems  15 new(oss)   0 K_oss  4 |    696 s, ends   1430 s | own_skywork K 0xK3+15xK1 (new problems 15, read 15 (K 3: 0, K 1: 15), window 797s, predicted 797s, took 696s, time scale 1.00, with a reading 15), own 693 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 15, none 0
+  call 3 Olmo-3-7B-Think:default          cases  15 problems  15 new(oss)   0 K_oss  4 |   1065 s, ends   2495 s | own_olmo K 12xK3+3xK1 (new problems 15, read 15 (K 3: 12, K 1: 3), window 1247s, predicted 1221s, took 1062s, time scale 1.00, with a reading 15), own 1062 s, cut batches 0 | cases read with 3 complete attempts 12, 1-2 3, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  15 problems  15 new(oss)   0 K_oss  4 |      0 s, ends   2495 s
+  call 6 gpt-oss-120b:low                 cases  15 problems  15 new(oss)   0 K_oss  4 |    174 s, ends   2669 s
+  call 7 gpt-oss-120b:medium              cases  15 problems  15 new(oss)   0 K_oss  4 |    134 s, ends   2803 s
+--- sweep 20 problems x 7, all included: cases 140, problems 20 | invalid 0/140 | calls 6 | virtual end 2968 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  20 problems  20 new(oss)  20 K_oss 16 |    790 s, ends    790 s
+  call 2 Skywork-OR1-Math-7B:default      cases  20 problems  20 new(oss)   0 K_oss  4 |    655 s, ends   1444 s | own_skywork K 0xK3+14xK1 (new problems 20, read 14 (K 3: 0, K 1: 14), window 772s, predicted 749s, took 655s, time scale 1.00, with a reading 14), own 652 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 14, none 6
+  call 3 Olmo-3-7B-Think:default          cases  20 problems  20 new(oss)   0 K_oss  4 |   1047 s, ends   2491 s | own_olmo K 9xK3+11xK1 (new problems 20, read 20 (K 3: 9, K 1: 11), window 1233s, predicted 1201s, took 1044s, time scale 1.00, with a reading 20), own 1044 s, cut batches 0 | cases read with 3 complete attempts 9, 1-2 11, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  20 problems  20 new(oss)   0 K_oss  4 |      0 s, ends   2491 s
+  call 6 gpt-oss-120b:low                 cases  20 problems  20 new(oss)   0 K_oss  4 |    174 s, ends   2666 s
+  call 7 gpt-oss-120b:medium              cases  20 problems  20 new(oss)   0 K_oss  4 |    302 s, ends   2968 s
+
+===== speed 1.4x all models
+--- board exact (21 cases, 16 problems) seed 1: cases 21, problems 16 | invalid 0/21 | calls 6 | virtual end 2656 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   2 problems   2 new(oss)   2 K_oss 32 |    257 s, ends    257 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   2 K_oss 32 |    879 s, ends   1136 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 898s, predicted 716s, took 625s, time scale 1.40, with a reading 3), own 622 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   2 problems   2 new(oss)   2 K_oss 32 |    576 s, ends   1712 s | own_olmo K 2xK3+0xK1 (new problems 2, read 2 (K 3: 2, K 1: 0), window 1287s, predicted 367s, took 319s, time scale 1.40, with a reading 2), own 319 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   2 K_oss 32 |    253 s, ends   1965 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   4 K_oss 32 |    470 s, ends   2435 s
+  call 7 gpt-oss-120b:medium              cases   3 problems   3 new(oss)   1 K_oss 32 |    221 s, ends   2656 s
+--- board exact seed 2: cases 21, problems 16 | invalid 0/21 | calls 6 | virtual end 2656 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   2 problems   2 new(oss)   2 K_oss 32 |    257 s, ends    257 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   2 K_oss 32 |    879 s, ends   1136 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 898s, predicted 716s, took 625s, time scale 1.40, with a reading 3), own 622 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   2 problems   2 new(oss)   2 K_oss 32 |    576 s, ends   1712 s | own_olmo K 2xK3+0xK1 (new problems 2, read 2 (K 3: 2, K 1: 0), window 1287s, predicted 367s, took 319s, time scale 1.40, with a reading 2), own 319 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   2 K_oss 32 |    253 s, ends   1965 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   4 K_oss 32 |    470 s, ends   2435 s
+  call 7 gpt-oss-120b:medium              cases   3 problems   3 new(oss)   1 K_oss 32 |    221 s, ends   2656 s
+--- board random 2-5 per call seed 3: cases 20, problems 15 | invalid 0/20 | calls 6 | virtual end 2537 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   3 problems   3 new(oss)   3 K_oss 32 |    290 s, ends    290 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   3 K_oss 32 |    911 s, ends   1201 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 868s, predicted 716s, took 625s, time scale 1.40, with a reading 3), own 622 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   2 problems   2 new(oss)   2 K_oss 32 |    576 s, ends   1777 s | own_olmo K 2xK3+0xK1 (new problems 2, read 2 (K 3: 2, K 1: 0), window 1222s, predicted 367s, took 319s, time scale 1.40, with a reading 2), own 319 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   5 problems   5 new(oss)   3 K_oss 32 |    286 s, ends   2063 s
+  call 6 gpt-oss-120b:low                 cases   2 problems   2 new(oss)   2 K_oss 32 |    253 s, ends   2316 s
+  call 7 gpt-oss-120b:medium              cases   2 problems   2 new(oss)   1 K_oss 32 |    221 s, ends   2537 s
+--- board random seed 4: cases 27, problems 17 | invalid 0/27 | calls 6 | virtual end 2963 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   3 problems   3 new(oss)   3 K_oss 32 |    290 s, ends    290 s
+  call 2 Skywork-OR1-Math-7B:default      cases   4 problems   4 new(oss)   2 K_oss 32 |    937 s, ends   1227 s | own_skywork K 3xK3+1xK1 (new problems 4, read 4 (K 3: 3, K 1: 1), window 883s, predicted 782s, took 683s, time scale 1.40, with a reading 4), own 680 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 1, none 0
+  call 3 Olmo-3-7B-Think:default          cases   4 problems   4 new(oss)   3 K_oss 32 |    759 s, ends   1986 s | own_olmo K 4xK3+0xK1 (new problems 4, read 4 (K 3: 4, K 1: 0), window 1164s, predicted 541s, took 470s, time scale 1.40, with a reading 4), own 470 s, cut batches 0 | cases read with 3 complete attempts 4, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   2 K_oss 32 |    253 s, ends   2240 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   2 K_oss 32 |    253 s, ends   2493 s
+  call 7 gpt-oss-120b:medium              cases   4 problems   4 new(oss)   4 K_oss 32 |    470 s, ends   2963 s
+--- final 30 problems x 7, 93% included, seed 5: cases 189, problems 30 | invalid 0/189 | calls 6 | virtual end 3004 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 4 median 16 max 32
+  call 1 Qwen3.5-4B:default               cases  28 problems  28 new(oss)  28 K_oss 16 |   1220 s, ends   1220 s
+  call 2 Skywork-OR1-Math-7B:default      cases  25 problems  25 new(oss)   1 K_oss  4 |    593 s, ends   1813 s | own_skywork K 0xK3+5xK1 (new problems 25, read 5 (K 3: 0, K 1: 5), window 489s, predicted 449s, took 394s, time scale 1.40, with a reading 5), own 391 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 5, none 20
+  call 3 Olmo-3-7B-Think:default          cases  27 problems  27 new(oss)   1 K_oss  4 |    774 s, ends   2587 s | own_olmo K 0xK3+16xK1 (new problems 27, read 16 (K 3: 0, K 1: 16), window 664s, predicted 657s, took 571s, time scale 1.40, with a reading 16), own 571 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 16, none 11
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  27 problems  27 new(oss)   0 K_oss  4 |      0 s, ends   2587 s
+  call 6 gpt-oss-120b:low                 cases  27 problems  27 new(oss)   0 K_oss  4 |      0 s, ends   2587 s
+  call 7 gpt-oss-120b:medium              cases  29 problems  29 new(oss)   0 K_oss  4 |    417 s, ends   3004 s
+--- final 30 x 7, 93%, seed 6: cases 194, problems 30 | invalid 0/194 | calls 6 | virtual end 2996 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 16 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  30 problems  30 new(oss)  30 K_oss 16 |   1412 s, ends   1412 s
+  call 2 Skywork-OR1-Math-7B:default      cases  27 problems  27 new(oss)   0 K_oss  4 |    394 s, ends   1806 s | own_skywork K 0xK3+5xK1 (new problems 27, read 5 (K 3: 0, K 1: 5), window 492s, predicted 449s, took 394s, time scale 1.40, with a reading 5), own 391 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 5, none 22
+  call 3 Olmo-3-7B-Think:default          cases  27 problems  27 new(oss)   0 K_oss  4 |    574 s, ends   2380 s | own_olmo K 0xK3+16xK1 (new problems 27, read 16 (K 3: 0, K 1: 16), window 872s, predicted 657s, took 571s, time scale 1.40, with a reading 16), own 571 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 16, none 11
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  29 problems  29 new(oss)   0 K_oss  4 |      0 s, ends   2380 s
+  call 6 gpt-oss-120b:low                 cases  28 problems  28 new(oss)   0 K_oss  4 |    206 s, ends   2585 s
+  call 7 gpt-oss-120b:medium              cases  26 problems  26 new(oss)   0 K_oss  4 |    411 s, ends   2996 s
+--- final 30 x 7, all included: cases 210, problems 30 | invalid 0/210 | calls 6 | virtual end 2996 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 16 median 16 max 32
+  call 1 Qwen3.5-4B:default               cases  30 problems  30 new(oss)  30 K_oss 16 |   1412 s, ends   1412 s
+  call 2 Skywork-OR1-Math-7B:default      cases  30 problems  30 new(oss)   0 K_oss  4 |    394 s, ends   1806 s | own_skywork K 0xK3+5xK1 (new problems 30, read 5 (K 3: 0, K 1: 5), window 492s, predicted 449s, took 394s, time scale 1.40, with a reading 5), own 391 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 5, none 25
+  call 3 Olmo-3-7B-Think:default          cases  30 problems  30 new(oss)   0 K_oss  4 |    574 s, ends   2380 s | own_olmo K 0xK3+16xK1 (new problems 30, read 16 (K 3: 0, K 1: 16), window 872s, predicted 657s, took 571s, time scale 1.40, with a reading 16), own 571 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 16, none 14
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  30 problems  30 new(oss)   0 K_oss  4 |      0 s, ends   2380 s
+  call 6 gpt-oss-120b:low                 cases  30 problems  30 new(oss)   0 K_oss  4 |    206 s, ends   2585 s
+  call 7 gpt-oss-120b:medium              cases  30 problems  30 new(oss)   0 K_oss  4 |    411 s, ends   2996 s
+--- sweep 3 problems x 7, all included: cases 21, problems 3 | invalid 0/21 | calls 6 | virtual end 1313 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   3 problems   3 new(oss)   3 K_oss 32 |    290 s, ends    290 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   0 K_oss  4 |    625 s, ends    915 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 997s, predicted 716s, took 625s, time scale 1.40, with a reading 3), own 622 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   3 problems   3 new(oss)   0 K_oss  4 |    398 s, ends   1313 s | own_olmo K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 1762s, predicted 454s, took 395s, time scale 1.40, with a reading 3), own 395 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   0 K_oss  4 |      0 s, ends   1313 s
+  call 6 gpt-oss-120b:low                 cases   3 problems   3 new(oss)   0 K_oss  4 |      0 s, ends   1313 s
+  call 7 gpt-oss-120b:medium              cases   3 problems   3 new(oss)   0 K_oss  4 |      0 s, ends   1313 s
+--- sweep 5 problems x 7, all included: cases 35, problems 5 | invalid 0/35 | calls 6 | virtual end 1797 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   5 problems   5 new(oss)   5 K_oss 32 |    506 s, ends    506 s
+  call 2 Skywork-OR1-Math-7B:default      cases   5 problems   5 new(oss)   0 K_oss  4 |    741 s, ends   1248 s | own_skywork K 3xK3+2xK1 (new problems 5, read 5 (K 3: 3, K 1: 2), window 900s, predicted 849s, took 741s, time scale 1.40, with a reading 5), own 738 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 2, none 0
+  call 3 Olmo-3-7B-Think:default          cases   5 problems   5 new(oss)   0 K_oss  4 |    549 s, ends   1797 s | own_olmo K 5xK3+0xK1 (new problems 5, read 5 (K 3: 5, K 1: 0), window 1429s, predicted 628s, took 546s, time scale 1.40, with a reading 5), own 546 s, cut batches 0 | cases read with 3 complete attempts 5, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   5 problems   5 new(oss)   0 K_oss  4 |      0 s, ends   1797 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   0 K_oss  4 |      0 s, ends   1797 s
+  call 7 gpt-oss-120b:medium              cases   5 problems   5 new(oss)   0 K_oss  4 |      0 s, ends   1797 s
+--- sweep 7 problems x 7, all included: cases 49, problems 7 | invalid 0/49 | calls 6 | virtual end 2216 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   7 problems   7 new(oss)   7 K_oss 32 |    723 s, ends    723 s
+  call 2 Skywork-OR1-Math-7B:default      cases   7 problems   7 new(oss)   0 K_oss  4 |    626 s, ends   1348 s | own_skywork K 1xK3+6xK1 (new problems 7, read 7 (K 3: 1, K 1: 6), window 802s, predicted 716s, took 625s, time scale 1.40, with a reading 7), own 622 s, cut batches 0 | cases read with 3 complete attempts 1, 1-2 6, none 0
+  call 3 Olmo-3-7B-Think:default          cases   7 problems   7 new(oss)   0 K_oss  4 |    868 s, ends   2216 s | own_olmo K 7xK3+0xK1 (new problems 7, read 7 (K 3: 7, K 1: 0), window 1329s, predicted 995s, took 865s, time scale 1.40, with a reading 7), own 865 s, cut batches 0 | cases read with 3 complete attempts 7, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   7 problems   7 new(oss)   0 K_oss  4 |      0 s, ends   2216 s
+  call 6 gpt-oss-120b:low                 cases   7 problems   7 new(oss)   0 K_oss  4 |      0 s, ends   2216 s
+  call 7 gpt-oss-120b:medium              cases   7 problems   7 new(oss)   0 K_oss  4 |      0 s, ends   2216 s
+--- sweep 10 problems x 7, all included: cases 70, problems 10 | invalid 0/70 | calls 6 | virtual end 2756 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  10 problems  10 new(oss)  10 K_oss 16 |    548 s, ends    548 s
+  call 2 Skywork-OR1-Math-7B:default      cases  10 problems  10 new(oss)   0 K_oss  4 |    683 s, ends   1232 s | own_skywork K 0xK3+10xK1 (new problems 10, read 10 (K 3: 0, K 1: 10), window 881s, predicted 782s, took 683s, time scale 1.40, with a reading 10), own 680 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 10, none 0
+  call 3 Olmo-3-7B-Think:default          cases  10 problems  10 new(oss)   0 K_oss  4 |   1095 s, ends   2327 s | own_olmo K 10xK3+0xK1 (new problems 10, read 10 (K 3: 10, K 1: 0), window 1445s, predicted 1256s, took 1092s, time scale 1.40, with a reading 10), own 1092 s, cut batches 0 | cases read with 3 complete attempts 10, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  10 problems  10 new(oss)   0 K_oss  4 |      0 s, ends   2327 s
+  call 6 gpt-oss-120b:low                 cases  10 problems  10 new(oss)   0 K_oss  4 |    230 s, ends   2556 s
+  call 7 gpt-oss-120b:medium              cases  10 problems  10 new(oss)   0 K_oss  4 |    200 s, ends   2756 s
+--- sweep 15 problems x 7, all included: cases 105, problems 15 | invalid 0/105 | calls 6 | virtual end 2902 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 16 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  15 problems  15 new(oss)  15 K_oss 16 |    802 s, ends    802 s
+  call 2 Skywork-OR1-Math-7B:default      cases  15 problems  15 new(oss)   0 K_oss  4 |    626 s, ends   1428 s | own_skywork K 0xK3+9xK1 (new problems 15, read 9 (K 3: 0, K 1: 9), window 767s, predicted 716s, took 625s, time scale 1.40, with a reading 9), own 622 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 9, none 6
+  call 3 Olmo-3-7B-Think:default          cases  15 problems  15 new(oss)   0 K_oss  4 |   1070 s, ends   2497 s | own_olmo K 7xK3+8xK1 (new problems 15, read 15 (K 3: 7, K 1: 8), window 1250s, predicted 1227s, took 1067s, time scale 1.40, with a reading 15), own 1067 s, cut batches 0 | cases read with 3 complete attempts 7, 1-2 8, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  15 problems  15 new(oss)   0 K_oss  4 |      0 s, ends   2497 s
+  call 6 gpt-oss-120b:low                 cases  15 problems  15 new(oss)   0 K_oss  4 |    169 s, ends   2667 s
+  call 7 gpt-oss-120b:medium              cases  15 problems  15 new(oss)   0 K_oss  4 |    236 s, ends   2902 s
+--- sweep 20 problems x 7, all included: cases 140, problems 20 | invalid 0/140 | calls 6 | virtual end 2978 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 16 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  20 problems  20 new(oss)  20 K_oss 16 |    904 s, ends    904 s
+  call 2 Skywork-OR1-Math-7B:default      cases  20 problems  20 new(oss)   0 K_oss  4 |    626 s, ends   1530 s | own_skywork K 0xK3+9xK1 (new problems 20, read 9 (K 3: 0, K 1: 9), window 720s, predicted 716s, took 625s, time scale 1.40, with a reading 9), own 622 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 9, none 11
+  call 3 Olmo-3-7B-Think:default          cases  20 problems  20 new(oss)   0 K_oss  4 |    994 s, ends   2524 s | own_olmo K 3xK3+17xK1 (new problems 20, read 20 (K 3: 3, K 1: 17), window 1147s, predicted 1140s, took 991s, time scale 1.40, with a reading 20), own 991 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 17, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  20 problems  20 new(oss)   0 K_oss  4 |      0 s, ends   2524 s
+  call 6 gpt-oss-120b:low                 cases  20 problems  20 new(oss)   0 K_oss  4 |      0 s, ends   2524 s
+  call 7 gpt-oss-120b:medium              cases  20 problems  20 new(oss)   0 K_oss  4 |    454 s, ends   2978 s
+
+===== speed 1.6x 7B models only
+--- board exact (21 cases, 16 problems) seed 1: cases 21, problems 16 | invalid 0/21 | calls 6 | virtual end 2319 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   2 problems   2 new(oss)   2 K_oss 32 |    188 s, ends    188 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   2 K_oss 32 |    898 s, ends   1086 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 960s, predicted 511s, took 714s, time scale 1.00, with a reading 3), own 711 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   2 problems   2 new(oss)   2 K_oss 32 |    551 s, ends   1637 s | own_olmo K 2xK3+0xK1 (new problems 2, read 2 (K 3: 2, K 1: 0), window 1408s, predicted 420s, took 365s, time scale 1.60, with a reading 2), own 365 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   2 K_oss 32 |    184 s, ends   1820 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   4 K_oss 32 |    338 s, ends   2158 s
+  call 7 gpt-oss-120b:medium              cases   3 problems   3 new(oss)   1 K_oss 32 |    160 s, ends   2319 s
+--- board exact seed 2: cases 21, problems 16 | invalid 0/21 | calls 6 | virtual end 2319 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   2 problems   2 new(oss)   2 K_oss 32 |    188 s, ends    188 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   2 K_oss 32 |    898 s, ends   1086 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 960s, predicted 511s, took 714s, time scale 1.00, with a reading 3), own 711 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   2 problems   2 new(oss)   2 K_oss 32 |    551 s, ends   1637 s | own_olmo K 2xK3+0xK1 (new problems 2, read 2 (K 3: 2, K 1: 0), window 1408s, predicted 420s, took 365s, time scale 1.60, with a reading 2), own 365 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   2 K_oss 32 |    184 s, ends   1820 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   4 K_oss 32 |    338 s, ends   2158 s
+  call 7 gpt-oss-120b:medium              cases   3 problems   3 new(oss)   1 K_oss 32 |    160 s, ends   2319 s
+--- board random 2-5 per call seed 3: cases 20, problems 15 | invalid 0/20 | calls 6 | virtual end 2234 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   3 problems   3 new(oss)   3 K_oss 32 |    211 s, ends    211 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   3 K_oss 32 |    921 s, ends   1132 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 940s, predicted 511s, took 714s, time scale 1.00, with a reading 3), own 711 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   2 problems   2 new(oss)   2 K_oss 32 |    551 s, ends   1683 s | own_olmo K 2xK3+0xK1 (new problems 2, read 2 (K 3: 2, K 1: 0), window 1361s, predicted 420s, took 365s, time scale 1.60, with a reading 2), own 365 s, cut batches 0 | cases read with 3 complete attempts 2, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   5 problems   5 new(oss)   3 K_oss 32 |    207 s, ends   1890 s
+  call 6 gpt-oss-120b:low                 cases   2 problems   2 new(oss)   2 K_oss 32 |    184 s, ends   2074 s
+  call 7 gpt-oss-120b:medium              cases   2 problems   2 new(oss)   1 K_oss 32 |    160 s, ends   2234 s
+--- board random seed 4: cases 27, problems 17 | invalid 0/27 | calls 6 | virtual end 2760 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   3 problems   3 new(oss)   3 K_oss 32 |    211 s, ends    211 s
+  call 2 Skywork-OR1-Math-7B:default      cases   4 problems   4 new(oss)   2 K_oss 32 |   1097 s, ends   1308 s | own_skywork K 4xK3+0xK1 (new problems 4, read 4 (K 3: 4, K 1: 0), window 950s, predicted 654s, took 913s, time scale 1.00, with a reading 4), own 910 s, cut batches 0 | cases read with 3 complete attempts 4, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   4 problems   4 new(oss)   3 K_oss 32 |    747 s, ends   2055 s | own_olmo K 4xK3+0xK1 (new problems 4, read 4 (K 3: 4, K 1: 0), window 1163s, predicted 618s, took 538s, time scale 1.60, with a reading 4), own 538 s, cut batches 0 | cases read with 3 complete attempts 4, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   2 K_oss 32 |    184 s, ends   2238 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   2 K_oss 32 |    184 s, ends   2422 s
+  call 7 gpt-oss-120b:medium              cases   4 problems   4 new(oss)   4 K_oss 32 |    338 s, ends   2760 s
+--- final 30 problems x 7, 93% included, seed 5: cases 189, problems 30 | invalid 0/189 | calls 6 | virtual end 3041 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 4 median 16 max 32
+  call 1 Qwen3.5-4B:default               cases  28 problems  28 new(oss)  28 K_oss 16 |    875 s, ends    875 s
+  call 2 Skywork-OR1-Math-7B:default      cases  25 problems  25 new(oss)   1 K_oss  4 |   1058 s, ends   1933 s | own_skywork K 0xK3+12xK1 (new problems 25, read 12 (K 3: 0, K 1: 12), window 668s, predicted 654s, took 913s, time scale 1.00, with a reading 12), own 910 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 12, none 13
+  call 3 Olmo-3-7B-Think:default          cases  27 problems  27 new(oss)   1 K_oss  4 |    657 s, ends   2590 s | own_olmo K 0xK3+11xK1 (new problems 27, read 11 (K 3: 0, K 1: 11), window 599s, predicted 585s, took 509s, time scale 1.60, with a reading 11), own 509 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 11, none 16
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  27 problems  27 new(oss)   0 K_oss  4 |      0 s, ends   2590 s
+  call 6 gpt-oss-120b:low                 cases  27 problems  27 new(oss)   0 K_oss  4 |    157 s, ends   2747 s
+  call 7 gpt-oss-120b:medium              cases  29 problems  29 new(oss)   0 K_oss  4 |    294 s, ends   3041 s
+--- final 30 x 7, 93%, seed 6: cases 194, problems 30 | invalid 0/194 | calls 6 | virtual end 3041 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 16 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  30 problems  30 new(oss)  30 K_oss 16 |   1012 s, ends   1012 s
+  call 2 Skywork-OR1-Math-7B:default      cases  27 problems  27 new(oss)   0 K_oss  4 |    913 s, ends   1925 s | own_skywork K 0xK3+12xK1 (new problems 27, read 12 (K 3: 0, K 1: 12), window 672s, predicted 654s, took 913s, time scale 1.00, with a reading 12), own 910 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 12, none 15
+  call 3 Olmo-3-7B-Think:default          cases  27 problems  27 new(oss)   0 K_oss  4 |    656 s, ends   2581 s | own_olmo K 0xK3+16xK1 (new problems 27, read 16 (K 3: 0, K 1: 16), window 752s, predicted 751s, took 653s, time scale 1.60, with a reading 16), own 653 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 16, none 11
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  29 problems  29 new(oss)   0 K_oss  4 |      0 s, ends   2581 s
+  call 6 gpt-oss-120b:low                 cases  28 problems  28 new(oss)   0 K_oss  4 |    157 s, ends   2738 s
+  call 7 gpt-oss-120b:medium              cases  26 problems  26 new(oss)   0 K_oss  4 |    302 s, ends   3041 s
+--- final 30 x 7, all included: cases 210, problems 30 | invalid 0/210 | calls 6 | virtual end 3041 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 16 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  30 problems  30 new(oss)  30 K_oss 16 |   1012 s, ends   1012 s
+  call 2 Skywork-OR1-Math-7B:default      cases  30 problems  30 new(oss)   0 K_oss  4 |    913 s, ends   1925 s | own_skywork K 0xK3+12xK1 (new problems 30, read 12 (K 3: 0, K 1: 12), window 672s, predicted 654s, took 913s, time scale 1.00, with a reading 12), own 910 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 12, none 18
+  call 3 Olmo-3-7B-Think:default          cases  30 problems  30 new(oss)   0 K_oss  4 |    656 s, ends   2581 s | own_olmo K 0xK3+16xK1 (new problems 30, read 16 (K 3: 0, K 1: 16), window 752s, predicted 751s, took 653s, time scale 1.60, with a reading 16), own 653 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 16, none 14
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  30 problems  30 new(oss)   0 K_oss  4 |      0 s, ends   2581 s
+  call 6 gpt-oss-120b:low                 cases  30 problems  30 new(oss)   0 K_oss  4 |    157 s, ends   2738 s
+  call 7 gpt-oss-120b:medium              cases  30 problems  30 new(oss)   0 K_oss  4 |    302 s, ends   3041 s
+--- sweep 3 problems x 7, all included: cases 21, problems 3 | invalid 0/21 | calls 6 | virtual end 1379 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   3 problems   3 new(oss)   3 K_oss 32 |    211 s, ends    211 s
+  call 2 Skywork-OR1-Math-7B:default      cases   3 problems   3 new(oss)   0 K_oss  4 |    714 s, ends    925 s | own_skywork K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 1033s, predicted 511s, took 714s, time scale 1.00, with a reading 3), own 711 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   3 problems   3 new(oss)   0 K_oss  4 |    454 s, ends   1379 s | own_olmo K 3xK3+0xK1 (new problems 3, read 3 (K 3: 3, K 1: 0), window 1752s, predicted 519s, took 451s, time scale 1.60, with a reading 3), own 451 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   3 problems   3 new(oss)   0 K_oss  4 |      0 s, ends   1379 s
+  call 6 gpt-oss-120b:low                 cases   3 problems   3 new(oss)   0 K_oss  4 |      0 s, ends   1379 s
+  call 7 gpt-oss-120b:medium              cases   3 problems   3 new(oss)   0 K_oss  4 |      0 s, ends   1379 s
+--- sweep 5 problems x 7, all included: cases 35, problems 5 | invalid 0/35 | calls 6 | virtual end 2104 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   5 problems   5 new(oss)   5 K_oss 32 |    365 s, ends    365 s
+  call 2 Skywork-OR1-Math-7B:default      cases   5 problems   5 new(oss)   0 K_oss  4 |   1112 s, ends   1477 s | own_skywork K 5xK3+0xK1 (new problems 5, read 5 (K 3: 5, K 1: 0), window 963s, predicted 797s, took 1112s, time scale 1.00, with a reading 5), own 1109 s, cut batches 0 | cases read with 3 complete attempts 5, 1-2 0, none 0
+  call 3 Olmo-3-7B-Think:default          cases   5 problems   5 new(oss)   0 K_oss  4 |    627 s, ends   2104 s | own_olmo K 5xK3+0xK1 (new problems 5, read 5 (K 3: 5, K 1: 0), window 1200s, predicted 718s, took 624s, time scale 1.60, with a reading 5), own 624 s, cut batches 0 | cases read with 3 complete attempts 5, 1-2 0, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   5 problems   5 new(oss)   0 K_oss  4 |      0 s, ends   2104 s
+  call 6 gpt-oss-120b:low                 cases   5 problems   5 new(oss)   0 K_oss  4 |      0 s, ends   2104 s
+  call 7 gpt-oss-120b:medium              cases   5 problems   5 new(oss)   0 K_oss  4 |      0 s, ends   2104 s
+--- sweep 7 problems x 7, all included: cases 49, problems 7 | invalid 0/49 | calls 6 | virtual end 2391 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases   7 problems   7 new(oss)   7 K_oss 32 |    520 s, ends    520 s
+  call 2 Skywork-OR1-Math-7B:default      cases   7 problems   7 new(oss)   0 K_oss  4 |   1244 s, ends   1764 s | own_skywork K 5xK3+2xK1 (new problems 7, read 7 (K 3: 5, K 1: 2), window 894s, predicted 892s, took 1244s, time scale 1.00, with a reading 7), own 1241 s, cut batches 0 | cases read with 3 complete attempts 5, 1-2 2, none 0
+  call 3 Olmo-3-7B-Think:default          cases   7 problems   7 new(oss)   0 K_oss  4 |    627 s, ends   2391 s | own_olmo K 4xK3+3xK1 (new problems 7, read 7 (K 3: 4, K 1: 3), window 913s, predicted 718s, took 624s, time scale 1.60, with a reading 7), own 624 s, cut batches 0 | cases read with 3 complete attempts 4, 1-2 3, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases   7 problems   7 new(oss)   0 K_oss  4 |      0 s, ends   2391 s
+  call 6 gpt-oss-120b:low                 cases   7 problems   7 new(oss)   0 K_oss  4 |      0 s, ends   2391 s
+  call 7 gpt-oss-120b:medium              cases   7 problems   7 new(oss)   0 K_oss  4 |      0 s, ends   2391 s
+--- sweep 10 problems x 7, all included: cases 70, problems 10 | invalid 0/70 | calls 6 | virtual end 2544 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  10 problems  10 new(oss)  10 K_oss 16 |    570 s, ends    570 s
+  call 2 Skywork-OR1-Math-7B:default      cases  10 problems  10 new(oss)   0 K_oss  4 |   1178 s, ends   1748 s | own_skywork K 3xK3+7xK1 (new problems 10, read 10 (K 3: 3, K 1: 7), window 871s, predicted 845s, took 1178s, time scale 1.00, with a reading 10), own 1175 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 7, none 0
+  call 3 Olmo-3-7B-Think:default          cases  10 problems  10 new(oss)   0 K_oss  4 |    656 s, ends   2404 s | own_olmo K 3xK3+7xK1 (new problems 10, read 10 (K 3: 3, K 1: 7), window 929s, predicted 751s, took 653s, time scale 1.60, with a reading 10), own 653 s, cut batches 0 | cases read with 3 complete attempts 3, 1-2 7, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  10 problems  10 new(oss)   0 K_oss  4 |      0 s, ends   2404 s
+  call 6 gpt-oss-120b:low                 cases  10 problems  10 new(oss)   0 K_oss  4 |    140 s, ends   2544 s
+  call 7 gpt-oss-120b:medium              cases  10 problems  10 new(oss)   0 K_oss  4 |      0 s, ends   2544 s
+--- sweep 15 problems x 7, all included: cases 105, problems 15 | invalid 0/105 | calls 6 | virtual end 2781 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  15 problems  15 new(oss)  15 K_oss 16 |    734 s, ends    734 s
+  call 2 Skywork-OR1-Math-7B:default      cases  15 problems  15 new(oss)   0 K_oss  4 |   1112 s, ends   1846 s | own_skywork K 0xK3+15xK1 (new problems 15, read 15 (K 3: 0, K 1: 15), window 797s, predicted 797s, took 1112s, time scale 1.00, with a reading 15), own 1109 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 15, none 0
+  call 3 Olmo-3-7B-Think:default          cases  15 problems  15 new(oss)   0 K_oss  4 |    627 s, ends   2473 s | own_olmo K 0xK3+15xK1 (new problems 15, read 15 (K 3: 0, K 1: 15), window 831s, predicted 718s, took 624s, time scale 1.60, with a reading 15), own 624 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 15, none 0
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  15 problems  15 new(oss)   0 K_oss  4 |      0 s, ends   2473 s
+  call 6 gpt-oss-120b:low                 cases  15 problems  15 new(oss)   0 K_oss  4 |    174 s, ends   2647 s
+  call 7 gpt-oss-120b:medium              cases  15 problems  15 new(oss)   0 K_oss  4 |    134 s, ends   2781 s
+--- sweep 20 problems x 7, all included: cases 140, problems 20 | invalid 0/140 | calls 6 | virtual end 2968 s INSIDE 3,600 | fallbacks 0 | oss attempts/problem at the end min 32 median 32 max 32
+  call 1 Qwen3.5-4B:default               cases  20 problems  20 new(oss)  20 K_oss 16 |    790 s, ends    790 s
+  call 2 Skywork-OR1-Math-7B:default      cases  20 problems  20 new(oss)   0 K_oss  4 |   1046 s, ends   1835 s | own_skywork K 0xK3+14xK1 (new problems 20, read 14 (K 3: 0, K 1: 14), window 772s, predicted 749s, took 1046s, time scale 1.00, with a reading 14), own 1043 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 14, none 6
+  call 3 Olmo-3-7B-Think:default          cases  20 problems  20 new(oss)   0 K_oss  4 |    656 s, ends   2491 s | own_olmo K 0xK3+16xK1 (new problems 20, read 16 (K 3: 0, K 1: 16), window 842s, predicted 751s, took 653s, time scale 1.60, with a reading 16), own 653 s, cut batches 0 | cases read with 3 complete attempts 0, 1-2 16, none 4
+  call 4 DeepSeek-R1-0528-Qwen3-8B:default cases  20 problems  20 new(oss)   0 K_oss  4 |      0 s, ends   2491 s
+  call 6 gpt-oss-120b:low                 cases  20 problems  20 new(oss)   0 K_oss  4 |    174 s, ends   2666 s
+  call 7 gpt-oss-120b:medium              cases  20 problems  20 new(oss)   0 K_oss  4 |    302 s, ends   2968 s
