@@ -608,7 +608,7 @@ limitation; Section 8). No Claude model runs inside the entries, which use only 
 Claude carried uploads out under the human author's standing permission [556, 601]), makes the nominations, provided the
 competition account and submits this report. The author also managed all accounts and sent every message to the organisers (Claude drafted some of them).
 
-**Review and responsibility.** The author reviewed this report and its results before submission and takes full responsibility for the final content of this paper, including AI-assisted text, claims, code and other artefacts.
+**Review and responsibility.** The author reviewed all AI-assisted work and takes full responsibility for the final content of this paper, including AI-assisted text, claims, code and other artefacts.
 
 ## References
 

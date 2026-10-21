@@ -184,7 +184,7 @@ Section 8). No Claude model runs inside the entries, which use only the open mod
 
 **Tasks done without generative AI.** The author set the goals and limits of the work; authorised every upload, including those Claude carried out from 18 October, and every use of compute; made the final decisions, including the nominations; provided and managed the competition account and all other accounts; sent every message to the organisers (Claude drafted some of them); and submits this report.
 
-**Review and responsibility.** The author reviewed this report and its results before submission and takes full responsibility for the final content of this paper, including AI-assisted text, claims, code and other artefacts.
+**Review and responsibility.** The author reviewed all AI-assisted work and takes full responsibility for the final content of this paper, including AI-assisted text, claims, code and other artefacts.
 
 ## References
 
@@ -222,13 +222,13 @@ our four public-template server logs (`training/runs/`). **Board scores**: each 
 per-case harness; a rerun in another server state varies by about 1.3 cases on main and 1.0 on small (Section 5) [585].
 **Licence**: code under the MIT License; report text under CC BY 4.0. **Repository**: https://github.com/EconLearn/aimo-interp-difficulty-vs-fragility.
 
-**Candidate nominee files** (md5 of each zip; board OFFICIAL, one draw each; the nomination plan is in Supplement 10):
+**Candidate nominee files** (md5 of each zip; board OFFICIAL, one draw each, with its Codabench submission id; the nomination plan is in Supplement 10):
 
 | Role | File | md5 | Board |
 |---|---|---|---|
-| The entry rebuilt for the final, main; small | `aimo_v111_main.zip`; `aimo_v112_small.zip` | 9686c9cec06ec4dc40f9b728f7ef17db; 8b404890d71bc5483ccce18f88887636 [540] | 17 of 21; 9 of 14 [560, 564] |
-| Per-case-safe variants (own runs stop at 160 s) | `aimo_v115_main.zip`; `aimo_v116_small.zip` | ad191e2e2262b0a918ec1aaf83bcf9c7; d3ada3a4b8ff05b5876582246008bbf9 [573] | 15 of 21; 9 of 14 [575, 576] |
-| The same with every reading's seed shifted | `aimo_v121_main.zip`; `aimo_v122_small.zip` | 22ced3169a4d73b5cfe9b7ceb0d815b6; 4de6852eee8d4c3e6ccb07576c422a31 [588] | 15 of 21; 9 of 14 [608] |
+| The entry rebuilt for the final, main; small | `aimo_v111_main.zip`; `aimo_v112_small.zip` | 9686c9cec06ec4dc40f9b728f7ef17db; 8b404890d71bc5483ccce18f88887636 [540] | 17 of 21 (1000991); 9 of 14 (1000212) [560, 564] |
+| Per-case-safe variants (own runs stop at 160 s) | `aimo_v115_main.zip`; `aimo_v116_small.zip` | ad191e2e2262b0a918ec1aaf83bcf9c7; d3ada3a4b8ff05b5876582246008bbf9 [573] | 15 of 21 (1003729); 9 of 14 (1003727) [575, 576] |
+| The same with every reading's seed shifted | `aimo_v121_main.zip`; `aimo_v122_small.zip` | 22ced3169a4d73b5cfe9b7ceb0d815b6; 4de6852eee8d4c3e6ccb07576c422a31 [588] | 15 of 21 (1004377); 9 of 14 (1004381) [608] |
 
 **Frozen prediction** (Section 4). Assumed: a roughly balanced class mix, a validation-like configuration mix and a
 server at most 1.2x slower than our mock. By a rule fixed before any final result [568], the forecast holds on a track

@@ -28,4 +28,4 @@ key-scored share in place of agreement (ceiling): right 62/71; hard 32/37; rows 
    non-robust: T11 Qwen, T13 Qwen, T13 Skywork, T10 Olmo, T13 Olmo, T19 DeepSeek, T13 DeepSeek, T10 low, T11 low
 T13 rows: Qwen non-robust, Skywork non-robust, Olmo non-robust, DeepSeek non-robust; agreement 0.647
 
-saved /Users/judewallis/algo tester/newcontests/aimo/figures/agreement_by_label_v30.png
+saved figures/agreement_by_label_v30.png
