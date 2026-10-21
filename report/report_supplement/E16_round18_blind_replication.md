@@ -83,7 +83,7 @@ least 0.05, and keeps v95's call where the template is not covered; wrong calls 
   reading depends on how literally its solution is transcribed.
 - **Writer 2's Spearman fail** comes from its T23 brutes, which accept fake rational answers (brute against brute 0.68;
   L 1.000 on a template with a mean rating of 0.2); without T23 its Spearman would be +0.477 (post hoc, not a result).
-- **Lane L's "blind" transcriptions** (Appendix E.14: 11 of 12) were written by the same author after reading the
+- **Lane L's "blind" transcriptions** (Appendix E.14: 11 of 12) were written by the same Claude agent (lane L) after reading the
   notes, so they are not a blind replication.
 
 **Pooled read** [527] (`PREREG_pooled.txt`, written before running): three replies per template (writer 1's program and

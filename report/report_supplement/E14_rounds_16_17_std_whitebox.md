@@ -37,7 +37,7 @@ judged bf16 model; single runs), post hoc.
   to 1.6x (main 3,420 s against v95's 3,339 at 1.0x; margin 88 s at 1.6x; v107 / v108, the same with v104's skip, give
   the same answers on 455 mock case runs with a margin of 753 s on main and 650 to 825 s on small [531]); every answer
   outside Skywork and Olmo cases identical to v95 / v96; 12 of 12 with v98's inputs and 11 of 12 with lane L's "blind"
-  transcriptions, written by the same author after reading the notes (a T07 false positive; independent blind writers in
+  transcriptions, written by the same Claude agent (lane L) after reading the notes (a T07 false positive; independent blind writers in
   Appendix E.16) [495]. STD takes up to 220 s per case including the gpt-oss load, so when it finds no validated pair
   the main fallback is cut short (Qwen's quick finish or plain robust, not v95's own run): v100 can beat v95 only if STD
   covers the hidden problems [495].

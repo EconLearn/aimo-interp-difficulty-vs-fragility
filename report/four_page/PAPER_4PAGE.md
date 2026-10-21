@@ -1,23 +1,23 @@
-# Difficulty is not fragility: an audited robustness predictor and 70 negative results
+# Difficulty is not fragility: an audited robustness predictor and 88 negative results
 
 Jude Wallis (Independent researcher)
 
-*Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 20 October 2026 (UTC); four-page
-version (draft 30). The full report (draft 29, `report/REPORT_full.pdf` in the repository) is its supplementary material: "Supplement X" points to
-its section or appendix X. Numbers come from our research ledger (entry in brackets) or Figure 1's script; hidden cases
-appear as counts only. Number labels are defined in Appendix A.*
+*Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 21 October 2026 (UTC); four-page
+version (draft 31). The full report (draft 29, `report/REPORT_full.pdf` in the repository) is its supplementary material: "Supplement X" points to
+its section or appendix X. Numbers come from our research ledger (entry in brackets), Figure 1's script or the
+supplement's audit scripts (Supplement F.7); hidden cases appear as counts only. Number labels are defined in Appendix A.*
 
 ## Abstract
 
 We predict, inside a fixed GPU budget, whether a configuration's accuracy on a math problem survives the organisers'
 perturbations, and find that difficulty is not fragility. A stronger model's answer agreement reads a problem's
 difficulty and ranks the 71 labelled public rows at within-configuration AUC 0.929, mostly because 33 of 34 rows on
-easy templates are robust. On the 37 rows of hard templates the AUC is 0.875, robust and non-robust rows mix at the
-same agreement, and 2.5 times more attempts or a perfect answer key add at most 0.054 AUC and 2 rows. What is left is
-fragility, and no in-budget attempt to read it passed a bar set before its data: of 88 negative results, 70 failed and
-2 were unclear. Leave-one-template-out our entry gets 60 of 71 public and 18 of 24 fresh rows, its board-chosen layer
-gained no more than keep-if-better selection on coin flips, and a 21-case validation board total varies by about 1.3
-cases across server states.
+easy templates are robust. On the 37 rows of hard templates the AUC is 0.875, rows that share an agreement but not a
+label mostly belong to different configurations, and 2.5 times more attempts or a perfect answer key add at most 0.054
+AUC and 2 rows. What is left is configuration-specific fragility, and no in-budget attempt to read it passed all its
+pre-set bars: of 88 negative results, 70 failed and 2 were unclear. Leave-one-template-out our entry gets 60 of 71
+public and 18 of 24 fresh rows, a selection null cannot tell its board-chosen layer's gain from coin flips, and a
+21-case validation board total varies by about 1.3 cases across server states.
 
 ## 1. Introduction
 
@@ -29,44 +29,48 @@ most 0.10, non-robust iff at least 0.25, and exists only if the configuration so
 sees only the original text, runs each case in its own process on one GPU [178, 464] and faces 30 to 50 new problems in
 the final at about 170 s each [513, 537].
 
-We show that **difficulty is not fragility**: a stronger model's reading of difficulty carries most of the public
-ranking but saturates on hard problems, where the label turns on fragility and none of our in-budget readings passed a
-pre-set bar (Sections 3 and 6). Edited or re-instantiated problems are known to cut accuracy (Mirzadeh et al., 2025;
-Huang et al., 2025a; Mondorf et al., 2026); whether probes and interpretations predict unseen behaviour is asked by
-Belinkov (2022), Li et al. (2025) and Huang et al. (2025b). We ask it of a whole entry, with a selection null from
-adaptive data analysis (Dwork et al., 2015; Blum and Hardt, 2015; Roelofs et al., 2019).
+We find that **difficulty is not fragility**: a stronger model's reading of difficulty carries most of the public
+ranking, but on hard problems one threshold cannot serve every configuration, and no in-budget reading of what remains,
+configuration-specific fragility, passed all its pre-set bars (Sections 3 and 6). Edited or re-instantiated problems are
+known to cut accuracy (Mirzadeh et al., 2025; Huang et al., 2025a; Mondorf et al., 2026); whether probes and
+interpretations predict unseen behaviour is asked by Belinkov (2022), Li et al. (2025) and Huang et al. (2025b). We ask
+it of a whole entry, with a selection null from adaptive data analysis (Dwork et al., 2015; Blum and Hardt, 2015;
+Roelofs et al., 2019).
 
 ## 2. Data and the entry
 
-**Data.** 82 public rows over 28 templates, 71 labelled (52 robust) [3, 278, 382]; *fresh rows* are the 24 labelled rows
-on 12 AIME-2026 templates [446, 509]; 9 of 12 Skywork rows added on 15 October are labelled (7 robust) [617]. The
-validation boards hold 21 main cases (10 robust) [99] and 14 small cases (7 robust) [270]. The site invites iterating
-on them; when we did, each upload was a method variant with a public-row reason, never constant answers per
-configuration or per-case probes, but board counts per configuration carry hidden-label information [329b], which we
-used while choosing three routes (Supplement A.2); Section 4 audits that use.
+**Data.** 82 public rows over 28 templates, 71 labelled (52 robust) [3, 278, 382, 618]; *fresh rows* are the 24
+labelled rows on 12 AIME-2026 templates [446, 509]; 9 of 12 Skywork rows added on 15 October are labelled (7 robust)
+[617]. The validation boards hold 21 main cases (10 robust) [99] and 14 small cases (7 robust) [270]. The site invites
+iterating on them; when we did, each upload was a method variant with a public-row reason, never constant answers per
+configuration or per-case probes, though early ones tested guesses about the hidden sets' structure
+(Supplement E.6.2) [266, 282, 290]. Board counts per configuration carry hidden-label information [329b], which we used while
+choosing three routes (Supplement A.2); Section 4 audits that use.
 
 **The entry reads behaviour only.** *Stand-in* (Qwen, DeepSeek, gpt-oss low and medium cases): gpt-oss-120b at low
 effort makes 4 to 32 attempts; their *agreement* (the probability that two attempts that ended on their own agree), a
-Qwen3.5-4B quick finish and an effort code enter a logistic rule with 10 coefficients (`decision.json`) [272b]. *Own
-runs* (Skywork, Olmo): robust iff at least 1 (Skywork) or 2 (Olmo) of 3 attempts of the judged model end on their own
-inside a 9,000- or 10,000-token cap [269, 339]. *Prior* (gpt-oss high): robust, as 13 of 15 public rows are [336]. *The
-entry* is v95 (main) and v96 (small); v111 and v112 are their rebuilds for the final [540].
+Qwen3.5-4B quick finish and an effort code enter a logistic rule with 10 coefficients (`decision.json`; Supplement F.4)
+[272b]. *Own runs* (Skywork, Olmo): robust iff at least 1 (Skywork) or 2 (Olmo) of 3 attempts of the judged model end on
+their own inside a 9,000- or 10,000-token cap [269, 339]. *Prior* (gpt-oss high): robust, as 13 of 15 public rows are
+[336]. *The entry* is v95 (main) and v96 (small), rebuilt for the final as v111 and v112 [540]; this paper's evaluated
+entries are their per-case-safe variants v115 and v116 (Codabench 1003729, 1003727; Section 7) [575, 576].
 
 ## 3. Difficulty is not fragility
 
-**Two meanings of difficulty.** The judged model's solve rate carries almost none of the label: in our fit of the
-label recipe the chance of a non-robust label is flat, 0.18 to 0.21, for solve rates from 0.5 to 1.0, and sampling
-noise explains only about 3% of non-robust labels (computed) [416]; on T13 every small model solves the problem and
-every one is labelled non-robust [197, 266]. Difficulty read by a stronger model carries far more: within each
-configuration, the stand-in's agreement at K 32 ranks the 71 public rows at AUC 0.929 [611].
+**Two meanings of difficulty.** The judged model's solve rate carries almost none of the label: in our fit of the label
+recipe the chance of a non-robust label is flat, 0.18 to 0.21, for solve rates from 0.5 to 1.0 (computed) [416]; on T13
+every small model solves the problem and every one is labelled non-robust [197, 266]. Difficulty read by a stronger
+model carries far more: the stand-in's agreement at K 32 ranks the 71 public rows at within-configuration AUC 0.929
+[611].
 
-**That reading saturates on hard templates** (Figure 1; computed, post hoc, one server read [440]). Its AUC comes
-mostly from the 10 easy templates, where 33 of 34 rows are robust. On the 17 *hard* templates, which a 2,000-token
-reader never finishes (37 rows, 18 non-robust) [267b, 278], it is 0.875, and between agreement 0.56 and 0.82, 8 robust
-and 9 non-robust rows mix. 80 pooled attempts give 0.929 and their accuracy against the answer key 0.911, inside the
-0.875 to 0.955 of single held reads; leave-one-template-out (LOTO), the key fixes 2 hard rows [611]. Decisions built on
-agreement get 0.743 of hard rows right (LOTO accuracy, mean of six reads) [278]; 7 of our entry's 11 LOTO errors are
-hard rows.
+**That reading saturates on hard templates** (Figure 1; computed, post hoc, one server read [440]). Its AUC comes mostly
+from the 10 easy templates, where 33 of 34 rows are robust. On the 17 *hard* templates, which a 2,000-token reader never
+finishes (37 rows, 18 non-robust) [267b, 278], it is 0.875: 7 of 56 same-configuration pairs are misordered (four on
+gpt-oss high, two on low, one on Skywork), 2 of 41 on the stand-in's four configurations; between agreement 0.56 and
+0.82, 8 robust and 9 non-robust rows mix, but 69 of their 72 pairs cross configurations: one threshold cannot serve
+every configuration. 80 pooled attempts give 0.929 and their accuracy against the answer key 0.911, inside the 0.875 to
+0.955 of single held reads; leave-one-template-out (LOTO), the key fixes 2 hard rows [611]. Decisions built on agreement
+get 0.743 of hard rows right (LOTO accuracy, mean of six reads) [278].
 
 ![Figure 1: agreement by label on easy and hard templates](agreement_by_label_v30.png)
 
@@ -81,9 +85,10 @@ organisers' [318].
 ## 4. A generalisation audit
 
 **What was fitted, and when.** The only label-fitted part, `decision.json`, was fitted on the 71 public rows on 5
-October, before the board-iteration period of 10 to 11 October; a LOTO refit changes 1 of 71 answers [509]. Three
-choices from that period (the gpt-oss high prior and both own runs) decide 8 of 21 main and 6 of 14 small cases; about
-ten hand-set values (caps, K, thresholds) cannot be cross-validated. Table 1 gives out-of-sample accuracy.
+October [113], after board uploads began (2 October) [20] but before the board-tested changes of 5 to 11 October; a
+LOTO refit changes 1 of 71 answers [509]. Three choices of 10 to 11 October (the gpt-oss high prior and both own runs)
+decide 8 of 21 main and 6 of 14 small cases; about ten hand-set values (caps, K, thresholds) cannot be cross-validated.
+Table 1 gives out-of-sample accuracy.
 
 *Table 1. The entry's rules on public rows (same server read), LOTO with `decision.json` refitted per held-out
 template (template-bootstrap 95% intervals; the 80-row line pre-registered [618]), the board this predicts
@@ -98,32 +103,34 @@ template (template-bootstrap 95% intervals; the 80-row line pre-registered [618]
 
 **The board-chosen layer against a selection null.** Keeping a change only when the board rises gains +3.9 in
 expectation (90% range 1 to 8) if every changed answer is a coin flip and +7.3 (3 to 12) if each is right 70% of the
-time (model-based). The three routes kept +3, inferred from board counts (Supplement A.2) [509], inside both ranges:
-the test cannot separate them, and **the board-chosen layer adds no demonstrable accuracy**. Moving Skywork's cases to
-the stand-in gains on the original public rows in four of five reads, and three of the six LOTO fresh-row errors sit on
-board-chosen routes [509]. On 9 Skywork rows labelled later (7 robust), the own run gets 9 of 9 on one read but 7, the
-always-robust count, on another, and the stand-in about 7.3 over eight reads [617, 618], so they cannot separate the routes.
+time (model-based). The three routes kept +3, inferred from board counts (Supplement A.2) [509], inside both ranges: the
+test cannot separate them, and **the board-chosen layer adds no demonstrable accuracy**. Moving Skywork's cases to the
+stand-in gains on the original public rows in four of five reads [543], and three of the six LOTO fresh-row errors sit
+on board-chosen routes [509]. On the 9 later Skywork rows the own run gets 9 and 7 on two reads, the stand-in about 7.3
+over eight [617, 618]: they cannot separate the routes.
 
 **A frozen prediction.** We expect v111 to get **about 16 of 21 main cases right on new problems** (90% range 11 to 20),
-not our best draw's 19 [393, 509]. Guess ranges for final accuracy, frozen on 17 October [543] (assumptions, rule and
-hash in Appendix A), are 0.72 to 0.82 for v111 and 0.62 to 0.76 for v112; Section 5's noise alone gives them only about
-0.4 to 0.5 and 0.55 to 0.7 coverage (computed). **Outcome.** The final is scored after this report's deadline, so the outcome is not known at submission; we will report each nominee's accuracy against these ranges, read with the coverage note, whichever way it falls.
+not our best draw's 19 [393, 509]. Guess ranges for final accuracy, frozen on 17 October [543] (assumptions, hash and
+their rule for the evaluated v115 and v116: Appendix A), are 0.72 to 0.82 for v111 and 0.62 to 0.76 for v112;
+Section 5's noise alone gives them only about 0.4 to 0.5 and 0.55 to 0.7 coverage (computed). **Outcome.** The final had not
+been scored when this report was submitted; we will report the evaluated entries' accuracy against these ranges, read
+with the coverage note, whichever way it falls.
 
 ## 5. How much a board score moves
 
 From our own logs, without hidden labels (computed) [585]: a reading repeats exactly within one server state (23 of 23
-same-problem groups), but across states a stand-in call flips with probability about 0.26 (90% interval 0.14 to 0.45;
-12 flips in 46 comparisons). One board total thus varies by about 1.3 cases on main and 1.0 on small, matching four
-earlier draws of the same rules (19, 17, 18, 16) [393]. **A 21-case board cannot order entries whose readings resample and
-that differ by two cases or fewer**: 17 against 15 arises with probability 0.41 with no real difference. On 30 to 50 new
-problems, reading noise and problem sampling give about 0.07 to 0.09 accuracy per run.
+same-problem groups), but across states a stand-in call flips with probability about 0.26 (90% interval 0.14 to 0.45).
+One board total thus varies by about 1.3 cases on main and 1.0 on small, matching four earlier draws of the same rules
+(19, 17, 18, 16) [393]. **A 21-case board cannot order entries whose readings resample and that differ by two cases or
+fewer**: 17 against 15 arises with probability 0.41 with no real difference. On 30 to 50 new problems, reading noise and
+problem sampling give about 0.07 to 0.09 accuracy per run.
 
 ## 6. Negative results
 
 Of 88 negative results (Supplement D), **70 failed a bar written before their data** in our dated, author-controlled
-ledger (no external timestamp), 2 were unclear (Supplement D, judging substance, counts Table 2's last row as failed),
-13 had no bar or a post hoc one, and 3 were not built or run; some are engineering levers or board bets. In Table 2, a
-difficulty variant adds nothing over agreement and no fragility reading passed.
+ledger (no external timestamp), 2 were unclear, 13 had no bar or a post hoc one, and 3 were not built or run; some are
+engineering levers or board bets. In Table 2, a difficulty variant adds nothing over agreement and no fragility reading
+passed all its bars.
 
 *Table 2. Seven informative readings (server: contest server; local proxy: 4-bit weights on a Mac). Ledger by row:
 [394], [499, 506, 516, 555], [614], [447, 457, 461, 470, 477, 479, 491], [521, 523, 528], [619], [302, 309].*
@@ -143,26 +150,24 @@ rows) (Supplement D): "failed" means not shown, not absent. One read of the 80-r
 and +2-row gates sit within read-to-read spread [616].*
 
 **Probes** held signal inside their 325-problem training pool (nested Spearman 0.346) that did not transfer to the 28
-templates [499, 516]: **we make no White-Box claim**. **STD**, written by an author who had read the raters' notes,
-scored 12 of 12 7B rows, blind 9 to 11 [489]: **a reading computed through a solver's own steps needs a blind
-replication.**
+templates [499, 516]: **we make no White-Box claim**. **STD** programs a Claude agent wrote after reading the raters'
+notes scored 12 of 12 7B rows, blind ones 9 to 11 [482, 489]: **a reading computed through a solver's own steps needs a
+blind replication.**
 
 ## 7. Efficiency under a 170 s per-case budget
 
-For the per-case harness of 15 October the entry rebuilt the work per case [464, 468, 471, 476]. Our decode paths
-share one K/V read across a KV head's query heads and write K and V in place [360, 186]; in pre-registered server
-benches a step takes 0.42x (Skywork) and 0.48x (Olmo) of the default time, gpt-oss-120b 54.9 against 225.2 ms [365,
-193]. Per-case-safe variants (v115, v116) answered every board case in at most 148 s, under the final's 170 s [575,
-576].
+Our decode paths share one K/V read across a KV head's query heads and write K and V in place [360, 186]; in
+pre-registered server benches a decode run takes 0.42x (Skywork) and 0.48x (Olmo) of the default wall time, and a
+gpt-oss-120b step 54.9 against 225.2 ms [365, 193]. v115 and v116 answered every board case in at most 148 s, under the
+final's 170 s [575, 576].
 
 ## 8. Limitations and lessons
 
 **Limitations.** Reading noise is measured coarsely (3 server states) [585]; fresh rows were seen while hand-set values
-were chosen; the own runs rest on thin, post hoc support (3 Skywork and 9 Olmo rows when chosen) [339, 387]; the rating
-rubric's author had seen the labels [447, 453]; raters and blind writers are Claude subagents; the final is mocked, not
-run [538]. **Lessons.** Split a reading's score by where the label varies; refit label-fitted parts LOTO and compare board gains
-with a selection null (`audit.py`), which moved our expectation from our best draw (19) to about 16 of 21; set bars
-above read-to-read noise.
+were chosen; the own runs rest on thin, post hoc support (3 Skywork and 9 Olmo rows when chosen) [339, 387]; a Claude
+agent wrote the rating rubric after seeing the labels [447, 480]; raters and blind writers are Claude subagents; the
+final is mocked, not run [538]. **Lessons.** Split a reading's score by where the label varies; refit label-fitted parts
+LOTO and compare board gains with a selection null (`audit.py`); set bars above read-to-read noise.
 
 ## AI Use Statement
 
@@ -172,17 +177,23 @@ writes and runs code, reads and edits files and starts further Claude instances 
 - **ideation**: research directions, hypotheses and the design of each pre-registered test (bars, controls, outcome
   branches);
 - **coding**: the entries, decode paths, mocks, fault injection, the analysis and audit scripts, the release folders and
-  the figure scripts;
-- **experiments and analysis**: local runs, the statistics and the research ledger; operating the competition site in a
-  logged-in browser session of the competition account, to read server logs and, from 18 October, to upload entries
-  and research runs [556, 601];
+  the figure scripts; Claude also created and updated the public GitHub repository under the author's account, with the
+  author's permission [632, 634];
+- **research data**: Claude agents wrote the perturbed problem texts (1,976 texts) [302], the LATENT rating rubric
+  [447, 480] and the solution programs of Section 6 [482];
+- **experiments and analysis**: local runs, the statistics and the research ledger; Claude also operated the
+  competition site in the author's logged-in browser session, to read server logs and, from 5 October, to upload
+  entries and research runs, among them v95 and v96 [469] and the evaluated v115 and v116 [574], under permissions the
+  author gave in chat (at first for one night [125], later for a session or a named file [239, 503], and standing from
+  18 October [556, 601]). One upload went up under a standing go-ahead before the author had answered a question about
+  it [288], and one file was uploaded twice by mistake [295];
 - **literature**: search and reading (statuses in the References);
 - **writing**: this report, its supplement and its consistency checks; Claude instances also reviewed drafts and code.
 
 Claude instances were also the five blinded raters and the three blind program writers of Section 6 (a limitation;
 Section 8). No Claude model runs inside the entries, which use only the open models of Section 1.
 
-**Tasks done without generative AI.** The author set the goals and limits of the work; authorised every upload, including those Claude carried out from 18 October, and every use of compute; made the final decisions, including the nominations; provided and managed the competition account and all other accounts; sent every message to the organisers (Claude drafted some of them); and submits this report.
+**Tasks done without generative AI.** The author set the goals and limits of the work; gave the permissions for uploads and compute in chat, mostly as standing permissions; provided the competition, GitHub and other accounts; sent this project's messages to the organisers (Claude drafted some and sent none); made the final decisions, including which entries are evaluated with this paper (Claude recommended them); and submits this report.
 
 **Review and responsibility.** The author reviewed all AI-assisted work and takes full responsibility for the final content of this paper, including AI-assisted text, claims, code and other artefacts.
 
@@ -222,7 +233,10 @@ our four public-template server logs (`training/runs/`). **Board scores**: each 
 per-case harness; a rerun in another server state varies by about 1.3 cases on main and 1.0 on small (Section 5) [585].
 **Licence**: code under the MIT License; report text under CC BY 4.0. **Repository**: https://github.com/EconLearn/aimo-interp-difficulty-vs-fragility.
 
-**Candidate nominee files** (md5 of each zip; board OFFICIAL, one draw each, with its Codabench submission id; the nomination plan is in Supplement 10):
+**Evaluated entries.** The entries evaluated with this paper are Codabench 1003729 (v115, main) and 1003727 (v116,
+small) [574]; by the rule fixed before any final result [568], the frozen ranges apply to them if they alone are scored.
+The other rows are listed for reproducibility (md5 of each zip; board OFFICIAL, one draw each, with its Codabench
+submission id):
 
 | Role | File | md5 | Board |
 |---|---|---|---|
@@ -231,11 +245,12 @@ per-case harness; a rerun in another server state varies by about 1.3 cases on m
 | The same with every reading's seed shifted | `aimo_v121_main.zip`; `aimo_v122_small.zip` | 22ced3169a4d73b5cfe9b7ceb0d815b6; 4de6852eee8d4c3e6ccb07576c422a31 [588] | 15 of 21 (1004377); 9 of 14 (1004381) [608] |
 
 **Frozen prediction** (Section 4). Assumed: a roughly balanced class mix, a validation-like configuration mix and a
-server at most 1.2x slower than our mock. By a rule fixed before any final result [568], the forecast holds on a track
-if the final accuracy of v111 (main) or v112 (small), or of another nominee if only that one is scored, lies in its
-range. The prediction's ledger row (`work/miners18/FROZEN_PREDICTION_ledger543.txt`) has sha256
-`ffd7c3fcc370631dbc7501bd713444df47f067ede871a672c15ead8aa91a2ec6`, computed on 18 October after the board runs of that
-day, with no external timestamp [566].
+server at most 1.2x slower than our mock, with 170 s as an average (a per-case limit leaves v111 15 of 21 answered
+[573]). By a rule fixed before any final result [568], the forecast holds on a track if the final accuracy of v111
+(main) or v112 (small), or of another nominee if only that one is scored, lies in its range, so the ranges apply to
+v115 and v116 if they alone are scored. The prediction's ledger row (`work/miners18/FROZEN_PREDICTION_ledger543.txt`)
+has sha256 `ffd7c3fcc370631dbc7501bd713444df47f067ede871a672c15ead8aa91a2ec6`, computed on 18 October after the board
+runs of that day, with no external timestamp [566].
 
 **Supplementary material.** The full report (draft 29, 38 pages; `report/REPORT_full.pdf` and `report/REPORT_full.md` in the
 repository) holds every detail this version omits; its supplement folder `report_supplement/` holds the full text of its longer
@@ -243,8 +258,8 @@ appendix parts. Where to look: the audit in full, Supplement E.13, and the board
 Figure 1; every board upload, Supplement A; board-feedback use, Supplement A.2; the 88 negative results with their bars,
 Supplement D and E.6; the worked T10 example, Supplement E.12; decode paths, Supplement E.3; the final-shape mocks and
 the pre-mortem, Supplement E.15 and E.17; token confidence, the 80-row rescore, the key-headroom check and the fragility
-vectors, Supplement E.18; the decision rule's coefficients, Supplement F.4; scripts, including `audit.py`, Supplement
-F.7. Figure 1 is made by `figures/make_agreement_by_label_v30.py` from held logs (lane G's loader and the server read of
+vectors, Supplement E.18; the decision rule's coefficients, Supplement F.4; scripts, including `audit.py`,
+Supplement F.7. Figure 1 is made by `figures/make_agreement_by_label_v30.py` from held logs (lane G's loader and the server read of
 15 October); it writes its numbers to `figures/make_agreement_by_label_v30.out`.
 
 **Number labels.** *Board*: the OFFICIAL hidden validation score, counts only, one draw each. *Public rows*: the
@@ -254,5 +269,5 @@ not accuracy). *Model-based*: a simulation. *Local proxy*: a run on a Mac with 4
 model. *Guess*: a judgement, given as a range.
 
 **Ledger entries.** Every bracketed number is an entry of our dated research ledger; the full report cites the same
-entries. The ledger holds internal notes and is not published as it stands; a redacted extract of the cited entries is
+entries, except 589 and 627 (release rebuild checks). The ledger holds internal notes and is not published as it stands; a redacted extract of the cited entries is
 available on request.

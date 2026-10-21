@@ -14,15 +14,15 @@ Inside a fixed GPU budget, we predict whether a configuration's accuracy on a ma
 perturbations. In our fit, sampling noise explains about 3% of public non-robust labels; among solved problems the solve
 rate says little about the label. Our entry reads behaviour: a gpt-oss-120b stand-in's answer agreement, whether the 7B
 models' own attempts end inside a token cap, and a prior for gpt-oss high. The final uses new problems; we audit
-generalisation. The only label-fitted part predates the board-iteration period; leave-one-template-out the entry gets 60
-of 71 public and 18 of 24 fresh rows, and 68.75 of the 80 rows now labelled (eight reads pooled). Three routes chosen
-later with board feedback decide 8 of 21 main cases; their board gain (+3) matches keep-if-better selection on coin
-flips (+3.9) and 3 of 6 fresh-row errors sit on them, yet Skywork's route held up on 9 rows labelled after its choice.
-Readings repeat exactly within a server state and resample across states (board SD about 1.3 cases), so the board cannot
-rank our versions. The nominees scored 17 and 15 of 21 and 9 and 9 of 14 (one draw each). At the boards' class and
-configuration mix we expect about 16 of 21 and 10 of 14 right on new problems (main 90% range 11 to 20). Of 88 negative
-results, 71 failed a pre-set bar, including white-box probes, token confidence and fragility features: our difficulty
-readings sit near their ceiling.
+generalisation. The only label-fitted part predates the board-tested changes of 5 to 11 October; leave-one-template-out
+the entry gets 60 of 71 public and 18 of 24 fresh rows, and 68.75 of the 80 rows now labelled (eight reads pooled).
+Three routes chosen later with board feedback decide 8 of 21 main cases; their board gain (+3) matches keep-if-better
+selection on coin flips (+3.9) and 3 of 6 fresh-row errors sit on them, yet Skywork's route held up on 9 rows labelled
+after its choice. Readings repeat exactly within a server state and resample across states (board SD about 1.3 cases),
+so the board cannot rank our versions. The nominees scored 17 and 15 of 21 and 9 and 9 of 14 (one draw each). At the
+boards' class and configuration mix we expect about 16 of 21 and 10 of 14 right on new problems (main 90% range 11 to
+20). Of 88 negative results, 70 failed a pre-set bar (2 were unclear), including white-box probes, token confidence and
+fragility features: our difficulty readings sit near their ceiling.
 
 ## Contributions
 
@@ -35,7 +35,7 @@ readings sit near their ceiling.
    (Section 3).
 3. **Deployment under a changed harness**: a per-case rebuild, time-guarded nominees mocked at the final's shape, a
    fault-injection pre-mortem, and decode-path fixes with in-run self-checks (Section 4).
-4. **Negative results with their bars and significance cutoffs**: 71 pre-registered failures, including
+4. **Negative results with their bars and significance cutoffs**: 70 pre-registered failures, including
    internal-versus-behavioural comparisons, a dose-response refutation for white-box probes, token confidence and
    fragility features (Section 5; Appendix D), a dormant-condition rating whose in-hour versions all failed, and a blind
    replication that undercut a contaminated bench (Section 6).
@@ -99,12 +99,12 @@ only) [505, 509]; `audit.py` recomputes Section 2.2's table and Section 2.3's se
 ### 2.1 What was fitted, and when
 
 The only label-fitted part, the stand-in's logistic rule `decision.json` (10 coefficients; Appendix F.4), was fitted on
-the 71 public rows on 5 October, before the board-iteration period of 10 to 11 October, and is byte-identical from v7 to
-v95. Refitting it leave-one-template-out changes 1 of 71 answers [509]. Seven decisions were made or kept with board
-feedback; three of them, chosen in that period, change answers: gpt-oss high answered from its prior, Olmo's own run and
-Skywork's own run (Section 3.2). Together they decide 8 of 21 main and 6 of 14 small cases. About ten hand-set values
-(strength codes, caps, K, the own-run thresholds, the prior) were chosen after seeing public rows and cannot be
-cross-validated (Appendix E.13).
+the 71 public rows on 5 October [113], after board uploads began (2 October) [20] but before the board-tested changes of
+5 to 11 October, and is byte-identical from v7 to v95. Refitting it leave-one-template-out changes 1 of 71 answers
+[509]. Seven decisions were made or kept with board feedback; three of them, chosen on 10 to 11 October, change answers:
+gpt-oss high answered from its prior, Olmo's own run and Skywork's own run (Section 3.2). Together they decide 8 of 21
+main and 6 of 14 small cases. About ten hand-set values (strength codes, caps, K, the own-run thresholds, the prior)
+were chosen after seeing public rows and cannot be cross-validated (Appendix E.13).
 
 ### 2.2 Out-of-sample accuracy against the board
 
@@ -187,7 +187,7 @@ frozen ranges, which used these boards: a consistency check, not a test. The pub
 16, v114 8) [557, 558, 560, 564], as the selection null expects on main; v95's 16 and v115's and v121's 15 lie within
 reading noise of v111's 17 (Section 2.6; Appendix E.17) [566, 608].
 
-**Outcome** The final is scored after this report's deadline, so the outcome is not known at submission; we will report each nominee's accuracy against these ranges, read with the coverage note, whichever way it falls.
+**Outcome** The final had not been scored when this report was submitted; we will report the evaluated entries' accuracy against these ranges, read with the coverage note, whichever way it falls.
 
 ### 2.6 How much a board score moves
 
@@ -308,7 +308,7 @@ agreement with the default path at least 0.99, a deliberately broken variant mus
 other than out-of-memory falls back to the default path. On 16 October the check caught a failing compacting loop on the
 server [566]. Pre-registered server benches:
 
-| Model, shape | Default | Fast | Time ratio (bar) | Check |
+| Model, shape | Default | Fast | Wall-time ratio (bar) | Check |
 |---|---|---|---|---|
 | Skywork-OR1-Math-7B, 12 rows to 7,000 tokens | 49 ms/step | 21 ms/step | 0.42 (≤ 0.67): 2.4x | agreement 1.000; sabotage failed [365] |
 | Olmo-3-7B-Think, same | 76 ms/step | 37 ms/step | 0.48 (≤ 0.80): 2.1x | the same [365] |
@@ -353,8 +353,8 @@ small cases (model-based); a pre-registered threshold refit missed its bar (+4.8
 
 ## 5. Negative results
 
-Appendix D indexes 88 negative results: **71 failed a bar written before their data** (one judged on a model-based
-estimate), 1 was unclear, 13 were tested post hoc or without a bar, and 3 were designed but not built or run.
+Appendix D indexes 88 negative results: **70 failed a bar written before their data** (one judged on a model-based
+estimate), 2 were unclear, 13 were tested post hoc or without a bar, and 3 were designed but not built or run.
 *Pre-registered* means a bar written in our dated, author-controlled ledger before the data came back; none has an
 external timestamp.
 
@@ -430,13 +430,13 @@ A rater sees only a problem and its answer and scores **LATENT** from 0 to 3: ho
 given numbers that keeps the deductive chain would make a condition bind that is dormant at the given numbers [442,
 447]. A case is called non-robust iff the raters' mean is at least 1.5. Five independent Claude subagents rated the 28
 public problems without labels or model names; three rated after bars and a frozen scorer were set [451, 452]. **The
-rubric was not written blind**: its author had seen all 71 public labels and about 12 of the 28 texts. On the 41
-small-model and gpt-oss low rows the rating reached AUC 0.935, 37 right against the entry's 34; with the entry
-elsewhere, 64 of 71 and 21 of 24 fresh rows against 61 and 19 [453, 455, 457]. **The stand-in alone also scores 64 of
-71** (in-sample) and about 11 of the 12 7B rows, so most of the rating's public gain undoes the own runs' public loss.
-By its pre-set bars the test failed (hard-row AUC 0.646 against 0.70; 6 of 7 low rows against 7 of 7), and the split by
-configuration was chosen post hoc on two raters [447, 453]. It is not difficulty: Spearman +0.08 with the stand-in's
-reading [447].
+rubric was not written blind**: the Claude agent that wrote it (lane A) had seen all 71 public labels [480] and about 12
+of the 28 texts. On the 41 small-model and gpt-oss low rows the rating reached AUC 0.935, 37 right against the entry's
+34; with the entry elsewhere, 64 of 71 and 21 of 24 fresh rows against 61 and 19 [453, 455, 457]. **The stand-in alone
+also scores 64 of 71** (in-sample) and about 11 of the 12 7B rows, so most of the rating's public gain undoes the own
+runs' public loss. By its pre-set bars the test failed (hard-row AUC 0.646 against 0.70; 6 of 7 low rows against 7 of
+7), and the split by configuration was chosen post hoc on two raters [447, 453]. It is not difficulty: Spearman +0.08
+with the stand-in's reading [447].
 
 ### 6.2 A worked example: T10's equivalent mutant
 
@@ -467,9 +467,9 @@ white-box component and no STD reading is in any entry.**
 
 ### 6.5 A replication lesson: STD written blind
 
-The STD bench's programs were written by an author who had read the raters' notes. Three independent writers (Claude
-subagents) rewrote them under a pre-registration: public problems and answers only, programs frozen, labels read
-after the frozen scorer's verdict (Appendix E.16; computed):
+The STD bench's programs were written by a Claude agent (lane L) that had read the raters' notes [482]. Three
+independent writers (Claude subagents) rewrote them under a pre-registration: public problems and answers only, programs
+frozen, labels read after the frozen scorer's verdict (Appendix E.16; computed):
 
 | Programs | 7B rows | All rows | Fresh | AUC | Scorer |
 |---|---|---|---|---|---|
@@ -568,6 +568,9 @@ server logs (`training/runs/`; Appendix F.8).
 | Public defaults, not nominated (Section 2.3) | `aimo_v113_main.zip` (`sub_v131m`); `aimo_v114_small.zip` (`sub_v132s`) | 10c5050f2937ffaa613b9b8d34b215d1; 546e7fa7518cea17ab0df181dcae676a [544] | 16 of 21 [558]; 8 of 14 [557] |
 | Scored per-case files (H2) | `aimo_v95_main.zip` (`sub_v114m`); `aimo_v96_small.zip` (`sub_v115s`) | 04460073a0d358ff3be70185906d8f05; 5d7ec8f10baf51e91d7a789cfdbb7e6c [469] | 16 of 21; 10 of 14 [471] |
 
+**Evaluated entries**: Codabench 1003729 (v115, main) and 1003727 (v116, small) [574]; by the decision rule of Section
+2.5 [568], the frozen ranges apply to them if they alone are scored.
+
 **Nomination plan** (`NOMINATION_SHEET.md`, 20 October; the procedure is not yet published [571]): with several files
 per track, v111 and v115 (main), v116 and v112 (small); with one, v115 and v116 unless the organisers say 170 s is an
 average, then v111 and v112 [576, 585]. v113 and v114 are no longer planned. v121 and v122, our latest uploads, can
@@ -595,18 +598,23 @@ writes and runs code, reads and edits files and starts further Claude instances 
 - **ideation**: research directions, hypotheses and the design of each pre-registered test (bars, controls, outcome
   branches);
 - **coding**: the entries, decode paths, mocks, fault injection, the analysis and audit scripts, the release folders and
-  the figure scripts;
-- **experiments and analysis**: local runs, preparing research and entry uploads, reading server logs, the statistics
-  and the research ledger;
+  the figure scripts; Claude also created and updated the public GitHub repository under the author's account, with the
+  author's permission [632, 634];
+- **research data**: Claude agents wrote the perturbed problem texts (1,976 texts; Appendix E.6.1) [302], the LATENT
+  rating rubric (Section 6.1) [447, 480] and the STD bench's solution programs (Section 6.5) [482];
+- **experiments and analysis**: local runs, the statistics and the research ledger; Claude also operated the
+  competition site in the author's logged-in browser session, to read server logs and, from 5 October, to upload
+  entries and research runs, among them v95 and v96 [469] and the evaluated v115 and v116 [574], under permissions the
+  author gave in chat (at first for one night [125], later for a session or a named file [239, 503], and standing from
+  18 October [556, 601]). One upload went up under a standing go-ahead before the author had answered a question about
+  it [288], and one file was uploaded twice by mistake [295];
 - **literature**: search and reading (statuses in the References);
 - **writing**: this report, its supplement and its consistency checks; Claude instances also reviewed drafts and code.
 
 Claude instances were also the five blinded raters of Section 6.1 and the three blind program writers of Section 6.5 (a
 limitation; Section 8). No Claude model runs inside the entries, which use only the open models of Section 1.
 
-**Tasks done without generative AI.** The author set the goals and limits, authorised the uploads (from 18 October
-Claude carried uploads out under the human author's standing permission [556, 601]), makes the nominations, provided the
-competition account and submits this report. The author also managed all accounts and sent every message to the organisers (Claude drafted some of them).
+**Tasks done without generative AI.** The author set the goals and limits of the work; gave the permissions for uploads and compute in chat, mostly as standing permissions; provided the competition, GitHub and other accounts; sent this project's messages to the organisers (Claude drafted some and sent none); made the final decisions, including which entries are evaluated with this report (Claude recommended them); and submits this report.
 
 **Review and responsibility.** The author reviewed all AI-assisted work and takes full responsibility for the final content of this paper, including AI-assisted text, claims, code and other artefacts.
 
@@ -836,7 +844,7 @@ four arms are one row).
 
 | Where | Rows | Failed a pre-set bar | Unclear | Post hoc or no bar | Not built or not run |
 |---|---|---|---|---|---|
-| E.6.1 Changing the problem | 9 | 7 | 0 | 2 (expert texts offline: not refuted, not buildable; surface twins: no bar) | 0 |
+| E.6.1 Changing the problem | 9 | 6 | 1 (answer-keeping rewrites on gpt-oss low: T11 sits exactly on the 0.10 line; failed in substance) | 2 (expert texts offline: not refuted, not buildable; surface twins: no bar) | 0 |
 | E.6.2 Priors, thresholds and bets on the test's structure | 6 | 6 | 0 | 0 | 0 |
 | E.6.3 Internals and reasoning | 9 | 9 | 0 | 0 | 0 |
 | E.10 Small-track readings | 9 | 6 | 0 | 3 (62 observables: post hoc bar; reading load and answer size: no bar) | 0 |
@@ -849,7 +857,7 @@ four arms are one row).
 | E.17: group 11 (lanes OLMO-CAP, SMALL and REFILL) | 3 | 2 | 0 | 1 (slot refill: no bar) | 0 |
 | E.18: group 12 (lane CONF; the 80-row refit) | 2 | 1 | 0 | 1 (clear-cut refit: no bar) | 0 |
 | E.18: group 13 (CRP19) | 6 | 5 | 0 | 1 (key proxies: post hoc) | 0 |
-| **All** | **88** | **71** | **1** | **13** | **3** |
+| **All** | **88** | **70** | **2** | **13** | **3** |
 
 Not counted: the five single-read reversals of Appendix E.5 (each failed its bar on a second read; we report them as a
 measurement lesson), the rejected adoption decisions of Appendix C, the own readings of Appendix E.2, lane X's
@@ -869,7 +877,7 @@ accuracy 0.69 at 52 against 19.
 **The 88 results by name** (each row, with its bar and values, is in the supplement file that the part named here points
 to; flags mark the results that did not fail a pre-set bar, and the one judged on a model-based estimate):
 
-- *E.6.1 (9):* answer-keeping rewrites on gpt-oss low; gpt-oss's own rewrites; re-numbered siblings; answer-changing
+- *E.6.1 (9):* answer-keeping rewrites on gpt-oss low (unclear); gpt-oss's own rewrites; re-numbered siblings; answer-changing
   expert-style texts on medium; the same texts on Skywork; expert texts on low offline (post hoc; not refuted); in-run
   siblings; program-aided siblings; surface twins and number variants of T13 (no bar).
 - *E.6.2 (6):* threshold at the stated base rate; recalibration under a hidden-like reweighting; rank within each call;
@@ -1123,11 +1131,12 @@ of groups 1 to 5: `report_supplement/E12_rounds_14_to_16.md`.* Findings:
 - **Exposure audit** [446]: exposed rows are non-robust 3 of 35 times and fresh (AIME-2026) rows 11 of 24 (one-sided p
   0.018, two-sided 0.04); on hard rows D −0.50 (one-sided p 0.048, two-sided 0.10; Appendix F.7). The lane guessed the
   direction while reading the templates.
-- **The dormant-condition rating** (Section 6.1; lane A) [447, 451-453, 457]: the rubric's author had seen the 71 public
-  labels; the five raters saw only problems and answers. Mean LATENT by template: supplement (addendum of 20 October,
-  draft 29). Against bars set before raters 3 to 5 [451, 453]: M1 (low 7 of 7) failed at 6 of 7; M2 (small models + low
-  ≥ 36 of 41) passed, 37; M3 (≥ 63 of 71 and fresh ≥ 20 of 24) passed, 64 and 21; M4 (rater agreement) passed, 0.661.
-  Lane A's own bar, hard-row AUC ≥ 0.70, failed at 0.646 [447, 457]. The in-hour versions all failed (Section 6.3).
+- **The dormant-condition rating** (Section 6.1; lane A) [447, 451-453, 457]: the Claude agent that wrote the rubric had
+  seen the 71 public labels [480]; the five raters saw only problems and answers. Mean LATENT by template: supplement
+  (addendum of 20 October, draft 29). Against bars set before raters 3 to 5 [451, 453]: M1 (low 7 of 7) failed at 6 of
+  7; M2 (small models + low ≥ 36 of 41) passed, 37; M3 (≥ 63 of 71 and fresh ≥ 20 of 24) passed, 64 and 21; M4 (rater
+  agreement) passed, 0.661. Lane A's own bar, hard-row AUC ≥ 0.70, failed at 0.646 [447, 457]. The in-hour versions all
+  failed (Section 6.3).
 - **Groups 1 to 5** (19 negative results, named in Appendix D): affordable small-model own runs, gpt-oss high and
   transfer fields, gpt-oss low's other readings, edit-side readings, and a cheap dormant-condition rater.
 
