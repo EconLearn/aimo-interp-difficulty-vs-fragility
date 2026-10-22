@@ -671,7 +671,8 @@ writes and runs code, reads and edits files and starts further Claude instances 
 - **experiments and analysis**: local runs, the statistics and the research ledger; Claude also operated the
   competition site in the author's logged-in browser session, to read server logs and, from 5 October, to upload
   entries and research runs, among them v95 and v96 [469] and the evaluated v115 and v116 [574], under permissions the
-  author gave in chat (at first for one night [125], later for a session or a named file [239, 503], and standing from
+  author gave in chat (at first for one night [125], then go-aheads in chat from 6 October [172, 187] and a standing
+  go-ahead 'for now' from 7 October [239], requests for named files [503], and unconditional from
   18 October [556, 601]). One upload went up under a standing go-ahead before the author had answered a question about
   it [288], and one file was uploaded twice by mistake [295];
 - **literature**: search and reading (statuses in the References);
