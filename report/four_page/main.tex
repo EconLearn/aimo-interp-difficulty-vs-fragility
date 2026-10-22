@@ -1,6 +1,12 @@
-% Four-page version of the AIMO Interpretability Challenge 2026 technical report (draft 32, 21 October 2026).
-% LaTeX twin of ../PAPER_4PAGE_v32.md; the full report (draft 29) is the supplementary material. Draft 31's four-page
-% twin (../report4_v31/main.tex) is kept unchanged.
+% Four-page version of the AIMO Interpretability Challenge 2026 technical report (draft 33, 22 October 2026).
+% LaTeX twin of ../PAPER_4PAGE_v33.md; the full report (draft 29) is the supplementary material. Draft 32's four-page
+% twin (../report4_v32/main.tex) is kept unchanged.
+%
+% Draft 33 applies the pre-submission audit of draft 32 (work/miners19/draft32/audit/AUDIT_v32.md; ledger 675):
+% Table 1 column widths (was 4.1 pt too wide), the raters cell (rater 1's 0.674 apart from the five-rater 0.711), the
+% basis of '15 of the 16' (all 80 labelled rows), the date (22 October), a shorter front footnote, the repository paths
+% of the scripts (report/figures/, report/report_supplement/) and texorpdfstring in Section 7's title. No result
+% changed; one number was added (0.674). Changes and checks: work/miners19/draft33/CHANGES_v33.md.
 %
 % Style file: neurips_2026.sty comes from the official NeurIPS 2026 template on Overleaf
 % (Overleaf -> New Project -> Templates -> NeurIPS 2026). Replace that project's main.tex with this file, upload
@@ -43,13 +49,11 @@ cases across server states.
 
 \begingroup
 \renewcommand\thefootnote{}
-\footnotetext{Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 21 October 2026
-(UTC); four-page version (draft 32). The full report (draft 29, \texttt{report/REPORT\_full.pdf} in the repository) is
-the supplementary material: ``Supplement X'' refers to its section or appendix X. Every number traces to an entry of
-our dated research ledger, to Figure~\ref{fig:agree}'s script or to the supplement's audit scripts (Supplement F.7),
-and matched-row numbers to the script named in Appendix~\ref{app:supp}: Appendix~\ref{app:supp} lists the entries by
-section, and the supplement cites them at each number. Hidden cases appear as counts only; number labels (board, public
-rows, server, computed, mock, model-based, local proxy, guess) are defined in Appendix~\ref{app:supp}.}
+\footnotetext{Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 22 October 2026
+(UTC); four-page version (draft 33). The full report (draft 29, revised 22 October; \texttt{report/REPORT\_full.pdf} in the
+repository) is the supplementary material: ``Supplement X'' refers to its section or appendix X. Hidden cases appear as
+counts only. Appendix~\ref{app:supp} gives the source of every number (ledger entries and scripts) and defines the
+number labels.}
 \endgroup
 
 \section{Introduction}
@@ -104,7 +108,7 @@ same-configuration pairs are misordered (four on gpt-oss high, two on low, one o
 [0.911], inside the 0.821 to 0.936 of single held reads; leave-one-template-out (LOTO), the key fixes
 1 of 32 hard rows [2 of 37].
 
-\textbf{What it misses is mostly the problem's own fragility} (computed, post hoc). By exact problem text, 15 of the 16 problems labelled for several configurations carry one label, and 4 of the 5 with
+\textbf{What it misses is mostly the problem's own fragility} (computed, post hoc). By exact problem text (all 80 labelled rows), 15 of the 16 problems labelled for several configurations carry one label, and 4 of the 5 with
 a non-robust label are non-robust for every configuration (T10 is the exception). An oracle calling a row non-robust when the other configurations' mean drop on the same text is at least 0.175 would fix 6.4 of our calls per read and break 0.4
 (matched rows, 8 reads). These are few problems; the oracle uses labels.
 
@@ -112,7 +116,7 @@ a non-robust label are non-robust for every configuration (T10 is the exception)
 \centering
 \includegraphics[width=\linewidth]{agreement_by_label_v32.png}
 \caption{The stand-in's agreement on each labelled public row, by label, on easy and hard templates. Hollow: rows labelled on other numbers. Diamonds: T13. Script
-\texttt{figures/make\_agreement\_by\_label\_v32.py}.}
+\texttt{report/figures/make\_agreement\_by\_label\_v32.py}.}
 \label{fig:agree}
 \end{figure}
 
@@ -138,7 +142,7 @@ one draw each).}
 \centering
 \small
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{0.21\linewidth}p{0.27\linewidth}p{0.12\linewidth}p{0.18\linewidth}p{0.17\linewidth}@{}}
+\begin{tabular}{@{}p{0.20\linewidth}p{0.27\linewidth}p{0.12\linewidth}p{0.18\linewidth}p{0.16\linewidth}@{}}
 \toprule
 Rows & Matched rows & All rows & Predicted board (90\% range) & Board \\
 \midrule
@@ -194,7 +198,7 @@ rows; a perfect probe (post hoc) 1.5 to 5.5 & failed \\
 Probes for the rating below: Qwen3.5-4B states on text, solution, thinking (local proxy); gpt-oss-120b (server) &
 internal state & Spearman $\geq 0.60$, 28 templates & 0.277, 0.454, 0.304; 0.030 & failed \\
 Five blinded Claude raters: would new numbers make a dormant condition bind? Five in-hour versions & fragility & AUC
-$\geq 0.70$, 37 hard rows; one bar per version & 0.646 (0.711 on the 32 matched rows, post hoc); none of five passed &
+$\geq 0.70$, 37 hard rows; one bar per version & 0.646; 32 matched rows (post hoc): 0.674, five-rater mean 0.711; none of five passed &
 failed \\
 STD: own steps against own brute force on new numbers; three blind writers & fragility & 11 of 12 7B rows; AUC
 $\geq 0.80$; Spearman $\geq 0.40$ & 9, 11, 10 of 12; AUC 0.724, 0.900, 0.789; writer 3 passes on
@@ -216,7 +220,7 @@ AUC of about 0.77 (19 against 18 rows) (Supplement D): ``failed'' means not show
 \textbf{STD} programs a Claude agent wrote after reading the raters' notes scored 12 of 12 7B rows, blind ones 9 to 11:
 \textbf{a reading computed through a solver's own steps needs a blind replication.}
 
-\section{Efficiency under a 170\,s per-case budget}
+\section{Efficiency under a \texorpdfstring{170\,s}{170 s} per-case budget}
 \label{sec:eff}
 
 Our decode paths share K/V reads across a KV head's query heads and write K and V in place; in pre-registered server
@@ -354,7 +358,7 @@ another server state varies by about 1.3 cases on main and 1.0 on small (Section
 \textbf{Matched rows.} A labelled row is matched when its own problem text is the template text all our readings used;
 \texttt{calib.json} flags this per row (\texttt{own\_text}, from \texttt{build\_calib.py}), and a hash of the texts in
 the organisers' file gives the same 8 of 71 and 9 of 80 unmatched rows. Figure~\ref{fig:agree}'s script and
-\path{recompute_matched_v32.py} compute every matched-row number from the same held logs.
+\path{report/figures/recompute_matched_v32.py} compute every matched-row number from the same held logs.
 
 \textbf{Evaluated entries.} The entries evaluated with this paper are Codabench 1003729 (v115, main) and 1003727 (v116,
 small); by the rule fixed before any final result, the frozen ranges apply to them if they alone are scored. Their 7,200-token Olmo cap costs about 0.6 to 0.9 main and 1.3 to 2.1 small cases per 40 new problems against
@@ -399,8 +403,8 @@ upload, Supplement A; board-feedback use, Supplement A.2; the 88 negative result
 E.6; the worked T10 example, Supplement E.12; decode paths, Supplement E.3; the final-shape mocks and the pre-mortem,
 Supplement E.15 and E.17; token confidence, the 80-row rescore, the key-headroom check and the fragility vectors,
 Supplement E.18; the decision rule's coefficients, Supplement F.4; scripts, including \texttt{audit.py}, Supplement F.7.
-Figure~\ref{fig:agree} is made by \path{figures/make_agreement_by_label_v32.py} from held logs (lane G's loader and the
-server read of 15 October); it writes its numbers to \path{figures/make_agreement_by_label_v32.out}.
+Figure~\ref{fig:agree} is made by \path{report/figures/make_agreement_by_label_v32.py} from held logs (lane G's loader and the
+server read of 15 October); it writes its numbers to \path{report/figures/make_agreement_by_label_v32.out}.
 
 \textbf{Number labels.} \emph{Board}: the OFFICIAL hidden validation score, counts only, one draw each. \emph{Public
 rows}: the labelled public rows (in-sample where our rule was fitted on them). \emph{Server}: a research run on the

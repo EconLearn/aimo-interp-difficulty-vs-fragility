@@ -2,11 +2,10 @@
 
 Jude Wallis (Independent researcher)
 
-*Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 21 October 2026 (UTC); four-page
-version (draft 32). The full report (draft 29, `report/REPORT_full.pdf` in the repository) is its supplementary material: "Supplement X" points to
-its section or appendix X. Numbers come from our research ledger (entry in brackets), Figure 1's script or the
-supplement's audit scripts (Supplement F.7), and matched-row numbers from the script named in Appendix A; hidden cases
-appear as counts only. Number labels are defined in Appendix A.*
+*Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 22 October 2026 (UTC); four-page
+version (draft 33). The full report (draft 29, revised 22 October; `report/REPORT_full.pdf` in the repository) is the
+supplementary material: "Supplement X" refers to its section or appendix X. Hidden cases appear as counts only.
+Appendix A gives the source of every number (ledger entries and scripts) and defines the number labels.*
 
 ## Abstract
 
@@ -72,16 +71,16 @@ misordered (four on gpt-oss high, two on low, one on Skywork). 80 pooled attempt
 against the answer key 0.872 [0.911], inside the 0.821 to 0.936 of single held reads; leave-one-template-out (LOTO), the
 key fixes 1 of 32 hard rows [2 of 37] [611].
 
-**What it misses is mostly the problem's own fragility** (computed, post hoc) [664]. By exact problem text, 15 of the 16
-problems labelled for several configurations carry one label, and 4 of the 5 with a non-robust label are non-robust for
-every configuration (T10 is the exception). An oracle calling a row non-robust when the other configurations' mean drop
-on the same text is at least 0.175 would fix 6.4 of our calls per read and break 0.4 (matched rows, 8 reads). These are
-few problems; the oracle uses labels.
+**What it misses is mostly the problem's own fragility** (computed, post hoc) [664]. By exact problem text (all 80
+labelled rows), 15 of the 16 problems labelled for several configurations carry one label, and 4 of the 5 with a
+non-robust label are non-robust for every configuration (T10 is the exception). An oracle calling a row non-robust when
+the other configurations' mean drop on the same text is at least 0.175 would fix 6.4 of our calls per read and break 0.4
+(matched rows, 8 reads). These are few problems; the oracle uses labels.
 
 ![Figure 1: agreement by label on easy and hard templates](agreement_by_label_v32.png)
 
 *Figure 1. The stand-in's agreement on each labelled public row, by label, on easy and hard templates. Hollow: rows
-labelled on other numbers. Diamonds: T13. Script `figures/make_agreement_by_label_v32.py`.*
+labelled on other numbers. Diamonds: T13. Script `report/figures/make_agreement_by_label_v32.py`.*
 
 **What fragility can look like.** On two harsher expert-style rewrites of T10, gpt-oss low's wrong answers are exactly
 those of the correct method without one check, a lower triangle bound; at the original numbers the check removes nothing
@@ -141,7 +140,7 @@ passed all its bars.
 |---|---|---|---|---|
 | Qwen3.5-4B prompt-state probe of Qwen's solve rate (local proxy; 80 rows) | difficulty (internal state) | Spearman ≥ 0.40; at most 0.5 rows lost; ablation gain ≥ 2 rows | Spearman 0.803; each use loses 0.25 to 3.25 rows; a perfect probe (post hoc) 1.5 to 5.5 | failed |
 | Probes for the rating below: Qwen3.5-4B states on text, solution, thinking (local proxy); gpt-oss-120b (server) | internal state | Spearman ≥ 0.60, 28 templates | 0.277, 0.454, 0.304; 0.030 | failed |
-| Five blinded Claude raters: would new numbers make a dormant condition bind? Five in-hour versions | fragility | AUC ≥ 0.70, 37 hard rows; one bar per version | 0.646 (0.711 on the 32 matched rows, post hoc); none of five passed | failed |
+| Five blinded Claude raters: would new numbers make a dormant condition bind? Five in-hour versions | fragility | AUC ≥ 0.70, 37 hard rows; one bar per version | 0.646; 32 matched rows (post hoc): 0.674, five-rater mean 0.711; none of five passed | failed |
 | STD: own steps against own brute force on new numbers; three blind writers | fragility | 11 of 12 7B rows; AUC ≥ 0.80; Spearman ≥ 0.40 | 9, 11, 10 of 12; AUC 0.724, 0.900, 0.789; writer 3 passes on matched rows (post hoc) | each failed a bar |
 | Premise reliance; instance-binding depth (local proxy) | fragility | Spearman with the rating ≤ −0.30; sabotage loses | +0.150 (11 of 34 problems defined); −0.038 (27); sabotage did not lose | failed |
 | Answer-keeping organiser-style rewrites, gpt-oss low (server, 7 rows) | fragility | drop ≥ 0.20 on non-robust rows | +0.03, +0.10; AUC 0.30 | unclear (0.10 is the boundary) |
@@ -234,7 +233,8 @@ https://github.com/EconLearn/aimo-interp-difficulty-vs-fragility.
 
 **Matched rows.** A labelled row is matched when its own problem text is the template text all our readings used;
 `calib.json` flags this per row (`own_text`, from `build_calib.py`), and a hash of the texts in the organisers' file
-gives the same 8 of 71 and 9 of 80 unmatched rows [661, 664]. Figure 1's script and `recompute_matched_v32.py` compute
+gives the same 8 of 71 and 9 of 80 unmatched rows [661, 664]. Figure 1's script and
+`report/figures/recompute_matched_v32.py` compute
 every matched-row number from the same held logs.
 
 **Evaluated entries.** The entries evaluated with this paper are Codabench 1003729 (v115, main) and 1003727 (v116,
@@ -260,14 +260,14 @@ of that day, with no external timestamp [566]. **Outcome.** The final had not be
 submitted; we will report the evaluated entries' accuracy against the frozen ranges, whichever way it falls.
 
 **Supplementary material.** The full report (draft 29, revised 22 October, 39 pages; `report/REPORT_full.pdf` and `report/REPORT_full.md` in
-the repository) holds every detail this version omits; its supplement folder `report_supplement/` holds the full text of
+the repository) holds every detail this version omits; its supplement folder `report/report_supplement/` holds the full text of
 its longer appendix parts. Where to look: the audit in full, Supplement E.13, and the board draws against it, the
 supplement's Figure 1; every board upload, Supplement A; board-feedback use, Supplement A.2; the 88 negative results
 with their bars, Supplement D and E.6; the worked T10 example, Supplement E.12; decode paths, Supplement E.3; the
 final-shape mocks and the pre-mortem, Supplement E.15 and E.17; token confidence, the 80-row rescore, the key-headroom
 check and the fragility vectors, Supplement E.18; the decision rule's coefficients, Supplement F.4; scripts, including
-`audit.py`, Supplement F.7. Figure 1 is made by `figures/make_agreement_by_label_v32.py` from held logs (lane G's loader
-and the server read of 15 October); it writes its numbers to `figures/make_agreement_by_label_v32.out`.
+`audit.py`, Supplement F.7. Figure 1 is made by `report/figures/make_agreement_by_label_v32.py` from held logs (lane G's
+loader and the server read of 15 October); it writes its numbers to `report/figures/make_agreement_by_label_v32.out`.
 
 **Number labels.** *Board*: the OFFICIAL hidden validation score, counts only, one draw each. *Public rows*: the
 labelled public rows (in-sample where our rule was fitted on them). *Server*: a research run on the contest server.
