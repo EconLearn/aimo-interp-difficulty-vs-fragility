@@ -2,11 +2,11 @@
 
 Jude Wallis (Independent researcher)
 
-*Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 20 October 2026 (UTC). Numbers
-come from our research ledger (entry in brackets; Section 10) or the output files named where used; hidden cases appear
-as counts only. Number labels (board, public rows, mock, server, computed, model-based, local proxy, guess) are defined
-in Appendix F. Longer appendix parts are summarised here; their full text is in `report_supplement/`, one file per
-part.*
+*Technical report, AIMO Interpretability Challenge 2026 (NeurIPS 2026, Codabench 16180), 20 October 2026 (UTC;
+revised 22 October for instance-matched rows, Section 1). Numbers come from our research ledger (entry in brackets;
+Section 10) or the output files named where used; hidden cases appear as counts only. Number labels (board, public rows,
+mock, server, computed, model-based, local proxy, guess) are defined in Appendix F. Longer appendix parts are summarised
+here; their full text, written before the revision, is in `report_supplement/`, one file per part.*
 
 ## Abstract
 
@@ -15,14 +15,16 @@ perturbations. In our fit, sampling noise explains about 3% of public non-robust
 rate says little about the label. Our entry reads behaviour: a gpt-oss-120b stand-in's answer agreement, whether the 7B
 models' own attempts end inside a token cap, and a prior for gpt-oss high. The final uses new problems; we audit
 generalisation. The only label-fitted part predates the board-tested changes of 5 to 11 October; leave-one-template-out
-the entry gets 60 of 71 public and 18 of 24 fresh rows, and 68.75 of the 80 rows now labelled (eight reads pooled).
-Three routes chosen later with board feedback decide 8 of 21 main cases; their board gain (+3) matches keep-if-better
-selection on coin flips (+3.9) and 3 of 6 fresh-row errors sit on them, yet Skywork's route held up on 9 rows labelled
-after its choice. Readings repeat exactly within a server state and resample across states (board SD about 1.3 cases),
-so the board cannot rank our versions. The nominees scored 17 and 15 of 21 and 9 and 9 of 14 (one draw each). At the
+the entry gets 55 of 63 public and 17 of 22 fresh rows labelled on the text we read (matched rows; all rows: 60 of 71
+and 18 of 24), and, of the 80 rows now labelled, 62.5 of 71 matched (68.75 of 80; eight reads pooled). Three routes
+chosen later with board feedback decide 8 of 21 main cases; their board gain (+3) matches keep-if-better selection on
+coin flips (+3.9) and 3 of 5 matched fresh-row errors sit on them, yet Skywork's route held up on 9 rows labelled after
+its choice. Readings repeat exactly within a server state and resample across states (board SD about 1.3 cases), so
+the board cannot rank our versions. The nominees scored 17 and 15 of 21 and 9 and 9 of 14 (one draw each). At the
 boards' class and configuration mix we expect about 16 of 21 and 10 of 14 right on new problems (main 90% range 11 to
-20). Of 88 negative results, 70 failed a pre-set bar (2 were unclear), including white-box probes, token confidence and
-fragility features: our difficulty readings sit near their ceiling.
+20). Of 88 negative results to 20 October, 70 failed a pre-set bar (2 were unclear), including white-box probes, token
+confidence and fragility features: our difficulty readings sit near their ceiling, and what they miss is mostly the
+problem's own fragility (15 of 16 problems labelled for several configurations carry one label; few problems).
 
 ## Contributions
 
@@ -42,8 +44,9 @@ fragility features: our difficulty readings sit near their ceiling.
 
 > **Key findings** (labels as in Appendix F; LOTO = leave-one-template-out)
 > 1. Sampling noise explains about 3% of public non-robust labels. *Computed, public labels* [416].
-> 2. Out of sample the entry gets 60 of 71 public rows and 18 of 24 fresh rows; with 9 rows labelled later, 68.75 of
->    80 over eight reads. *Measured, public LOTO* [509, 618].
+> 2. Out of sample the entry gets 55 of 63 matched public rows and 17 of 22 matched fresh rows (all rows: 60 of 71
+>    and 18 of 24); with 9 rows labelled later, 62.5 of 71 matched rows (all rows: 68.75 of 80 over eight reads).
+>    *Measured, public LOTO; matched rows computed post hoc* [509, 618, 664].
 > 3. Per-case rules scored 16 of 21 (main) and 10 of 14 (small); the nominees 17 and 15, and 9 and 9; one draw each.
 >    *OFFICIAL board* [471, 560, 564, 575, 576].
 > 4. Board-chosen routes gained +3, no more than keep-if-better selection on coin flips (+3.9; 90% range 1 to 8).
@@ -53,10 +56,13 @@ fragility features: our difficulty readings sit near their ceiling.
 >    rows* [509, 544, 618].
 > 6. Readings repeat within a server state and resample across states: one board total varies by about 1.3 cases
 >    (main), so the board cannot rank our versions. *Computed, own logs* [585].
-> 7. White-box probes held signal inside their training pool (nested Spearman 0.346), not on the 28 templates (0.277;
->    bar 0.60). *Local proxy* [499].
+> 7. White-box rating probes failed on the 28 templates (0.277; bar 0.60), and a prompt-state probe that tracks Qwen's
+>    own solve rate (Spearman 0.803) loses 0.25 to 3.25 rows in every use: no White-Box claim. *Local proxy* [499,
+>    652].
 > 8. Written blind, STD's programs gained 0, 2 and 1 7B rows over the entry, not 3. *Measured, public rows* [521, 523,
 >    528].
+> 9. What the difficulty reading misses is mostly the problem's own fragility: by exact text, 15 of 16 problems labelled
+>    for several configurations carry one label (few problems). *Computed, post hoc, public rows* [664].
 
 ## 1. Task, data and scoring
 
@@ -86,6 +92,11 @@ signal whose effect an ablation shows to be substantial [498]; our entries use o
   **hard region** is the 17 labelled templates that a 2,000-token reader never finishes (37 rows, 19 robust) [267b,
   278]. **Fresh rows** are the 24 labelled rows on 12 AIME-2026 templates [446, 509]. The organisers added 12 Skywork
   rows on 15 October, 9 labelled (7 robust) [617].
+- **Matched rows.** 8 of the 71 labelled rows (5 of them non-robust) and 9 of the 80 were labelled on another number
+  instance than the template text every one of our readings used; `calib.json` flags this per row (`own_text`) [661,
+  664]. Where a value has been recomputed on the 63 matched rows (71 of 80; computed, post hoc,
+  `work/miners19/draft32/recompute_matched_v32.out`), we give it with the all-row value; other values on the 71 rows
+  are all-row values, as are the full texts in `report_supplement/`.
 - **Board.** Main: 21 cases, 10 robust [99]; small: 14 cases, 7 robust [270]. Score = 2 × (right robust calls) + 11 −
   (robust calls) on main [329], with 7 in place of 11 on small [327]. With per-call counts the score reveals
   hidden-label information by configuration [329b]; Section 4.1 and Appendix A.2 disclose our use.
@@ -101,7 +112,9 @@ only) [505, 509]; `audit.py` recomputes Section 2.2's table and Section 2.3's se
 The only label-fitted part, the stand-in's logistic rule `decision.json` (10 coefficients; Appendix F.4), was fitted on
 the 71 public rows on 5 October [113], after board uploads began (2 October) [20] but before the board-tested changes of
 5 to 11 October, and is byte-identical from v7 to v95. Refitting it leave-one-template-out changes 1 of 71 answers
-[509]. Seven decisions were made or kept with board feedback; three of them, chosen on 10 to 11 October, change answers:
+[509]; refitting it without the 8 mismatched rows (Section 1) changes no call on the dress read and 0 or 1 on each of
+seven other reads (computed; Appendix E.13). Seven decisions were made or kept with board feedback; three of them,
+chosen on 10 to 11 October, change answers:
 gpt-oss high answered from its prior, Olmo's own run and Skywork's own run (Section 3.2). Together they decide 8 of 21
 main and 6 of 14 small cases. About ten hand-set values (strength codes, caps, K, the own-run thresholds, the prior)
 were chosen after seeing public rows and cannot be cross-validated (Appendix E.13).
@@ -109,12 +122,16 @@ were chosen after seeing public rows and cannot be cross-validated (Appendix E.1
 ### 2.2 Out-of-sample accuracy against the board
 
 v95's rules on its server dress read [440], with `decision.json` refitted per held-out template (public rows;
-template-bootstrap 95% intervals; board predictions are model-based, binomial at the board's class mix) [509]:
+template-bootstrap 95% intervals; board predictions are model-based, binomial at the board's class mix) [509];
+matched rows (Section 1) computed post hoc [664]:
 
 | Public rows, leave-one-template-out | Accuracy | Predicted board | Observed board |
 |---|---|---|---|
+| 63 matched rows (in-sample 56) | 55/63 = 0.873 [0.78, 0.94]; 0.811 at the board's mix | main 17.0 (90%: 13 to 20) | 16, 17 |
+| 22 matched fresh rows | 17/22 = 0.773 [0.64, 0.90]; 0.763 at the board's mix | main 16.0 (11 to 20) | 16, 17 |
+| 31 matched small-model rows | 27/31 = 0.871; 0.872 at the board's mix | small 12.2 (10 to 14) | 10 |
 | All 71 (in-sample 61) | 60/71 = 0.845 [0.75, 0.92]; 0.807 at the board's mix | main 17.0 (90%: 13 to 20) | 16, 17; P(≤ 16) 0.39, P(≤ 17) 0.58 |
-| 24 fresh (AIME-2026) rows | 18/24 = 0.750 [0.59, 0.91] | main 15.7 (11 to 20) | 16, 17; P(≤ 16) 0.58, P(≤ 17) 0.73 |
+| 24 fresh (AIME-2026) rows | 18/24 = 0.750 [0.59, 0.90] | main 15.7 (11 to 20) | 16, 17; P(≤ 16) 0.58, P(≤ 17) 0.73 |
 | 34 small-model rows | 0.817 at the board's mix | small 11.4 (8 to 14) | 10, P(≤ 10) 0.27 |
 
 The four H1 draws on one fixed set of 21 cases (19, 17, 18, 16; SD 1.3) measure reading noise only; a new 21-case set
@@ -124,6 +141,8 @@ rows either way; bar +2), so the small-track gap is not a rule-fit problem [587]
 
 **Nine rows labelled later** (pre-registered [618]): with them, v95's rules get 68.75 of 80 leave-one-template-out,
 pooled over eight reads (0.859; balanced 0.826; always-robust 0.738), 65 to 71 per read.
+On the 71 matched rows of these 80 (computed, post hoc): 62.5 of 71 (0.880; balanced 0.817; always-robust 0.789), 60 to
+64 per read [664].
 
 ![Figure 1: board draws against the audit](figures/board_vs_audit_v29.png)
 
@@ -151,16 +170,18 @@ variants (v113, v114 [544]) are not nominated.
 
 ### 2.4 Where the fresh-row errors are
 
-Leave-one-template-out, v95 makes 11 errors; six fall on fresh rows, and **three of those six (Skywork T13 and T16,
-gpt-oss high T26) sit on board-chosen routes** [509]. The stand-in alone, fitted only on public rows, is also weaker on
-fresh rows: 0.71 against 0.92 on the other 47 (partly class mix) [509]. Fresh problems are also non-robust more often
+Leave-one-template-out, v95 makes 11 errors (8 on matched rows); six fall on fresh rows (5 matched), and **three of
+those six (Skywork T13 and T16, gpt-oss high T26) sit on board-chosen routes** [509, 664], all three on matched rows.
+The stand-in alone, fitted only on public rows, is also weaker on fresh rows: 0.71 against 0.92 on the other 47 (partly
+class mix) [509]. Fresh problems are also non-robust more often
 (Appendix E.12) [446].
 
 ### 2.5 Expectation on new problems
 
 At the announced 170 s per case [537], with the nominee v111 (v95's answers at server speed in the mock; Section 4.5),
 we expect **about 16 of 21 main cases right on new problems (15.7 from fresh rows to 17.0 from all rows; 90% range 11 to
-20)**, not the 19 of our best draw. Other caveats: the fresh rows are public rows the team saw while choosing the
+20)**, not the 19 of our best draw; on matched rows, 16.0 from fresh rows to 17.0 from all [664]. Other caveats: the
+fresh rows are public rows the team saw while choosing the
 hand-set values; leave-one-template-out refits only `decision.json`.
 
 **Frozen prediction** (17 October, before the final; guess ranges) [543]. Accuracy on the final's new problems: main
@@ -262,9 +283,9 @@ calls 29 of 39 rows non-robust, Skywork 11; 15 are) [399] (Appendix E.11).
 | Stand-in alone, main | 0.845 LOTO [272b] | 0.743 [278] | 0.71 [509] | 13 to 16 of 21 | not run |
 | Stand-in alone, small | 0.882 on 34 small rows [277] | — | — | 8 of 14 [284] | not run |
 | Skywork's finishing, as reader of every case | 0.859; AUC 0.89 [269, 387] | 0.784; AUC 0.83 | — | 12 of 21 [299] | not run |
-| v95's rules (main; H2: v95, v111, v115, v121) | 60/71 LOTO [509]; 68.75/80 pooled [618] | 30/37 | 18/24 | 19, 17, 18, 16 [393] | 16, 17, 15, 15 [471, 564, 576, 608] |
+| v95's rules (main; H2: v95, v111, v115, v121) | 60/71 LOTO [509]; 68.75/80 pooled [618]; matched 55/63 and 62.5/71 [664] | 30/37 (matched 26/32) | 18/24 (matched 17/22) | 19, 17, 18, 16 [393] | 16, 17, 15, 15 [471, 564, 576, 608] |
 | v96's rules (small) | 0.817 at the board's mix, 34 small rows [509] | — | 0.762 at the board's mix, 16 rows [509] | 9, 8, 8 [352, 366, 369] | 10, 9, 9, 9 (v96, v112, v116, v122) [471, 560, 575, 608] |
-| Dormant-condition rating (Section 6) | 64/71 [453] | AUC 0.646 [457] | 21/24 [455] | not run | not run |
+| Dormant-condition rating (Section 6) | 64/71 [453] | AUC 0.646 [457]; matched 0.711 (post hoc) [664] | 21/24 [455] | not run | not run |
 
 The stand-in transferred at its hard-region level on main and not on small (Appendix E.8). Public accuracy overstates
 hidden accuracy: the public rows hold many easy problems, the hidden set fewer by every observable we have. Reweighting
@@ -353,12 +374,13 @@ small cases (model-based); a pre-registered threshold refit missed its bar (+4.8
 
 ## 5. Negative results
 
-Appendix D indexes 88 negative results: **70 failed a bar written before their data** (one judged on a model-based
-estimate), 2 were unclear, 13 were tested post hoc or without a bar, and 3 were designed but not built or run.
+Appendix D indexes 88 negative results from work to 20 October (ledger 619): **70 failed a bar written before their
+data** (one judged on a model-based estimate), 2 were unclear, 13 were tested post hoc or without a bar, and 3 were
+designed but not built or run.
 *Pre-registered* means a bar written in our dated, author-controlled ledger before the data came back; none has an
 external timestamp.
 
-### 5.1 The eleven most informative
+### 5.1 The twelve most informative
 
 "Cutoff" is the smallest value each test could tell from chance (two-sided α = 0.05; computed; template clustering
 ignored, so true cutoffs are higher; Appendix D).
@@ -376,6 +398,7 @@ ignored, so true cutoffs are higher; Appendix D).
 | Fresh-regime recalibration, lane R [515] | ≥ 20 of 24 fresh | 24 rows | 19 (base 18) | one row = 0.04 |
 | STD with a 4B program writer (local proxy) [496] | ≥ 20 templates covered | 28 templates | 2 and 0 | — |
 | Token confidence in place of agreement: top-half agreement, weighted agreement, mean lowest window, mean tail; lane CONF (server) [614] | +2 rows; second read +1 | 71 rows | −3, 0, −12, −9; second read −1, 0, −7, −3 | — |
+| Prompt-state probe of Qwen's solve rate, lane WHITEBOX (local proxy; 21 October, after Appendix D's count) [652] | Spearman ≥ 0.40; at most 0.5 rows lost; ablation gain ≥ 2 rows | 28 templates; 80 rows | 0.803; each use loses 0.25 to 3.25 rows | — |
 
 Many failures sit far below their bars (route diversity, v97's arms, W-oss). Others failed without excluding the bar:
 W-sol's and W-think's 95% intervals include 0.60, and the rewrites (7 rows) and lane R (one row is 0.04 of accuracy)
@@ -405,6 +428,16 @@ overlap (Section 5.1) and no probe's policy reached its bar [516]. An input-grad
 claim would have needed a pass and a probe-off ablation on public rows and on at least two board draws per arm (Section
 2.6).
 
+**A prompt-state probe of difficulty** (lane WHITEBOX, 21 October; local proxy; bars written first) [652]. A probe on
+Qwen3.5-4B's prompt states tracks Qwen's own solve rate on the 28 templates (Spearman 0.803; instrument bar at least
+0.40, passed), but no use passes the bars that it lose at most 0.5 rows of 80 and that its ablation gain be at least 2
+rows: as a tie-break it loses 3.25 rows, stacked 0.25, in place of the quick finish 0.38. Bound (post hoc): Qwen's
+measured solve rate in the probe's place still loses 1.5 to 5.5 rows. The probe reads difficulty, which agreement
+already reads better. Its pre-registration file (md5 1f603bda, asserted by the scorer) carries a header time of about
+19:05 UTC but a file time of 18:25:40 UTC, before the state extraction (18:31:18 UTC) and the scores (18:39:05 UTC); we
+read the header time as a clock-label slip (computed from file times). Lane W's pool-internal signal (nested Spearman
+0.346; Appendix E.14) is withdrawn as evidence: it had no same-pipeline null, which fitted probes need [499, 644].
+
 ### 5.3 The common cause
 
 Almost every refuted reading measures the difficulty of the original problem. In our label fit most non-robust labels
@@ -415,12 +448,34 @@ text we cannot see.
 **Six fragility vectors, none surviving** (CRP19; computed, and a local proxy) [609-613, 619]. Three cross-domain
 features (accidental numeric identities, shallow wrong formulas that hit the answer, given numbers never reused in
 gpt-oss low's traces) correlated +0.012, −0.099 and +0.008 with LATENT (Section 6.1; bar +0.20) [610]. A better answer
-key buys little (post hoc): within configuration AUC 0.935 against the deployed reading's 0.929, and three zero-cost key
-proxies change no row at K 32 [611]. Premise reliance and instance-binding depth (a correct write-up's likelihood loss
+key buys little (post hoc): within configuration AUC 0.933 against the deployed reading's 0.914 on matched rows
+(0.935 against 0.929 on all 71), and three zero-cost key proxies change no row at K 32 [611, 664]. Premise reliance
+and instance-binding depth (a correct write-up's likelihood loss
 when a condition is deleted or a number swapped; Qwen3.5-4B, 34 problems) correlated +0.150 and −0.038 (bar −0.30):
 deleting the whole problem changes the write-up's log-likelihood by −0.315 nats per token in its first quarter and
 −0.002 in the rest, so once a write-up restates the problem the scorer stops reading it [619]. Our difficulty readings
 sit near their ceiling.
+
+**What the difficulty reading misses is mostly the problem's own fragility** (computed, post hoc, public rows; Section
+1) [664]. On the 63 matched rows the deployed agreement ranks rows at within-configuration AUC 0.914 (all 71 rows:
+0.929); 30 of the 31 matched easy-template rows are robust, and on the 32 matched hard rows (13 non-robust) it is 0.821
+(0.875), with 7 of 39 (7 of 56) same-configuration pairs misordered: four on gpt-oss high, two on low, one on Skywork.
+80 pooled attempts give 0.897 (0.929) and their key-scored share 0.872 (0.911), inside the 0.821 to 0.936 of single
+held reads. By exact problem text, 15 of the 16 problems labelled for several configurations carry one label (all 80
+labelled rows, each under its own text), and 4 of the 5 with a non-robust label are non-robust for every configuration;
+T10 is the exception (Section 6.2). An oracle calling a row non-robust when the other configurations' mean drop on the
+same text is at least 0.175 would fix 6.4 of our calls per read and break 0.4 (matched rows, eight reads). These are few
+problems, and the oracle uses labels; no in-budget reading of a problem's own fragility from the original passed all its
+pre-set bars (Section 5.1).
+
+**No refuted reading revives on the matched rows** (two pre-registered lanes; computed) [666, 671]. Lane RESCORE
+rescored 50 problem-level readings and lane RESCORE2 25 more (14 with a verdict, 11 information lines), 75 in all, each
+under family-wise control (Westfall-Young minP); none is revived. The one family-wise significant reading, offline STD
+written blind by writer 1 (within-configuration AUC 0.971 on the matched hard rows, adjusted p 0.034), fails a
+label-free part of its own bar and its leave-one-template-out gain bar, and cannot run in 170 s; writer 3 passes its
+whole original bar on the matched rows but not the family-wise control [666].
+Most factory-arm verdicts were already instance-matched, and targeted siblings were never run: untested, not refuted
+[671].
 
 ## 6. Beyond difficulty: dormant conditions
 
@@ -435,16 +490,20 @@ of the 28 texts. On the 41 small-model and gpt-oss low rows the rating reached A
 34; with the entry elsewhere, 64 of 71 and 21 of 24 fresh rows against 61 and 19 [453, 455, 457]. **The stand-in alone
 also scores 64 of 71** (in-sample) and about 11 of the 12 7B rows, so most of the rating's public gain undoes the own
 runs' public loss. By its pre-set bars the test failed (hard-row AUC 0.646 against 0.70; 6 of 7 low rows against 7 of
-7), and the split by configuration was chosen post hoc on two raters [447, 453]. It is not difficulty: Spearman +0.08
-with the stand-in's reading [447].
+7), and the split by configuration was chosen post hoc on two raters [447, 453]. On the 32 matched hard rows
+(Section 1) the five raters' pooled AUC is 0.711 and rater 1's, which the bar used, 0.674 (post hoc); the bar named the
+37 rows, and on the matched rows the rating's leave-one-template-out gain still fails and its rise is within random-drop
+noise [664, 666]. It is not difficulty: Spearman +0.08 with the stand-in's reading [447].
 
 ### 6.2 A worked example: T10's equivalent mutant
 
-On our two harsher expert-style T10 texts, gpt-oss low's wrong answers are exactly those of one mutant of the correct
-method, the one that skips the lower triangle bound (Appendix E.12) [446]. At the original numbers the mutant is
-equivalent (850 = 850), so no reading of the original's answers can tell the model from it. The bound is a dormant
-condition (T10's mean rating 1.8). For benchmark builders: an answer key at the given numbers cannot separate a method
-from its equivalent mutant; only instances where the dormant condition binds can.
+On two harsher expert-style rewrites of T10, gpt-oss low's wrong answers are exactly those of the correct method
+without one check, a lower triangle bound (Appendix E.12) [446]; at the original numbers the check removes nothing (both
+give 850), so the original cannot show the slip (an equivalent mutant). gpt-oss medium makes the same slip yet is
+labelled robust, so our rewrites are harsher than the organisers' [318]. The bound is a dormant condition (T10's mean
+rating 1.8). T10 is also the one problem labelled for several configurations whose label splits: low non-robust; high,
+medium and Skywork robust (Section 5.3) [664]. For benchmark builders: an answer key at the given numbers cannot
+separate a method from its equivalent mutant; only instances where the dormant condition binds can.
 
 ### 6.3 In-hour and computed versions
 
@@ -505,8 +564,8 @@ failures to carrying the original method over, the mechanism of Section 6.2.
 Whether interpretations predict behaviour on unseen data is asked by Li et al. (2025) and, for internal causal
 mechanisms, by Huang et al. (2025b). Linear probes on the last prompt token that predict a model's own success before
 generation (Lugoloobi et al., 2026) are the nearest prior work to our probe baseline. Our audit applies the same
-question to a whole entry, and our probes add a negative case: a signal that holds inside a rated pool and does not
-transfer to new templates.
+question to a whole entry, and our probes add negative cases: rating probes that do not transfer to new templates,
+and a difficulty probe that adds nothing to a behavioural reading (Section 5.2).
 
 **Adaptive overfitting.** Section 2.3's selection null is a small case of adaptive data analysis, which the reusable
 holdout (Dwork et al., 2015) and the Ladder leaderboard (Blum and Hardt, 2015) guard against. Studies of reused test
@@ -520,6 +579,8 @@ an equivalent mutant (Papadakis et al., 2015) and a case of coincidental correct
 
 ## 8. Limitations
 
+- **Instance mismatch**: 8 of the 71 labelled rows (9 of 80) were labelled on other numbers than the text we read;
+  values not marked as matched are on all rows (Section 1) [661, 664].
 - **Reading noise measured coarsely** (3 server states, 12 flips; Section 2.6); one H2 draw per file, without
   per-configuration counts; v115's log not archived [471, 556-564, 575, 576, 585].
 - **Fresh rows are not unseen** (Section 2.5).
@@ -551,6 +612,8 @@ an equivalent mutant (Papadakis et al., 2015) and a case of coincidental correct
    October would have cost our H1 nominee 6 of 21 cases (mock) [466] (Section 4.3); a fault-injection pre-mortem found
    three bugs reachable on the contest server (Section 4.5).
 5. **Profile the decode step, and gate fast paths with an in-run check and a sabotage arm** (Section 4.4).
+6. **Check that each labelled row's text is the text you read** (Section 1): 8 of our 71 labelled rows were not, and 5
+   of them are non-robust [664].
 
 ## 10. Reproducibility
 
@@ -569,7 +632,10 @@ server logs (`training/runs/`; Appendix F.8).
 | Scored per-case files (H2) | `aimo_v95_main.zip` (`sub_v114m`); `aimo_v96_small.zip` (`sub_v115s`) | 04460073a0d358ff3be70185906d8f05; 5d7ec8f10baf51e91d7a789cfdbb7e6c [469] | 16 of 21; 10 of 14 [471] |
 
 **Evaluated entries**: Codabench 1003729 (v115, main) and 1003727 (v116, small) [574]; by the decision rule of Section
-2.5 [568], the frozen ranges apply to them if they alone are scored.
+2.5 [568], the frozen ranges apply to them if they alone are scored. Their 7,200-token Olmo cap [573] costs about 0.6 to
+0.9 main and 1.3 to 2.1 small cases per 40 new problems against v111 and v112 (model-based; a later estimate than
+Section 4.5's) [654]. These ids may still change after the organisers' answers (v111 and v112 if 170 s is an average)
+or a pending server timing test of an Olmo variant [657, 663].
 
 **Nomination plan** (`NOMINATION_SHEET.md`, 20 October; the procedure is not yet published [571]): with several files
 per track, v111 and v115 (main), v116 and v112 (small); with one, v115 and v116 unless the organisers say 170 s is an
@@ -862,7 +928,13 @@ four arms are one row).
 Not counted: the five single-read reversals of Appendix E.5 (each failed its bar on a second read; we report them as a
 measurement lesson), the rejected adoption decisions of Appendix C, the own readings of Appendix E.2, lane X's
 consistency model and X6's post hoc hand bench (Appendix E.14; X6's blind read is counted in group 8), and the pooled
-blind-writer read of Appendix E.16 (information only by its pre-registration).
+blind-writer read of Appendix E.16 (information only by its pre-registration). The count closes at ledger 619 (20
+October, 13:04 UTC). Results after it are not counted, among them lane REFIT8 [621], a refit of `decision.json` on
+eight reads that failed its pre-set bar (+0.25 rows against +1.0); lane SELFPERT [631], killed at the design stage
+because at the caps that fit the time budget nearly every answer of the thinking models is forced at the cap; and the
+lanes from 21 October (ledger 640 on), such as WHITEBOX (Section 5.2) [652] and the rescoring of refuted readings on the
+matched rows (Section 5.3) [666, 671]. Targeted siblings, counted in group 6 as not built, were never run: untested, not
+refuted [671].
 
 **The significance-cutoff column of Section 5.1** (computed in this report; normal approximations that ignore template
 clustering, so the true cutoffs are higher): for an AUC, the null SD is sqrt((n1 + n2 + 1) / (12 n1 n2)), 0.096 at 19
@@ -1135,8 +1207,8 @@ of groups 1 to 5: `report_supplement/E12_rounds_14_to_16.md`.* Findings:
   seen the 71 public labels [480]; the five raters saw only problems and answers. Mean LATENT by template: supplement
   (addendum of 20 October, draft 29). Against bars set before raters 3 to 5 [451, 453]: M1 (low 7 of 7) failed at 6 of
   7; M2 (small models + low ≥ 36 of 41) passed, 37; M3 (≥ 63 of 71 and fresh ≥ 20 of 24) passed, 64 and 21; M4 (rater
-  agreement) passed, 0.661. Lane A's own bar, hard-row AUC ≥ 0.70, failed at 0.646 [447, 457]. The in-hour versions all
-  failed (Section 6.3).
+  agreement) passed, 0.661. Lane A's own bar, hard-row AUC ≥ 0.70, failed at 0.646 [447, 457] (0.711 on the 32
+  matched hard rows, post hoc; Section 6.1). The in-hour versions all failed (Section 6.3).
 - **Groups 1 to 5** (19 negative results, named in Appendix D): affordable small-model own runs, gpt-oss high and
   transfer fields, gpt-oss low's other readings, edit-side readings, and a cheap dormant-condition rater.
 
@@ -1185,6 +1257,15 @@ pre-iteration nominee v22. On the main board those three changed 5 answers (2 hi
 The 11 leave-one-template-out errors are T05 Qwen and DeepSeek, T19 DeepSeek, T16 and T13 Skywork, T08 Olmo, T25 and T26
 high, T09 and T10 low, and T12 medium; six fall on fresh rows, three of those (T16 and T13 Skywork, T26 high) on
 board-chosen routes [509].
+
+**On the 63 matched rows** (Section 1; computed, post hoc; `work/miners19/draft32/recompute_matched_v32.out`) [664]: the
+same leave-one-template-out run gets 55/63 = 0.873 [0.780, 0.944] (in-sample 56), hard 26/32, easy 29/31, fresh 17/22
+= 0.773 [0.636, 0.905] and small-model rows 27/31 = 0.871 [0.742, 0.969]; at the board's class mix 0.811, 0.763 and
+0.872, predicting 17.0 (90%: 13 to 20), 16.0 (11 to 20) and 12.2 (10 to 14). Three of the 11 errors are on mismatched
+rows (T05 and T19 DeepSeek, T12 medium). Refitting `decision.json` without the 8 mismatched rows changes no call on the
+dress read, in-sample or leave-one-template-out; in-sample it changes 0 or 1 call on each of the seven other reads, and
+the leave-one-template-out refit on 80 rows changes 0, 0, 0, 0, 2, 4, 0 and 0 calls over the eight reads (lane
+RESCORE agrees [666]).
 
 **Board against public** (model-based: each hidden case right with probability p, p from the bootstrap; binomial over 21
 or 14 cases):
@@ -1240,7 +1321,9 @@ Other results of rounds 16 and 17:
   passes W1 to W4 gets an entry whose ablation is the same entry with the probe switched off; if everything fails, keep
   v95 / v96. The read gave that last branch [555].
 - **Lane Q** (a 4B program writer, local proxy) covered 2 and 0 of 28 templates against a bar of 20: the writer does not
-  terminate [496]. **Lanes W, W-sol and W-think** (local proxy) are Section 5.2 [499, 506, 516]. **Lane X** [508]: X1 to
+  terminate [496]. **Lanes W, W-sol and W-think** (local proxy) are Section 5.2 [499, 506, 516]; the pool-internal
+  signal that the supplement file reports for lane W (nested Spearman 0.346) is withdrawn (Section 5.2). **Lane X**
+  [508]: X1 to
   X4 failed, were killed or reversed; X5, a classification-consistency model, puts the headroom on the 52 rows of
   DeepSeek, Qwen and gpt-oss medium and high at about 5 rows at the assumed label noise and about 2 at twice that noise;
   X6 is read blind in Appendix E.16. **Lane P** [481]: spare per-case time is worth an estimated +0.06 to +0.10 case on
@@ -1364,8 +1447,8 @@ with the bars as written, every read's counts and the CRP19 tables: `report_supp
 - **CRP19** [609-613, 619]. Bars written first: Spearman with LATENT at least +0.20 (lane X; for the two problem-text
   features also an AUC of at least 0.70 on the 71 rows) or at most −0.30 (premise lanes), with sabotage arms that must
   lose. On the 71 rows the three lane-X features reach within-configuration AUC 0.47 to 0.62, against difficulty's 0.935
-  [610]. In the premise lanes two sabotage arms correlated more strongly than the real arm, so the instrument does not
-  measure premise use [619].
+  [610] (0.933 on the matched rows; Section 5.3). In the premise lanes two sabotage arms correlated more strongly than
+  the real arm, so the instrument does not measure premise use [619].
 
 ## Appendix F. Glossary, number labels and reproducibility details
 
@@ -1520,7 +1603,7 @@ not in `calib.json` [617]):
 
 The table-to-script map, one row per table or number of this report with its script, input and ledger entries, is in
 `report_supplement/F7_table_to_script_map.md`. Every decision and bar is in our research ledger, refuted entries kept (a
-redacted extract on request; Section 10). Rows for 16 to 20 October follow. Files first written to a session scratchpad,
+redacted extract on request; Section 10). Rows from 16 October follow. Files first written to a session scratchpad,
 which the operating system clears, are copied to `work/evidence_scratch_20261017/` [543].
 
 | Table or number | Script → output | Ledger |
@@ -1543,6 +1626,10 @@ which the operating system clears, are copied to `work/evidence_scratch_20261017
 | §5.1 and E.18: lane CONF | `work/miners19/laneConf/parse_conf.py`, `score_conf.py` on `runs/v124r_main_1004374.log` → `score_v124r_1004374.out` | [583, 593-607, 614] |
 | §5.3 and E.18: CRP19 | `work/miners19/crp19/X/coincidence.py`, `deadinput.py`, `keyscored.py` (each → `.out`); `crp19/premise/premise.py` → `premise.out` | [609-613, 619] |
 | §2.6 and §10: seed variants | `work/miners19/seedvar/build_seedvar.py`; `check_seedvar.py` → `check_seedvar.out` | [588, 608] |
+| §1, §2, §3.4, §5.3, §6.1 and E.13: matched rows (21 October) | `work/miners19/draft32/recompute_matched_v32.py` → `recompute_matched_v32.out` (read-only, held files) | [661, 664] |
+| §5.1 and §5.2: lane WHITEBOX, re-run read-only | `work/miners19/draft32/verify_whitebox_v32.py` → `verify_whitebox_v32.out` (runs `work/miners20/whitebox/score_wb.py` and `posthoc_wb.py`) | [652] |
+| §5.3 and Appendix D: refuted readings rescored on matched rows | `work/miners20/rescore/rs3_score.py` → `rs3_score.out`; `work/miners20/rescore2/rs3b_score.py` → `rs3b_score.out` | [666, 671] |
+| §10 and Appendix D: the Olmo cap's cost, the count's cutoff | `work/miners19/draft32/misc_checks_v32.py` → `misc_checks_v32.out` | [573, 619, 654] |
 
 ### F.8 Release folder
 

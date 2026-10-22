@@ -1,0 +1,158 @@
+# recompute_matched_v32.py: draft 32 numbers on instance-matched rows (computed, post hoc, held files only; nothing OFFICIAL)
+   md5 hf/train-main-v2.parquet   3394dba3f01210c6f653ae0bea9f7de5
+   md5 fa8af758 parquet           fc7e748697f128eb3dc09d0c3e452946
+   md5 calib.json (v135m)         d5b98e21169c0ae100c14009340b7fca
+   md5 calib.json (v101m)         d5b98e21169c0ae100c14009340b7fca
+   md5 dress log                  23837f31f6b3d477177944196cb287a8
+   md5 x_pool.json                3551d1b5fe6cc86189334e913952d66e
+   md5 g_common.py                3329cc5816cacb75426a502d2f9cda0f
+   md5 adv_load.py                650349a921ff090759df1f3771859bfa
+check: the sha1 match equals calib.json's own_text flag (build_calib.py: row problem == the template's first problem) on 82/82 rows; the same calib.json (md5 d5b98e21) is in every bundle from sub_v2m (2 October) on
+
+## 0. instance-matched rows (key = sha1(problem text)[:12]; read text = the template text in calib.json that every read used)
+rows whose text differs from the read text: 11 of 94 parquet rows: T10 Olmo NR, T05 DeepSeek R, T19 DeepSeek NR, T12 high R, T19 high unlabelled, T14 high unlabelled, T12 medium R, T22 medium NR, T24 medium NR, T14 medium NR, T19 Skywork NR (added 15 Oct)
+labelled: 8 of 71 (old rows) mismatched -> 63 matched; 9 of 80 (with the 9 labelled rows of 15 Oct) mismatched -> 71 matched
+   mismatched labelled rows: T10 Olmo NR, T05 DeepSeek R, T19 DeepSeek NR, T12 high R, T12 medium R, T22 medium NR, T24 medium NR, T14 medium NR, T19 Skywork NR (added 15 Oct)
+   T10 Olmo NR                        labelled-text key 79f835e18839 vs read-text key 9fc9278a2ba9; first numbers ['1628', '932'] vs ['200', '225']
+   T05 DeepSeek R                     labelled-text key de9f9b5f7e8e vs read-text key 481b6519bb1d; first numbers ['1', '79', '1', '2', '1', '2', '6'] vs ['4', '39', '2', '2', '8', '12']
+   T19 DeepSeek NR                    labelled-text key d9d2d9443c3b vs read-text key 403db665a092; first numbers ['4', '16', '8', '13', '52', '26', '288', '0'] vs ['14', '44', '30', '9', '144', '255', '243', '0']
+   T12 high R                         labelled-text key 6e90d790a64a vs read-text key 9bb61479c8d4; first numbers ['1', '1', '1', '1', '1024', '1', '2', '3'] vs ['1', '1', '1', '1', '3272', '1', '2', '3']
+   T12 medium R                       labelled-text key 3d78dd398f9c vs read-text key 9bb61479c8d4; first numbers ['1', '1', '1', '1', '445', '1', '2', '3'] vs ['1', '1', '1', '1', '3272', '1', '2', '3']
+   T22 medium NR                      labelled-text key 1d125ace76dd vs read-text key 67739591a861; first numbers ['27', '3', '9', '1', '9', '9', '3', '3'] vs ['27', '3', '9', '1', '9', '9', '3', '3']
+   T24 medium NR                      labelled-text key 39a92fc6983e vs read-text key f088e93bef93; first numbers ['1', '2', '0', '0', '0', '1', '10', '10'] vs ['1', '2', '0', '0', '0', '1', '10', '10']
+   T14 medium NR                      labelled-text key 941b97f20d3e vs read-text key 445fbf067040; first numbers ['1', '1', '1000', '1000', '2024'] vs ['1', '1', '617', '617', '3520']
+   T19 Skywork NR (added 15 Oct)      labelled-text key d9d2d9443c3b vs read-text key 403db665a092; first numbers ['4', '16', '8', '13', '52', '26', '288', '0'] vs ['14', '44', '30', '9', '144', '255', '243', '0']
+matched 71-row set: 63 rows (14 NR); mismatched 8 rows, of them NR 5
+
+## 1. within-configuration AUC (value, rows, non-robust rows, pairs): matched rows [all 71 rows]
+deployed agreement, dress read K 32      all 0.914 (63, 14, 105) [0.929 (71, 19, 155)] | hard 0.821 (32, 13, 39) [0.875 (37, 18, 56)] | easy 1.000 (31, 1, 6) [1.000 (34, 1, 6)]
+agreement, 80 pooled attempts            all 0.943 (63, 14, 105) [0.948 (71, 19, 155)] | hard 0.897 (32, 13, 39) [0.929 (37, 18, 56)] | easy 1.000 (31, 1, 6) [1.000 (34, 1, 6)]
+key-scored accuracy, 80 pooled attempts  all 0.933 (63, 14, 105) [0.935 (71, 19, 155)] | hard 0.872 (32, 13, 39) [0.911 (37, 18, 56)] | easy 1.000 (31, 1, 6) [1.000 (34, 1, 6)]
+hard rows: 80 pooled attempts (2.5x K 32) add +0.077 AUC [+0.054]; the key-scored share +0.051 [+0.036]
+single held reads (K 8 or 16), hard rows, matched: 0.821, 0.885, 0.821, 0.923, 0.936, 0.833; range 0.821 to 0.936 [all: range 0.875 to 0.955]
+easy matched rows: 31, robust 30; hard matched rows: 32, NR 13
+
+misordered same-configuration pairs, deployed agreement (dress read K 32):
+   hard, matched: pairs 39, misordered 7, ties 0, AUC 0.821
+      Skywork   pairs   1 misordered 1 ties 0 ['T13 NR 0.647 > T16 R 0.562']
+      high      pairs  14 misordered 4 ties 0 ['T25 NR 0.169 > T22 R 0.073', 'T25 NR 0.169 > T23 R 0.093', 'T26 NR 0.262 > T22 R 0.073', 'T26 NR 0.262 > T23 R 0.093']
+      low       pairs   4 misordered 2 ties 0 ['T10 NR 0.762 > T09 R 0.655', 'T11 NR 0.708 > T09 R 0.655']
+      stand-in configurations (Qwen, DeepSeek, low, medium): pairs 24, misordered 2; others: pairs 15, misordered 5
+   hard, all 71 (draft 31: 56 pairs, 7 misordered): pairs 56, misordered 7, ties 0, AUC 0.875
+      Skywork   pairs   1 misordered 1 ties 0 ['T13 NR 0.647 > T16 R 0.562']
+      high      pairs  14 misordered 4 ties 0 ['T25 NR 0.169 > T22 R 0.073', 'T25 NR 0.169 > T23 R 0.093', 'T26 NR 0.262 > T22 R 0.073', 'T26 NR 0.262 > T23 R 0.093']
+      low       pairs   4 misordered 2 ties 0 ['T10 NR 0.762 > T09 R 0.655', 'T11 NR 0.708 > T09 R 0.655']
+      stand-in configurations (Qwen, DeepSeek, low, medium): pairs 41, misordered 2; others: pairs 15, misordered 5
+   all, matched: pairs 105, misordered 9, ties 0, AUC 0.914
+      Qwen      pairs  32 misordered 2 ties 0 ['T11 NR 0.708 > T05 R 0.554', 'T13 NR 0.647 > T05 R 0.554']
+      Skywork   pairs   2 misordered 1 ties 0 ['T13 NR 0.647 > T16 R 0.562']
+      high      pairs  24 misordered 4 ties 0 ['T25 NR 0.169 > T22 R 0.073', 'T25 NR 0.169 > T23 R 0.093', 'T26 NR 0.262 > T22 R 0.073', 'T26 NR 0.262 > T23 R 0.093']
+      low       pairs  10 misordered 2 ties 0 ['T10 NR 0.762 > T09 R 0.655', 'T11 NR 0.708 > T09 R 0.655']
+      stand-in configurations (Qwen, DeepSeek, low, medium): pairs 72, misordered 4; others: pairs 33, misordered 5
+   all, all 71: pairs 155, misordered 11, ties 0, AUC 0.929
+      DeepSeek  pairs  21 misordered 2 ties 0 ['T19 NR 0.819 > T05 R 0.554', 'T13 NR 0.647 > T05 R 0.554']
+      Qwen      pairs  32 misordered 2 ties 0 ['T11 NR 0.708 > T05 R 0.554', 'T13 NR 0.647 > T05 R 0.554']
+      Skywork   pairs   2 misordered 1 ties 0 ['T13 NR 0.647 > T16 R 0.562']
+      high      pairs  26 misordered 4 ties 0 ['T25 NR 0.169 > T22 R 0.073', 'T25 NR 0.169 > T23 R 0.093', 'T26 NR 0.262 > T22 R 0.073', 'T26 NR 0.262 > T23 R 0.093']
+      low       pairs  10 misordered 2 ties 0 ['T10 NR 0.762 > T09 R 0.655', 'T11 NR 0.708 > T09 R 0.655']
+      stand-in configurations (Qwen, DeepSeek, low, medium): pairs 113, misordered 6; others: pairs 42, misordered 5
+   band 0.56 to 0.82, hard rows, matched: 8 robust, 7 NR; pairs 56, same configuration 3, cross configuration 53; same exact problem text 2, same template 2, different problem text 54; NR rows: T11 Qwen, T13 Qwen, T13 Skywork, T13 Olmo, T13 DeepSeek, T10 low, T11 low
+   band 0.56 to 0.82, hard rows, all 71: 8 robust, 9 NR; pairs 72, same configuration 3, cross configuration 69; same exact problem text 2, same template 4, different problem text 70; NR rows: T11 Qwen, T13 Qwen, T13 Skywork, T10 Olmo, T13 Olmo, T19 DeepSeek, T13 DeepSeek, T10 low, T11 low
+
+## 2. the entry (v95 rules), leave-one-template-out on the dress read (lane G run_policy; decision.json refitted per fold)
+LOTO right: matched 55/63 [all 60/71]; in-sample (shipped decision.json) matched 56/63 [all 61/71]
+   hard         matched 26/32 [all 30/37]
+   easy         matched 29/31 [all 30/34]
+   fresh        matched 17/22 [all 18/24]
+   small-model  matched 27/31 [all 28/34]
+   errors on mismatched rows: T05 DeepSeek, T19 DeepSeek, T12 medium; right on mismatched rows: T10 Olmo, T12 high, T22 medium, T24 medium, T14 medium
+   LOTO errors on fresh, matched: 5; on board-chosen routes 3: T05 Qwen (stand-in), T16 Skywork (own run (board-chosen)), T13 Skywork (own run (board-chosen)), T26 high (prior (board-chosen)), T10 low (stand-in)
+   LOTO errors on fresh, all 24: 6; on board-chosen routes 3: T05 Qwen (stand-in), T16 Skywork (own run (board-chosen)), T13 Skywork (own run (board-chosen)), T05 DeepSeek (stand-in), T26 high (prior (board-chosen)), T10 low (stand-in)
+   errors on matched rows: T05 Qwen R, T16 Skywork R (hard), T13 Skywork NR (hard), T08 Olmo R, T25 high NR (hard), T26 high NR (hard), T09 low R (hard), T10 low NR (hard)
+key-scored share in place of agreement (ceiling), LOTO: right matched 56/63 [all 62/71]; hard matched 27/32 [all 32/37]; rows changed: T19 DeepSeek fixed (mismatched row); T10 low fixed
+   key fixes on matched hard rows: 1 [all hard rows: 2]; breaks 0
+
+## 3. Table 1 on matched rows [all rows]: LOTO accuracy, template-bootstrap 95% interval (10,000, seed 17), predicted board
+   all labelled     matched 55/63 = 0.873 [0.7797, 0.9444]; board-mix (10 R / 11 NR) 0.811 -> predicted 17.0 of 21 (90% 13 to 20)
+                    all     60/71 = 0.845 [0.7458, 0.9221]; board-mix (10 R / 11 NR) 0.807 -> predicted 17.0 of 21 (90% 13 to 20)
+   fresh AIME-2026  matched 17/22 = 0.773 [0.6364, 0.9048]; board-mix (10 R / 11 NR) 0.763 -> predicted 16.0 of 21 (90% 11 to 20)
+                    all     18/24 = 0.750 [0.5909, 0.9048]; board-mix (10 R / 11 NR) 0.747 -> predicted 15.7 of 21 (90% 11 to 20)
+   small-model      matched 27/31 = 0.871 [0.7419, 0.9688]; board-mix (7 R / 7 NR) 0.872 -> predicted 12.2 of 14 (90% 10 to 14)
+                    all     28/34 = 0.824 [0.6667, 0.9459]; board-mix (7 R / 7 NR) 0.817 -> predicted 11.4 of 14 (90% 8 to 14)
+   80 rows, 8 reads pooled, LOTO-80: matched 62.50/71 = 0.880 (per read 60 to 64: 62 64 64 63 64 60 60 63; balanced 0.817; always-robust 56/71 = 0.789; NR 15)
+                    all     68.75/80 = 0.859 (per read 65 to 71; balanced 0.826; always-robust 0.738)
+
+## 4. decision.json refitted on the matched rows only (63 of 71): does any call change?
+   full            decision.json beta [-1.27, -1.782, -1.075, -1.212] -> matched-only refit [-1.525, -1.874, -0.989, -1.153]
+   agreement_only  decision.json beta [-0.858, -2.179, -1.278] -> matched-only refit [-1.121, -2.245, -1.204]
+   finish_only     decision.json beta [-0.779, -1.873, -0.53] -> matched-only refit [-0.897, -1.876, -0.519]
+      oss_low_r4+qwen_quick_r2           full fit -> matched-only fit                 T09 medium R: R -> N (breaks)
+      oss_low_m2+qwen_quick_m            full fit -> matched-only fit                 T09 medium R: R -> N (breaks)
+      oss_low_m2+qwen_quick_m            LOTO-80 -> LOTO-80 without mismatched rows   T13 Qwen NR: N -> R (breaks)
+      oss_low_m2+qwen_quick_m            LOTO-80 -> LOTO-80 without mismatched rows   T13 DeepSeek NR: N -> R (breaks)
+      v124r 94286138+dress qfin          full fit -> matched-only fit                 T09 medium R: R -> N (breaks)
+      v124r 94286138+dress qfin          LOTO-80 -> LOTO-80 without mismatched rows   T01 Qwen R: N -> R (fixes)
+      v124r 94286138+dress qfin          LOTO-80 -> LOTO-80 without mismatched rows   T01 DeepSeek R: N -> R (fixes)
+      v124r 94286138+dress qfin          LOTO-80 -> LOTO-80 without mismatched rows   T01 low R: N -> R (fixes)
+      v124r 94286138+dress qfin          LOTO-80 -> LOTO-80 without mismatched rows   T09 medium R: R -> N (breaks)
+      v124r 681617219+dress qfin         full fit -> matched-only fit                 T21 medium R: R -> N (breaks)
+   calls on the 80 rows, full-fit decision.json vs matched-only refit, per read: [0, 0, 1, 0, 1, 1, 1, 0] (changed calls)
+   calls on the 80 rows, LOTO-80 refit with vs without the mismatched rows in training, per read: [0, 0, 0, 0, 2, 4, 0, 0]
+   dress read, in-sample: decision.json vs matched-only refit, calls changed on the 71 rows 0
+   dress read, LOTO on 71 trained on matched rows only: calls changed 0; right on matched 55/63
+   decision boundary on a grid of readings (agreement 0 to 1 by 0.001 x quick finish 0 / 1 x strength 1 / 2 / 3; and the agreement-only model): grid points whose call changes 350 of 9009
+   agreement threshold (strength, quick finish): decision.json -> matched-only refit: (1, 0.0) 0.802 -> 0.782; (1, 1.0) 0.429 -> 0.475; (2, 0.0) 0.550 -> 0.567; (2, 1.0) 0.177 -> 0.261; (3, 0.0) 0.298 -> 0.353; (3, 1.0) none -> 0.046; (1, agreement_only) 0.734 -> 0.724; (2, agreement_only) 0.516 -> 0.537; (3, agreement_only) 0.299 -> 0.350
+
+## 5. labels by exact problem text (all 80 labelled rows, each under its own labelled text)
+   80 labelled rows: 33 distinct problem texts; multi-configuration 16; one label 15 of 16; with an NR label 5, NR for all their configurations 4 of 5
+      T10 text 9fc9278a2ba9 (read text): high R, low NR, medium R, Skywork R
+      T11 text 34f58ec1c234 (read text): Qwen NR, low NR, Skywork NR
+      T13 text ca873e52fbda (read text): Qwen NR, Skywork NR, Olmo NR, DeepSeek NR
+      T19 text d9d2d9443c3b (other instance): DeepSeek NR, Skywork NR
+      T26 text c902e67888c3 (read text): high NR, medium NR
+   71 labelled rows (82-row file): 33 distinct problem texts; multi-configuration 15; one label 14 of 15; with an NR label 4, NR for all their configurations 3 of 4
+      T10 text 9fc9278a2ba9 (read text): high R, low NR, medium R
+      T11 text 34f58ec1c234 (read text): Qwen NR, low NR
+      T13 text ca873e52fbda (read text): Qwen NR, Skywork NR, Olmo NR, DeepSeek NR
+      T26 text c902e67888c3 (read text): high NR, medium NR
+   single-configuration problem texts with an NR label (80 rows): T10 Olmo (other instance), T12 Qwen, T14 Qwen, T14 medium (other instance), T20 DeepSeek, T22 medium (other instance), T24 medium (other instance), T25 high, T28 medium
+
+## 5b. text-level oracle: NR iff the OTHER configurations' rows with the same exact text have mean max_drop >= 0.175 (rows without another configuration on their text keep the entry's call); against the deployed LOTO-80 calls of the 8 reads
+   others = every parquet row (labelled or not): defined on 62 of 71 matched rows; per read fixes [6, 5, 5, 6, 6, 9, 8, 6] breaks [0, 0, 0, 0, 1, 1, 0, 1]; mean fixes 6.38, breaks 0.38 on matched rows [all 80: fixes 7.12, breaks 0.38]
+      oracle alone on its defined matched rows: right 61 of 62
+   others = labelled rows only: defined on 61 of 71 matched rows; per read fixes [6, 5, 5, 6, 6, 9, 8, 6] breaks [0, 0, 0, 0, 1, 1, 0, 1]; mean fixes 6.38, breaks 0.38 on matched rows [all 80: fixes 7.12, breaks 0.38]
+      oracle alone on its defined matched rows: right 60 of 61
+
+## 6. LATENT ratings: pooled AUC on hard rows (a6_score.py's AUC; higher rating -> non-robust)
+   rater 1 (the pre-set A6 bar)   hard rows: matched 0.674 (32 rows, 13 NR) [all 0.646 (37 rows)]; all rows matched 0.777 [0.735]
+   mean of the five raters        hard rows: matched 0.711 (32 rows, 13 NR) [all 0.646 (37 rows)]; all rows matched 0.853 [0.783]
+
+## 7. PAPER VALUES (draft 32 wording; matched value first, all-row value in square brackets; rounding as printed)
+   abstract AUC       AUC 0.914 [0.929]
+   hard AUC           0.821 [0.875]
+   pooled hard        0.897 [0.929]
+   key hard           0.872 [0.911]
+   abstract ceiling   raise it to at most 0.897
+   single reads       the 0.821 to 0.936 of single held reads
+   single reads all   0.875 to 0.955
+   easy               30 of 31 rows are robust
+   easy all           33 of 34
+   hard rows          (32 rows, 13 non-robust)
+   hard rows all      (37 rows, 18 non-robust)
+   pairs              7 of 39 [7 of 56] same-configuration pairs
+   stand-in pairs     2 of 24 [2 of 41] on the stand-in's
+   key fix            the key fixes 1 of 32 hard rows [2 of 37]
+   LOTO abstract      gets 55 of 63 [60 of 71] public and 17 of 22 [18 of 24] fresh rows
+   in-sample          (in-sample 56, 61)
+   T1 all             55/63 = 0.873 (0.78 to 0.94) | 60/71 = 0.845
+   T1 fresh           17/22 = 0.773 (0.64 to 0.90) | 18/24 = 0.750
+   T1 board all       main 17.0 (13 to 20)
+   T1 board fresh     main 16.0 (11 to 20)
+   T1 board small     small 12.2 (10 to 14)
+   T1 small mix       0.872 | 0.817
+   T1 80              62.5/71 = 0.880 (60 to 64 per read; balanced 0.817; always-robust 0.789) | 68.75/80 = 0.859
+   refit              changes no call on the Figure 1 read (0 or 1 on seven others
+   by text            15 of the 16; 4 of the 5
+   oracle             would fix 6.4 of our calls per read and break 0.4
+   raters             0.646 (0.711 on the 32 matched rows
+   mismatch           8 of the 71 labelled rows (9 of 80)

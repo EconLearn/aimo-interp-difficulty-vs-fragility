@@ -1,0 +1,18 @@
+# Figure 1, draft 32: agreement by label, easy vs hard templates, mismatched rows hollow (computed, post hoc; held files only)
+rows 71 (19 non-robust); hard 37 rows on 17 templates (18 non-robust); easy 34 rows on 10 templates (33 robust)
+instance-matched rows 63 (14 non-robust); hard 32 (13 non-robust); easy 31 (30 robust)
+mismatched rows (hollow): T10 Olmo non-robust, T05 DeepSeek robust, T19 DeepSeek non-robust, T12 high robust, T12 medium robust, T22 medium non-robust, T24 medium non-robust, T14 medium non-robust
+
+## within-configuration AUC (value, rows, non-robust rows, within-configuration pairs): matched [all]
+deployed agreement, dress read K 32        all 0.914 (63, 14, 105) [0.929 (71, 19, 155)] | hard 0.821 (32, 13, 39) [0.875 (37, 18, 56)] | easy 1.000 (31, 1, 6) [1.000 (34, 1, 6)]
+agreement, 80 pooled attempts              all 0.943 (63, 14, 105) [0.948 (71, 19, 155)] | hard 0.897 (32, 13, 39) [0.929 (37, 18, 56)] | easy 1.000 (31, 1, 6) [1.000 (34, 1, 6)]
+key-scored accuracy, 80 pooled attempts    all 0.933 (63, 14, 105) [0.935 (71, 19, 155)] | hard 0.872 (32, 13, 39) [0.911 (37, 18, 56)] | easy 1.000 (31, 1, 6) [1.000 (34, 1, 6)]
+single held reads (K 8 or 16), hard rows: matched range 0.821 to 0.936 [all 0.875 to 0.955]
+
+## the entry (v95 rules) leave-one-template-out on the dress read (lane G run_policy)
+right: matched 55/63 [all 60/71]; hard matched 26/32 [all 30/37]
+key-scored share in place of agreement (ceiling), rows changed: T19 DeepSeek fixed (mismatched); T10 low fixed
+hard rows with agreement 0.56 to 0.82, matched: 8 robust, 7 non-robust (information; draft 32 draws no band)
+hard rows with agreement 0.56 to 0.82, all: 8 robust, 9 non-robust (information; draft 32 draws no band)
+
+saved figures/agreement_by_label_v32.png
