@@ -19,7 +19,7 @@ import sys
 
 sys.dont_write_bytecode = True
 HERE = os.path.dirname(os.path.abspath(__file__))
-AIMO = "<AIMO_DIR>"
+AIMO = os.environ.get("AIMO_DIR", ".")  # folder holding hf/ and work/
 WORK = os.path.join(AIMO, "work")
 sys.path.insert(0, os.path.join(WORK, "miners17", "laneG"))
 sys.path.insert(0, os.path.join(WORK, "miners17", "laneX"))
