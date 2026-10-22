@@ -1,0 +1,119 @@
+PRE-REGISTRATION: a difficulty-preserving null for the 'same label' claim, a leave-one-configuration-out label check,
+and the intervals of draft 37 of the four-page report
+Written 2026-10-22 ~09:40 UTC, BEFORE any of the computations below is run. Its md5 is recorded in
+PREREG_samelabel_difficulty.txt.md5 before samelabel_difficulty.py or intervals_v37.py exists; both scripts print this
+file's md5 and refuse to run if it differs.
+
+WHY. Draft 36, Section 4, says labels follow the problem: of the 16 public problems labelled for several configurations,
+15 get the same label from every configuration, against a mean of 5.88 when each configuration's labels are shuffled
+across problems (perm_samelabel.out). A fourth cold reader (ledger 684) points out that this null destroys problem
+DIFFICULTY, which is problem-level by the paper's own story (easy problems are robust for every model), so difficulty
+alone would beat it, and the title's 'not fragility' is asserted, not tested. Draft 36's post hoc hard / easy stratified
+null only partly answers this (two strata). The test below keeps difficulty, measured the way the paper measures it.
+Definition used throughout: FRAGILITY = the problem-level part of the label that agreement does not explain.
+
+DATA AND LOADER (read-only; nothing is refitted except the secondary check's small logistic models).
+  - The row table (ALLROWS, LAB80, LAB71, the 'match' flag) is built by the loader of
+    work/miners19/draft36/perm_samelabel.py, copied verbatim (that script is not imported or run). Same files and md5s:
+    hf/train-main-v2.parquet 3394dba3..., the fa8af758 parquet fc7e7486..., sub_v135m/calib.json d5b98e21...
+  - Difficulty of a problem = A(T), the DEPLOYED AGREEMENT of its template T: pool[T]['prim'] of the K 32 'dress' read
+    (Codabench 987666, work/runs/v88_dress_987666.log), parsed by g_common.parse_dress() (lane G, imported read-only, as
+    recompute_matched_v32.py section 1 does: agree = {T: pool[T]['prim']}). Low agreement = hard. A problem on another
+    number instance of its template (a mismatched text) gets its template's A(T), the only reading we hold (a limit).
+  - Problem = one exact problem text (key = sha1(text)[:12]), as in draft 36. Multi-configuration problems ('multi') are
+    the problems whose rows span >= 2 configurations.
+  - Guards, run before any new result is printed; if one fails the script stops and nothing is reported as a result:
+      G1 observed counts: LAB80 -> multi 16, one label 15, with an NR label 5, all NR 4; LAB71 -> 15, 14, 4, 3.
+      G2 the draft 36 pre-registered within-configuration null, re-run with this script's code on LAB80, seed
+         20261022, 10,000 shuffles, reproduces its null mean 5.88 and 0 shuffles reaching 15 (perm_samelabel.out).
+      G3 the within-configuration AUC of A(T) on the 63 matched rows is 0.914 (recompute_matched_v32.out section 1).
+
+(a) PRIMARY TEST: shuffle within configuration x difficulty bin.
+  Bins: tertiles of A over the distinct problems of the case set being tested (each problem counted once, by its
+  template's A): cut points q1, q2 = numpy.quantile(values, [1/3, 2/3]) (default linear method); bin 0 if A <= q1,
+  bin 1 if q1 < A <= q2, bin 2 if A > q2. Bins are computed separately for LAB80 and for LAB71, each on its own problems.
+  Null: for each cell (configuration, bin), the labels of that cell's rows (all its labelled rows, including rows on
+  problems labelled for one configuration only) are randomly permuted among those rows. Each configuration's label count
+  within each difficulty tertile is kept exactly; the grouping of rows into problems is fixed. 10,000 permutations,
+  numpy.random.default_rng(20261022), cells in the order configuration (Qwen, Skywork, Olmo, DeepSeek, high, low, medium)
+  then bin (0, 1, 2); LAB80 first, then LAB71 with a fresh generator on the same seed.
+  Statistics (on the multi problems):
+    S1 = number of multi problems whose rows all carry one label (all robust or all non-robust);
+    S2 = among multi problems with at least one non-robust label, the share whose labels are all non-robust.
+  p-values (one-sided): p1 = share of the 10,000 permutations with S1 >= observed S1; also reported (1 + n) / 10,001.
+    p2 = share with S2 >= observed S2 (tolerance 1e-12); a permutation with no multi problem carrying an NR label has no
+    S2 and counts as NOT reaching the observed share; the share conditional on S2 defined is reported beside it.
+  Also reported: null mean and 5th / 95th percentiles of S1, the null mean of S2, the bin cut points, the problems per
+  bin, and each cell's (rows, NR).
+  PRIMARY: p1 on LAB80 (the paper's 15 of 16). Reported beside it: p1 on LAB71 (14 of 15); p2 on both.
+
+  WORDING RULE (fixed now). The branch is the WEAKER of the branches of p1 on LAB80 and p1 on LAB71, so the choice of
+  case-set definition cannot rescue the claim:
+    p <= 0.05         STANDS: the problem-level claim stands beyond difficulty. The title keeps 'not fragility'; Section 4
+                      and the abstract give the difficulty-preserving null's mean and p (both definitions), and keep
+                      the caveats (few problems; harsher perturbation of some problems; difficulty finer than a tertile).
+    0.05 < p <= 0.20  WEAKENED: the title becomes the fallback title below; the abstract and Section 4 say the labels
+                      lean towards the problem beyond difficulty but the evidence is weak (p stated); 'not fragility' is
+                      not stated as a finding anywhere.
+    p > 0.20          NOT SHOWN: the title becomes the fallback title; the abstract and Section 4 drop 'not fragility'
+                      as a finding and present problem-level fragility as a hypothesis, stating that one label on 15 of
+                      16 problems is about what difficulty bins alone give (null mean stated).
+  FALLBACK TITLE (fixed now): 'Answer agreement measures difficulty: a robustness predictor and its self-audit'.
+  The '4 of 5 non-robust for all' clause follows p2 (the weaker of LAB80 and LAB71) on the same three branches.
+  Whatever the result, it is reported in Section 4, in Appendix A and in CHANGES_v37.md; a reversal is reported as one.
+
+  INFORMATION ONLY (no decision; reported in the .out and in one Appendix A sentence at most): the same null on the 63
+  matched rows; the same null with 2, 4 and 5 equal-count agreement bins (quantile cuts as above) on LAB80 and LAB71;
+  the same null with tertiles of the proxy model's key-scored accuracy (80 attempts pooled from six reads, xbench.LOW,
+  as recompute_matched_v32.py's keyacc) in place of agreement.
+
+(b) SECONDARY CHECK: does the other configurations' label on the same problem predict this configuration's label beyond
+  agreement? statsmodels is not installed in any local venv (checked 2026-10-22: ModuleNotFoundError in aimo-hf, aimo,
+  l2d, l2d-upstream); nothing will be installed, so no mixed or conditional logistic model is fitted. Instead:
+  Rows: the rows of the multi problems (each such row has >= 1 other labelled configuration on its exact text); LAB80
+  (primary for this check) and LAB71 (reported).
+  Features: x1 = A(T) (this case's deployed agreement); x2 = the mean label (1 = non-robust) of the OTHER
+  configurations' labelled rows on the same exact text (leave-one-configuration-out).
+  Models: M0 = logistic(label ~ x1); M1 = logistic(label ~ x1 + x2). Intercept unpenalised; features standardised with
+  the training fold's mean and SD (ddof 0; SD 0 -> 1); L2 penalty 0.5 * 1.0 * ||beta||^2 on the non-intercept
+  coefficients (keeps separated folds finite); Newton-Raphson from zero, at most 100 steps, stop when the step's max
+  absolute change < 1e-10.
+  Leave-one-template-out: for each template T among the rows, fit on rows of other templates and predict the rows of T.
+  (x2 of a held-out row uses the other configurations' labels on its own text: this is Appendix A's label-peeking oracle
+  made into a test; coefficients never see the held-out template.)
+  Metrics on the LOTO predictions: within-configuration AUC (the paper's metric; ties count half) and accuracy (call
+  non-robust iff predicted probability >= 0.5), for M0 and M1, and the differences M1 - M0.
+  Interval: template bootstrap of the evaluation rows (resample templates with replacement; predictions fixed), 10,000
+  resamples, numpy.random.default_rng(20261022); 95% percentile interval; resamples with no within-configuration pair
+  are dropped and counted.
+  Reading: the check SUPPORTS a problem-level component beyond agreement if the 95% interval of the AUC difference M1 - M0
+  on LAB80 lies above 0; otherwise NOT SHOWN at this size. The secondary check does not change the title (the primary
+  rule does); it is reported in Section 4 (or Appendix A) with its interval, and if it disagrees with the primary test
+  the text says so.
+
+(c) INTERVALS (not tests; fixed now).
+  Template-bootstrap 95% intervals (cluster = template; resample templates with replacement; 10,000 resamples;
+  numpy.random.default_rng(20261022); percentile interval; resamples with no within-configuration pair dropped and
+  counted) for the headline within-configuration AUCs, each on the paper's 63 matched cases, recomputed first to the
+  printed value (guard):
+    0.914  deployed agreement, dress read K 32, all 63 cases (105 pairs);
+    0.821  the same on the 32 hard-template cases (39 pairs);
+    0.897  agreement over the 80 attempts pooled from six reads, hard cases;
+    0.872  the proxy's key-scored accuracy over the same 80 attempts, hard cases;
+    and the paired difference 0.897 - 0.872 (both AUCs on the same resample).
+  Machinery copied (read-only) from work/miners19/draft32/recompute_matched_v32.py: pair_nat, pooled, keyacc, the
+  within-configuration AUC (xbench.auc_within's definition), lane G's tboot scheme (its seed 17 is NOT used here).
+  Exact Clopper-Pearson 95% intervals (scipy.stats.beta) for 15 of 21 (main board), 9 of 14 (small board) and 55 of 63
+  (public, LOTO), each printed beside its always-robust share (10/21, 7/14, 49/63).
+  Wording (fixed now): if the 95% interval of the difference 0.897 - 0.872 contains 0, Section 3 says agreement beats
+  accuracy 'only marginally, within noise' and gives the interval; if it lies above 0, Section 3 says agreement beats
+  accuracy, with the interval. If the small board's interval contains 0.5 (always robust's 7 of 14), the text says
+  plainly that 9 of 14 is not distinguishable from always robust on its own; the same rule for the main board (10 of 21)
+  and the public 55 of 63 (49 of 63).
+
+KNOWN LIMITS (stated now). Tertile bins are coarse: difficulty finer than a tertile, or difficulty that agreement does not
+measure, can still produce clustering (by the definition above that residual counts as 'fragility', which is why the
+secondary check conditions on agreement as a continuous value). A mismatched text gets its template's agreement. The
+problems are few (16 / 15 multi), so p is coarse. If some problems were perturbed harder by the organisers, labels would
+cluster by problem too; no test here separates that from fragility. Single analysis per item; no other statistic, bin
+rule or seed will be substituted after seeing the results.

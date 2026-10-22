@@ -1,0 +1,30 @@
+# intervals_v37.py: template-bootstrap AUC intervals and exact binomial intervals (computed; nothing OFFICIAL except the board counts, which are board scores)
+   PREREG_samelabel_difficulty.txt md5 f1df21c8fc9961e443536e2ccd978565 (part c; recorded: recorded 2026-10-22 09:40:33 UTC before samelabel_difficulty.py or intervals_v37.py existed or ran)
+   md5 hf/train-main-v2.parquet   3394dba3f01210c6f653ae0bea9f7de5
+   md5 fa8af758 parquet           fc7e748697f128eb3dc09d0c3e452946
+   md5 calib.json (v135m)         d5b98e21169c0ae100c14009340b7fca
+   md5 calib.json (v101m)         d5b98e21169c0ae100c14009340b7fca
+   md5 g_common.py                3329cc5816cacb75426a502d2f9cda0f
+   md5 xbench.py                  dca519f0caade5032c6abf168e9fe7f3
+   md5 x_pool.json                3551d1b5fe6cc86189334e913952d66e
+   md5 dress log                  23837f31f6b3d477177944196cb287a8
+
+## 1. headline within-configuration AUCs on the 63 matched cases, template bootstrap (cluster = template; 10000 resamples; default_rng(20261022); 95% percentile interval)
+   guard: deployed agreement, dress read K 32, all cases: 0.914 on 63 cases (14 non-robust, 105 pairs, 25 templates) = printed 0.914: ok
+   guard: deployed agreement, dress read K 32, hard cases: 0.821 on 32 cases (13 non-robust, 39 pairs, 15 templates) = printed 0.821: ok
+   guard: agreement over the 80 pooled attempts, hard cases: 0.897 on 32 cases (13 non-robust, 39 pairs, 15 templates) = printed 0.897: ok
+   guard: key-scored accuracy over the 80 pooled attempts, hard cases: 0.872 on 32 cases (13 non-robust, 39 pairs, 15 templates) = printed 0.872: ok
+   0.914 (all 63 cases): 95% interval 0.778 to 0.993; dropped resamples 0
+   0.821 (32 hard cases): 95% interval 0.448 to 1.000; dropped resamples 2
+   0.897 (32 hard cases): 95% interval 0.636 to 1.000; dropped resamples 2
+   0.872 (32 hard cases): 95% interval 0.579 to 1.000; dropped resamples 2
+   difference 0.897 - 0.872 = +0.025 (unrounded +0.0256): paired 95% interval +0.000 to +0.176; share of resamples with the difference <= 0: 0.593
+   wording (pre-registered): only marginally, within noise
+
+## 2. exact Clopper-Pearson 95% intervals (board counts are board scores, OFFICIAL; one run each)
+   main board, the entry: 15 of 21 = 0.714; 95% interval 0.478 to 0.887 (0.48 to 0.89); always robust 10 of 21 = 0.476 outside the interval -> above always robust
+   small board, the entry: 9 of 14 = 0.643; 95% interval 0.351 to 0.872 (0.35 to 0.87); always robust 7 of 14 = 0.500 INSIDE the interval -> not distinguishable from always robust on its own
+   public, LOTO, the entry: 55 of 63 = 0.873; 95% interval 0.765 to 0.944 (0.77 to 0.94); always robust 49 of 63 = 0.778 INSIDE the interval -> not distinguishable from always robust on its own
+   main board, always robust: 10 of 21 = 0.476; 95% interval 0.257 to 0.702 (information)
+   small board, always robust: 7 of 14 = 0.500; 95% interval 0.230 to 0.770 (information)
+   public, always robust: 49 of 63 = 0.778; 95% interval 0.655 to 0.873 (information)

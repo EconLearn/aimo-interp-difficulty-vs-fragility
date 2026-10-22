@@ -1,0 +1,78 @@
+# samelabel_difficulty.py: difficulty-preserving null and leave-one-configuration-out check for the 'same label' claim
+# (computed; post hoc claim, pre-registered test; nothing OFFICIAL)
+   PREREG_samelabel_difficulty.txt md5 f1df21c8fc9961e443536e2ccd978565 (recorded: recorded 2026-10-22 09:40:33 UTC before samelabel_difficulty.py or intervals_v37.py existed or ran)
+   md5 hf/train-main-v2.parquet                   3394dba3f01210c6f653ae0bea9f7de5
+   md5 fa8af758 parquet                           fc7e748697f128eb3dc09d0c3e452946
+   md5 calib.json (v135m)                         d5b98e21169c0ae100c14009340b7fca
+   md5 calib.json (v101m)                         d5b98e21169c0ae100c14009340b7fca
+   md5 g_common.py                                3329cc5816cacb75426a502d2f9cda0f
+   md5 xbench.py                                  dca519f0caade5032c6abf168e9fe7f3
+   md5 x_pool.json                                3551d1b5fe6cc86189334e913952d66e
+   md5 dress log                                  23837f31f6b3d477177944196cb287a8
+   md5 perm_samelabel.py (loader source)          55f79b94cf13f44c55e5d2363a614049
+
+## guards (run before any new result)
+   G1 LAB80: multi 16, one label 15, with an NR label 5, all NR 4 = (16, 15, 5, 4): ok
+   G1 LAB71: multi 15, one label 14, with an NR label 4, all NR 3 = (15, 14, 4, 3): ok
+   G2 draft 36's within-configuration null re-run here on LAB80: null mean 5.88 of 16, 0 of 10000 reach 15 (perm_samelabel.out: 5.88, 0): ok
+   G3 within-configuration AUC of the deployed agreement on the 63 matched cases: 0.914 (105 pairs) = 0.914: ok
+
+## (a) PRIMARY: labels shuffled within configuration x tertile of deployed agreement (dress read K 32)
+
+### LAB80 (80 labelled cases; 33 distinct problems; 16 multi-configuration problems; observed 15 of 16)
+   tertile cut points of agreement over the 33 problems: 0.456, 0.781; problems per bin (0 = lowest agreement = hardest): 0: 13, 1: 9, 2: 11
+   multi-configuration problems (template, agreement, bin: labels): T01 0.877 b2: Qwen R DeepSeek R high R low R medium R; T02 0.938 b2: Qwen R DeepSeek R high R medium R Skywork R; T04 1.000 b2: Qwen R Olmo R DeepSeek R high R low R medium R Skywork R; T05 0.554 b1: Qwen R high R; T06 1.000 b2: Qwen R Olmo R DeepSeek R high R low R medium R Skywork R; T07 0.938 b2: Qwen R Olmo R DeepSeek R high R low R medium R Skywork R; T08 0.819 b2: Qwen R Olmo R high R medium R Skywork R; T09 0.655 b1: high R low R medium R; T10 0.762 b1: high R low NR medium R Skywork R; T11 0.708 b1: Qwen NR low NR Skywork NR; T13 0.647 b1: Qwen NR Skywork NR Olmo NR DeepSeek NR; T15 1.000 b2: Skywork R Olmo R; T17 1.000 b2: Olmo R DeepSeek R; T19 0.819 b2: DeepSeek NR Skywork NR; T21 0.599 b1: high R medium R Skywork R; T26 0.262 b0: high NR medium NR
+   cells (configuration, bin): rows/NR: Qwen b0 2/2, Qwen b1 3/2, Qwen b2 7/0, Skywork b1 5/2, Skywork b2 7/1, Olmo b1 2/2, Olmo b2 7/0, DeepSeek b0 1/1, DeepSeek b1 2/1, DeepSeek b2 7/1, high b0 5/2, high b1 4/0, high b2 6/0, low b1 3/2, low b2 4/0, medium b0 6/5, medium b1 3/0, medium b2 6/0
+   observed: S1 15 of 16; with an NR label 5, all NR 4 -> S2 0.800
+   null S1: mean 9.43 of 16; 5th / 95th percentile 8 / 12; distribution 7: 395, 8: 1994, 9: 3171, 10: 2499, 11: 1395, 12: 433, 13: 102, 14: 11
+   p1 = P(S1 >= 15) = 0 / 10000 = 0.0000; (1 + 0) / 10001 = 0.0001
+   null S2: defined in 10000 of 10000; mean where defined 0.098; p2 = P(S2 >= 0.800) = 0 / 10000 = 0.0000 (undefined counted as not reaching); conditional on defined 0 / 10000 = 0.0000
+
+### LAB71 (71 labelled cases; 33 distinct problems; 15 multi-configuration problems; observed 14 of 15)
+   tertile cut points of agreement over the 33 problems: 0.456, 0.781; problems per bin (0 = lowest agreement = hardest): 0: 13, 1: 9, 2: 11
+   multi-configuration problems (template, agreement, bin: labels): T01 0.877 b2: Qwen R DeepSeek R high R low R medium R; T02 0.938 b2: Qwen R DeepSeek R high R medium R; T04 1.000 b2: Qwen R Olmo R DeepSeek R high R low R medium R; T05 0.554 b1: Qwen R high R; T06 1.000 b2: Qwen R Olmo R DeepSeek R high R low R medium R; T07 0.938 b2: Qwen R Olmo R DeepSeek R high R low R medium R; T08 0.819 b2: Qwen R Olmo R high R medium R; T09 0.655 b1: high R low R medium R; T10 0.762 b1: high R low NR medium R; T11 0.708 b1: Qwen NR low NR; T13 0.647 b1: Qwen NR Skywork NR Olmo NR DeepSeek NR; T15 1.000 b2: Skywork R Olmo R; T17 1.000 b2: Olmo R DeepSeek R; T21 0.599 b1: high R medium R; T26 0.262 b0: high NR medium NR
+   cells (configuration, bin): rows/NR: Qwen b0 2/2, Qwen b1 3/2, Qwen b2 7/0, Skywork b1 2/1, Skywork b2 1/0, Olmo b1 2/2, Olmo b2 7/0, DeepSeek b0 1/1, DeepSeek b1 2/1, DeepSeek b2 7/1, high b0 5/2, high b1 4/0, high b2 6/0, low b1 3/2, low b2 4/0, medium b0 6/5, medium b1 3/0, medium b2 6/0
+   observed: S1 14 of 15; with an NR label 4, all NR 3 -> S2 0.750
+   null S1: mean 10.30 of 15; 5th / 95th percentile 9 / 12; distribution 8: 498, 9: 2080, 10: 3363, 11: 2424, 12: 1272, 13: 328, 14: 35
+   p1 = P(S1 >= 14) = 35 / 10000 = 0.0035; (1 + 35) / 10001 = 0.0036
+   null S2: defined in 10000 of 10000; mean where defined 0.177; p2 = P(S2 >= 0.750) = 29 / 10000 = 0.0029 (undefined counted as not reaching); conditional on defined 29 / 10000 = 0.0029
+
+## verdict under the pre-registered rule (branch = the weaker of LAB80 and LAB71; p <= 0.05 stands; 0.05 < p <= 0.20 weakened; p > 0.20 not shown)
+   p1 (S1, one label): LAB80 p = 0.0000 -> STANDS; LAB71 p = 0.0035 -> STANDS; VERDICT STANDS
+   p2 (S2, all non-robust): LAB80 p = 0.0000 -> STANDS; LAB71 p = 0.0029 -> STANDS; VERDICT STANDS
+   title: kept (not fragility stated as a finding)
+
+## information only (no decision): other bin counts, the 63 matched cases, key-scored accuracy tertiles
+   LAB80 agreement, 2 bins             : S1 15 of 16: null mean 6.76, p1 = 0 / 10000 = 0.0000; S2 4 of 5: null mean 0.064, p2 = 0 / 10000 = 0.0000
+   LAB80 agreement, 4 bins             : S1 15 of 16: null mean 9.36, p1 = 4 / 10000 = 0.0004; S2 4 of 5: null mean 0.122, p2 = 3 / 10000 = 0.0003
+   LAB80 agreement, 5 bins             : S1 15 of 16: null mean 9.33, p1 = 1 / 10000 = 0.0001; S2 4 of 5: null mean 0.103, p2 = 0 / 10000 = 0.0000
+   LAB80 key-scored accuracy, 3 bins   : S1 15 of 16: null mean 10.51, p1 = 23 / 10000 = 0.0023; S2 4 of 5: null mean 0.174, p2 = 9 / 10000 = 0.0009
+   LAB71 agreement, 2 bins             : S1 14 of 15: null mean 7.22, p1 = 0 / 10000 = 0.0000; S2 3 of 4: null mean 0.098, p2 = 0 / 10000 = 0.0000
+   LAB71 agreement, 4 bins             : S1 14 of 15: null mean 9.64, p1 = 21 / 10000 = 0.0021; S2 3 of 4: null mean 0.132, p2 = 12 / 10000 = 0.0012
+   LAB71 agreement, 5 bins             : S1 14 of 15: null mean 9.94, p1 = 36 / 10000 = 0.0036; S2 3 of 4: null mean 0.152, p2 = 24 / 10000 = 0.0024
+   LAB71 key-scored accuracy, 3 bins   : S1 14 of 15: null mean 10.82, p1 = 165 / 10000 = 0.0165; S2 3 of 4: null mean 0.201, p2 = 117 / 10000 = 0.0117
+   LAB63 agreement, 2 bins             : S1 14 of 15: null mean 9.50, p1 = 4 / 10000 = 0.0004; S2 3 of 4: null mean 0.147, p2 = 4 / 10000 = 0.0004
+   LAB63 agreement, 3 bins (tertiles)  : S1 14 of 15: null mean 9.86, p1 = 14 / 10000 = 0.0014; S2 3 of 4: null mean 0.164, p2 = 14 / 10000 = 0.0014
+   LAB63 agreement, 4 bins             : S1 14 of 15: null mean 10.58, p1 = 72 / 10000 = 0.0072; S2 3 of 4: null mean 0.183, p2 = 72 / 10000 = 0.0072
+   LAB63 agreement, 5 bins             : S1 14 of 15: null mean 12.34, p1 = 1707 / 10000 = 0.1707; S2 3 of 4: null mean 0.496, p2 = 1707 / 10000 = 0.1707
+   LAB63 key-scored accuracy, 3 bins   : S1 14 of 15: null mean 9.92, p1 = 13 / 10000 = 0.0013; S2 3 of 4: null mean 0.164, p2 = 9 / 10000 = 0.0009
+
+## (b) SECONDARY: label ~ agreement (M0) against label ~ agreement + the other configurations' mean label on the same text (M1); ridge logistic, leave-one-template-out; template bootstrap
+
+### LAB80: 63 cases on 16 multi-configuration problems (12 non-robust; 16 templates)
+   full-data fit (information): M0 beta [-1.837, -1.302]; M1 beta [-2.491, -0.638, 1.988] (intercept, agreement, others' mean label; standardised)
+   LOTO within-configuration AUC: M0 (agreement) 0.882 [0.667, 1.000]; M1 (+ others' label) 0.976 [0.840, 1.000]; difference +0.094 [-0.037, +0.286]
+   LOTO accuracy (non-robust iff p >= 0.5): M0 48/63 = 0.762 [0.533, 0.923]; M1 62/63 = 0.984 [0.947, 1.000]; difference +0.222 [+0.062, +0.451]
+   bootstrap: 10000 template resamples, seed 20261022; dropped (no within-configuration pair) 24
+   M1 wrong: T10 low NR (p 0.02)
+   M0 wrong: T05 Qwen R (p 0.67), T05 high R (p 0.67), T11 Qwen NR (p 0.22), T11 low NR (p 0.22), T11 Skywork NR (p 0.22), T13 Qwen NR (p 0.27), T13 Skywork NR (p 0.27), T13 Olmo NR (p 0.27), T13 DeepSeek NR (p 0.27), T19 DeepSeek NR (p 0.11), T19 Skywork NR (p 0.11), T21 high R (p 0.60), T21 medium R (p 0.60), T21 Skywork R (p 0.60), T10 low NR (p 0.21)
+
+### LAB71: 53 cases on 15 multi-configuration problems (9 non-robust; 15 templates)
+   full-data fit (information): M0 beta [-2.122, -1.462]; M1 beta [-2.655, -0.763, 1.653] (intercept, agreement, others' mean label; standardised)
+   LOTO within-configuration AUC: M0 (agreement) 0.929 [0.684, 1.000]; M1 (+ others' label) 0.946 [0.600, 1.000]; difference +0.018 [-0.260, +0.222]
+   LOTO accuracy (non-robust iff p >= 0.5): M0 42/53 = 0.792 [0.571, 0.946]; M1 52/53 = 0.981 [0.936, 1.000]; difference +0.189 [+0.034, +0.409]
+   bootstrap: 10000 template resamples, seed 20261022; dropped (no within-configuration pair) 100
+   M1 wrong: T10 low NR (p 0.02)
+   M0 wrong: T05 Qwen R (p 0.65), T05 high R (p 0.65), T11 Qwen NR (p 0.19), T11 low NR (p 0.19), T13 Qwen NR (p 0.20), T13 Skywork NR (p 0.20), T13 Olmo NR (p 0.20), T13 DeepSeek NR (p 0.20), T21 high R (p 0.52), T21 medium R (p 0.52), T10 low NR (p 0.16)
+
+## secondary reading (pre-registered: SUPPORTS iff the 95% interval of the LAB80 AUC difference lies above 0): NOT SHOWN (LAB80 difference +0.094, interval lower end -0.037)
