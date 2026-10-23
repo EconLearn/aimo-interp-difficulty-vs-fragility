@@ -123,6 +123,8 @@ release_public_v111/
                       release), plus moot_count.py (the public-row counts of changes 1 and 3)
   audit/              the generalisation-audit script of the report (Sections 2.2-2.3), its two input CSVs and its
                       expected output
+  report/             the technical report; figures/ holds the scripts behind the numbers the four-page version names,
+                      with their outputs and pre-registrations (section at the end)
 ```
 
 Files have mode 644 (`rw-r--r--`), folders 755. The release has 108 files before the first step (118 after it: the
@@ -785,3 +787,41 @@ cd ..
 ```
 
 Checked on 17 October 2026: the output is byte-identical to `audit_v95.out` under Python 3.11.15 and 3.9.6.
+
+## Report scripts: `report/figures/`
+
+The four-page report (Appendix A) names the scripts behind its tests, intervals and matched-case numbers. They are in
+`report/figures/`, each with its output and, for a pre-registered test, the pre-registration and the md5 recorded before
+the script first ran (`*.md5`; each script refuses to run if its pre-registration has changed):
+
+| Script → output | Numbers in the four-page report | Pre-registration (md5) |
+|---|---|---|
+| `perm_samelabel.py` → `perm_samelabel.out` | the null that ignores difficulty: 5.88 of 16 on average (Appendix A) | `PREREG_samelabel.txt` (6afb3e0fdfa4ea7af5f455d24deb463d) |
+| `samelabel_difficulty.py` → `samelabel_difficulty.out` | the difficulty-preserving null: 9.43 of 16, p <= 0.0001; 10.30 of 15, p = 0.0035; AUC 0.882 to 0.976 (Section 4, Appendix A) | `PREREG_samelabel_difficulty.txt` (f1df21c8fc9961e443536e2ccd978565) |
+| `intervals_v37.py` → `intervals_v37.out` | template-bootstrap and exact intervals (Appendix A) | the same |
+| `paired_v38.py` → `paired_v38.out` | paired tests against always robust, McNemar p = 0.1796 and 0.1797 (post hoc) | none |
+| `recompute_matched_v32.py` → `recompute_matched_v32.out` | the matched-case table and the label-peeking oracle (Appendix A) | none |
+| `rows80.py` → `rows80.out` | own run 8.0 against 7.25 on the 9 Skywork cases labelled later (Section 5); 68.75 of 80 (Appendix A) | `PREREG_rows80.txt` (c0f69a27f6c38bcfb84ac1193fac1d04) and `ADDENDUM_rows80.txt` |
+| `make_agreement_by_label_v32.py` → `make_agreement_by_label_v32.out` | Figure 1 (it writes the figure next to itself; the copy in `report/four_page/` is byte-identical) | none |
+
+`perm_samelabel_run1_prereg_only.out` is the first run of `perm_samelabel.py`, before its post hoc lines were added; the
+first lines of `perm_samelabel.out` are identical to it. The md5s that the outputs print for other scripts are those of
+our working copies, which differ from the copies here only in the line that sets the data folder (and, in the figure
+script, the path printed in its last line).
+
+**These scripts read files that are not in this repository**, so they can be read here but not re-run from it alone. Set
+`AIMO_DIR` to the folder that holds them (the scripts give each path relative to it): the organisers' public parquet at
+two revisions (`aimo-interp/train-main-v2`, revision 23791d9b as `hf/train-main-v2.parquet`, and the 15 October revision
+fa8af758), `calib.json` (which `training/build_calib.py` rebuilds), our server logs of reads of the public templates (for
+example the read of 15 October, Codabench 987666), and our analysis modules and their inputs (for example lane G's loader
+`g_common.py`, and lane X's `xbench.py` with its pool of attempts). Each script needs numpy and pandas (also scipy for
+`intervals_v37.py`, `paired_v38.py` and `recompute_matched_v32.py`; matplotlib for the figure), writes only its `.out`
+(and the figure) next to itself, and runs on a CPU in under two minutes:
+
+```sh
+AIMO_DIR=/path/to/held/folder python3 report/figures/perm_samelabel.py
+```
+
+Checked on 23 October 2026: run from this layout with `AIMO_DIR` set to our folder, every `.out` above and the figure
+were reproduced byte for byte (Python 3.11.15 with numpy 2.4.6, pandas 3.0.3 and scipy 1.17.1; the figure with Python
+3.9.6 and matplotlib 3.9.4).

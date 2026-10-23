@@ -35,7 +35,7 @@ import numpy as np
 
 sys.dont_write_bytecode = True
 HERE = os.path.dirname(os.path.abspath(__file__))
-AIMO = os.path.dirname(HERE)
+AIMO = os.environ.get('AIMO_DIR', os.path.dirname(HERE))  # folder holding hf/ and work/
 WORK = os.path.join(AIMO, 'work')
 sys.path.insert(0, os.path.join(WORK, 'miners17', 'laneG'))
 sys.path.insert(0, os.path.join(WORK, 'miners17', 'laneX'))
@@ -200,5 +200,5 @@ axes[0].set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0])
 axes[0].set_ylabel('Stand-in agreement on the original\n(K 32; one server read)', fontsize=7, color=MUTED)
 fig.tight_layout(w_pad=1.2)
 fig.savefig(OUT_PNG, bbox_inches='tight', facecolor=SURF)
-say(f'\nsaved {os.path.relpath(OUT_PNG, AIMO)}')
+say(f'\nsaved {os.path.relpath(OUT_PNG, os.path.dirname(HERE))}')
 open(OUT_TXT, 'w').write('\n'.join(LINES) + '\n')

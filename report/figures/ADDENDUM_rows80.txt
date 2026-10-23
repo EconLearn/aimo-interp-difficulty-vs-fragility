@@ -1,0 +1,72 @@
+ADDENDUM to PREREG_rows80.txt (md5 c0f69a27f6c38bcfb84ac1193fac1d04). Written 2026-10-20 BEFORE any score, call or label of
+the 9 new rows was computed or looked at. Only done so far: the row-order check of the new parquet against the old one
+(hf/train-main-v2.parquet, md5 3394dba3...: the new file = the old 82 rows in the same order + 12 Skywork rows appended at
+positions 82-93) and the template mapping of the 12 new rows (no labels read). Each item fixes a point the prereg leaves open.
+
+R1 TEMPLATE MAPPING (as g_common / release/training/build_calib.py / pool_all.py do): stem = digits -> '#', whitespace
+   collapsed, first 60 characters; T = 1 + index of that stem's template text in sub_v135m/calib.json's text order.
+   Pre-check (done, no labels): 12/12 new problems equal (after whitespace normalisation) a problem already among the old
+   82 rows of the same template; 12 distinct templates T01 T02 T04 T05 T06 T07 T08 T09 T10 T11 T19 T21; the T19 row is the
+   template's second instance (own_text False) and, like every own_text-False row in lane G, takes its template's readings.
+   No new row is on T13 / T15 / T16 (the 3 old Skywork rows) or on T27. The script re-does and prints this check, and checks
+   that the old 82 rows' labels and max_drop equal sub_v135m/calib.json.
+
+R2 STAND-IN READS (8, all reported separately and pooled):
+   (1) DRESS (Codabench 987666): prim + qfin as parse_dress gives them (lane G B);
+   (2)-(5) lane G's four held reads (g_common.held_reads): oss_low_r3 / r4 + qwen_quick_r2 (v10), oss_low_m1 / m2 +
+       qwen_quick_m (v12);
+   (6)-(8) v124r reads 94286138 / 681617219 / 794012114 (runs/v124r_main_1004374.log, parse_conf.py): prim = the logged
+       pair_nat at K 32. These reads carry no quick finish. qfin = the DRESS read's qfin, i.e. the pairing lane CONF used
+       (ADDENDUM_conf.txt R6), so its 71-row baselines (62 / 57 / 62, ledger 614) are a known-answer check here.
+       Sensitivity (information only, never in the decision): the same three prims paired with the two held Qwen reads
+       (qwen_quick_r2, qwen_quick_m). The partial read 560372929 is not used.
+
+R3 OWN RUN (decision): runs/v37_small_968679.log full_skywork_a/b/c, parsed with miners12/review/own_q1q2.py's parse();
+   reading = g_common.own_reading(cap 9,000); call = g_common.own_call(K_max 3, min_ended 1) (deployed: robust iff >= 1 of
+   3 ended on its own inside 9,000). The script checks that own_q1q2's parser and g_common.grab give identical v37 attempts.
+   Information only (not in the decision): the dress's own Skywork reading (sky = ended/far/attempts, same rule) on the
+   same 12 rows.
+
+R4 POOLED: for the stand-in, the mean right-count over the 8 reads of R2 (equal weight per read); the own run has one read.
+   Rule, applied exactly as fixed: SWITCH iff pooled_standin(9 new) - own(9 new) >= 2 AND pooled_standin(3 old) >= own(3 old)
+   AND pooled_standin(2 new NR) >= own(2 new NR). Also printed: per read, lane G's 5 reads pooled, the 3 fresh reads pooled.
+
+R5 WHICH STAND-IN SCHEME DECIDES: the prereg scores the stand-in two ways (decision.json frozen; LOTO refit on 80 rows) but
+   does not say which one the rule uses. Fixed now: the rule is evaluated under both; DECISION = SWITCH only if it passes
+   under BOTH; if they disagree the decision is KEEP and the split is reported (the rule's 'only if', default keep).
+
+R6 LOTO ON 80 ROWS: fit data = lane G's 71 rows (build_fit_data) + the 9 new labelled Skywork rows, each carrying its
+   template's fit-time pair16 and qfin (the values every other row of that template carries) and strength 1 (refit_low16's
+   Skywork recoding); y = 1 iff is_robust is False. Folds = the 27 labelled templates; per fold decision.json's three models
+   are refitted with pool_all.fit and the high prior is the majority label of the fold's training high rows
+   (g_common.run_policy, unchanged). Frozen = DEC (decision.json md5 f29963e2..., identical in sub_v114m / sub_v135m).
+
+R7 Q2 (information): deployed policy = g_common.V95 (high answered robust via the per-fold prior; Skywork own run >= 1 of 3
+   at 9,000; Olmo own run >= 2 of 3 at 10,000; combine = replace). Readings per stand-in read: DRESS -> the dress's own
+   Skywork / Olmo readings (lane G B); held reads -> held_reads' v37 / v33b / v39 (lane G C); v124r reads -> dress qfin +
+   dress own readings (lane CONF R6). Known-answer checks before anything on 80 rows is printed: lane G B 60/71, lane G C
+   62 / 62 / 61 / 62 of 71, lane CONF 62 / 57 / 62 of 71. Reported: LOTO-80 right per read and pooled, per configuration,
+   new 9 / old 71, plain and balanced accuracy, always-robust baseline. Caveat printed: v115 / v121's Olmo own run stops at
+   7,200 tokens, the held Olmo readings are at 10,000 (as in lane CONF).
+
+R8 Q3 (information): clear-cut rows = max_drop <= 0.05 or >= 0.35 (new parquet's max_drop). Out-of-fold = the same 27
+   template folds; in each fold decision.json's three models are fitted on the fold's training rows that are clear-cut only
+   (g_common.run_policy scheme 'split' with train = (T != T0) & clear-cut, test = (T == T0); its high prior then comes from
+   the clear-cut training high rows - printed per fold set, expected robust in every fold) and applied to all rows of the
+   held-out template. Compared with the deployed fit procedure (R6, all training rows), both under (a) the stand-in on every
+   row with the fit-time reads (lane G A analogue) and (b) the deployed policy on each of the 8 reads (pooled mean).
+   Also printed: the clear-cut fit on all 80 rows vs decision.json's coefficients. No build follows from Q3.
+
+R9 Counts are plain rows; balanced accuracy and the always-robust baseline are printed beside the totals. Single reads per
+   line; nothing here is an OFFICIAL board number.
+
+R10 CORRECTION (added 2026-10-20, after the first script run stopped at the known-answer check and BEFORE any score, call or
+   comparison on the 9 new rows was computed; the run had printed only the data checks and the 71-row checks).
+   The v124r known-answer expectation in R2 / R7 was wrong: lane CONF's 62 / 57 / 62 (score_v124r_1004374.out 'baseline')
+   train decision.json's forms on THAT read's own pair_nat (ADDENDUM_conf R6 replaces pair16 in training by the read's
+   feature), whereas lane G's run_policy trains on the fit-time pair16 and applies the fit to the read's prim. With lane G's
+   machinery the first v124r read gives 57/71, not 62. Fix: the known-answer check for the v124r reads is done in lane
+   CONF's own form (training column pair16 replaced by the read's pair_nat; dress qfin / own readings; V95; LOTO) and must
+   give 62 / 57 / 62; lane G's machinery (fit-time pair16 in training, as the prereg says and as the deployed decision.json
+   was fitted) is then used for every Q1-Q3 number, unchanged from R2-R8. The 71-row lane-G-machinery counts of the v124r
+   reads are printed beside the check. Nothing else changes.

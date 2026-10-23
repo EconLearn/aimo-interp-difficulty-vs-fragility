@@ -1,0 +1,152 @@
+# LANE ROWS80: Skywork route on 80 labelled rows (computed; CPU; no model run; nothing OFFICIAL here)
+   md5 PREREG               c0f69a27f6c38bcfb84ac1193fac1d04
+   md5 ADDENDUM             d63a44d769c1770e40c77f06037ce5ca
+   md5 new parquet          fc7e748697f128eb3dc09d0c3e452946
+   md5 old parquet          3394dba3f01210c6f653ae0bea9f7de5
+   md5 calib                d5b98e21169c0ae100c14009340b7fca
+   md5 decision.json        f29963e26fb37c91a2f4045d2116e2df
+   md5 decision.json v135m  f29963e26fb37c91a2f4045d2116e2df
+   md5 v37 log              10408beb54b1be07275b15a7d413afaa
+   md5 v124r log            88f28d4badc67747e903ab2e7ec09da3
+   md5 dress log            23837f31f6b3d477177944196cb287a8
+   md5 g_common.py          3329cc5816cacb75426a502d2f9cda0f
+   md5 parse_conf.py        7f0be544d1eaa2103d6b9cabf5d55510
+   md5 own_q1q2.py          13802288a4b059d2e367653e960e633e
+
+## data checks
+old 82 rows: new file rows 0-81 vs old parquet and calib.json (text / model / effort / label / max_drop / template): 82/82 identical
+new 12 rows (all Skywork-OR1-Math-7B:default): matched to an old problem after whitespace normalisation 12/12; templates T07 T19 T06 T08 T05 T11 T10 T04 T21 T02 T09 T01; own_text False: T19
+new labelled rows 9 (robust 7, NR 2); null rows T05 (max_drop +0.20), T09 (max_drop +0.11), T01 (max_drop +0.21)
+D80: 80 rows (robust 59, NR 21), templates 27; Skywork rows 12 (old 3: T15 T16 T13; new 9)
+
+v37 own run (own_q1q2 parse): 28 templates x 3 attempts; kinds ['f', 'n']; (tokens, kind) identical to g_common.grab on 28/28 templates (answers 28/28); own readings = held_reads' sky on 28/28: True
+
+## known-answer checks (71 rows, lane G / lane CONF numbers)
+refit on the 71 rows reproduces decision.json (three models, 2e-4): OK
+   lane G: deployed policy LOTO on 71, dress 987666                       60/71 (expected 60: OK)
+   lane G: deployed policy LOTO on 71, oss_low_r3+qwen_quick_r2           62/71 (expected 62: OK)
+   lane G: deployed policy LOTO on 71, oss_low_r4+qwen_quick_r2           62/71 (expected 62: OK)
+   lane G: deployed policy LOTO on 71, oss_low_m1+qwen_quick_m            61/71 (expected 61: OK)
+   lane G: deployed policy LOTO on 71, oss_low_m2+qwen_quick_m            62/71 (expected 62: OK)
+   lane CONF form (training on the read's own pair_nat): v124r 94286138+dress qfin      62/71 (expected 62: OK) | lane G machinery (training on fit-time pair16; used below): 57/71
+   lane CONF form (training on the read's own pair_nat): v124r 681617219+dress qfin     57/71 (expected 57: OK) | lane G machinery (training on fit-time pair16; used below): 59/71
+   lane CONF form (training on the read's own pair_nat): v124r 794012114+dress qfin     62/71 (expected 62: OK) | lane G machinery (training on fit-time pair16; used below): 62/71
+
+==============================================================================================================
+## Q1 (DECISION): Skywork route - own run (v37, K 3 @ 9,000, robust iff >= 1 of 3 ended) vs stand-in, 12 labelled Skywork rows
+
+per row (R = robust, N = non-robust; stand-in calls in read order: 1 = dress 987666, 2 = oss_low_r3+qwen_quick_r2, 3 = oss_low_r4+qwen_quick_r2, 4 = oss_low_m1+qwen_quick_m, 5 = oss_low_m2+qwen_quick_m, 6 = v124r 94286138+dress qfin, 7 = v124r 681617219+dress qfin, 8 = v124r 794012114+dress qfin)
+row  T   label   drop | v37 own (e/f/a)  call | dress own  call | stand-in frozen  | stand-in LOTO-80
+old  T13 NR     +1.00 | (2, 1, 3)        R    | (1, 2, 3)  R    | NNNNNNNN         | NNNNNNNN        
+old  T15 R      +0.00 | (3, 0, 3)        R    | (3, 0, 3)  R    | RRRRRRRR         | RRRRRRRR        
+old  T16 R      +0.00 | (2, 1, 3)        R    | (0, 3, 3)  N    | RRRRNRRR         | RRRRNRRR        
+new  T02 R      +0.08 | (1, 2, 3)        R    | (2, 1, 3)  R    | RRRRRRRR         | RRRRRRRR        
+new  T04 R      +0.00 | (2, 1, 3)        R    | (3, 0, 3)  R    | RRRRRRRR         | RRRRRRRR        
+new  T06 R      +0.00 | (3, 0, 3)        R    | (3, 0, 3)  R    | RRRRRRRR         | RRRRRRRR        
+new  T07 R      +0.00 | (3, 0, 3)        R    | (3, 0, 3)  R    | RRRRRRRR         | RRRRRRRR        
+new  T08 R      +0.01 | (3, 0, 3)        R    | (3, 0, 3)  R    | RRRRRRRR         | RRRRRRRR        
+new  T10 R      +0.01 | (2, 1, 3)        R    | (3, 0, 3)  R    | NNRRNNRN         | RRRRNNRN        
+new  T11 NR     +0.33 | (0, 3, 3)        N    | (2, 1, 3)  R    | NNNRNNNN         | NNNRNNNN        
+new  T19 NR     +0.52 | (0, 3, 3)        N    | (1, 2, 3)  R    | RNNNNNNN         | RNNNNNRN        
+new  T21 R      +0.05 | (3, 0, 3)        R    | (2, 1, 3)  R    | NNNNRNNN         | NNNNRNNN        
+
+rows right (plain counts): new 9 n 9 | old 3 n 3 | new NR 2 n 2 | all 12 n 12
+   always robust                                        new 9 7  old 3 2  new NR 2 0  all 12 9
+   OWN RUN v37 (decision)                               new 9 9  old 3 2  new NR 2 2  all 12 11
+   own run, dress read (information)                    new 9 7  old 3 1  new NR 2 0  all 12 8
+
+   stand-in, decision.json FROZEN (no refit):
+   dress 987666                                         new 9 6  old 3 3  new NR 2 1  all 12 9
+   oss_low_r3+qwen_quick_r2                             new 9 7  old 3 3  new NR 2 2  all 12 10
+   oss_low_r4+qwen_quick_r2                             new 9 8  old 3 3  new NR 2 2  all 12 11
+   oss_low_m1+qwen_quick_m                              new 9 7  old 3 3  new NR 2 1  all 12 10
+   oss_low_m2+qwen_quick_m                              new 9 8  old 3 2  new NR 2 2  all 12 10
+   v124r 94286138+dress qfin                            new 9 7  old 3 3  new NR 2 2  all 12 10
+   v124r 681617219+dress qfin                           new 9 8  old 3 3  new NR 2 2  all 12 11
+   v124r 794012114+dress qfin                           new 9 7  old 3 3  new NR 2 2  all 12 10
+   POOLED 8 reads (mean)                                new 9 7.25  old 3 2.88  new NR 2 1.75  all 12 10.12
+   lane G's 5 reads (mean)                              new 9 7.20  old 3 2.80  new NR 2 1.60  all 12 10.00
+   3 fresh v124r reads (mean)                           new 9 7.33  old 3 3.00  new NR 2 2.00  all 12 10.33
+   sensitivity (information): v124r prims with a held Qwen quick finish instead of the dress qfin
+   v124r 94286138+qwen_quick_r2                         new 9 7  old 3 3  new NR 2 2  all 12 10
+   v124r 94286138+qwen_quick_m                          new 9 7  old 3 3  new NR 2 2  all 12 10
+   v124r 681617219+qwen_quick_r2                        new 9 8  old 3 3  new NR 2 2  all 12 11
+   v124r 681617219+qwen_quick_m                         new 9 8  old 3 3  new NR 2 2  all 12 11
+   v124r 794012114+qwen_quick_r2                        new 9 7  old 3 3  new NR 2 2  all 12 10
+   v124r 794012114+qwen_quick_m                         new 9 7  old 3 2  new NR 2 2  all 12 9
+   pooled, 5 lane-G reads + 6 sensitivity pairings      new 9 7.27  old 3 2.82  new NR 2 1.82  all 12 10.09
+
+   stand-in, decision.json LOTO refit on 80 rows:
+   dress 987666                                         new 9 7  old 3 3  new NR 2 1  all 12 10
+   oss_low_r3+qwen_quick_r2                             new 9 8  old 3 3  new NR 2 2  all 12 11
+   oss_low_r4+qwen_quick_r2                             new 9 8  old 3 3  new NR 2 2  all 12 11
+   oss_low_m1+qwen_quick_m                              new 9 7  old 3 3  new NR 2 1  all 12 10
+   oss_low_m2+qwen_quick_m                              new 9 8  old 3 2  new NR 2 2  all 12 10
+   v124r 94286138+dress qfin                            new 9 7  old 3 3  new NR 2 2  all 12 10
+   v124r 681617219+dress qfin                           new 9 7  old 3 3  new NR 2 1  all 12 10
+   v124r 794012114+dress qfin                           new 9 7  old 3 3  new NR 2 2  all 12 10
+   POOLED 8 reads (mean)                                new 9 7.38  old 3 2.88  new NR 2 1.62  all 12 10.25
+   lane G's 5 reads (mean)                              new 9 7.60  old 3 2.80  new NR 2 1.60  all 12 10.40
+   3 fresh v124r reads (mean)                           new 9 7.00  old 3 3.00  new NR 2 1.67  all 12 10.00
+   sensitivity (information): v124r prims with a held Qwen quick finish instead of the dress qfin
+   v124r 94286138+qwen_quick_r2                         new 9 7  old 3 3  new NR 2 2  all 12 10
+   v124r 94286138+qwen_quick_m                          new 9 7  old 3 3  new NR 2 2  all 12 10
+   v124r 681617219+qwen_quick_r2                        new 9 7  old 3 3  new NR 2 1  all 12 10
+   v124r 681617219+qwen_quick_m                         new 9 7  old 3 3  new NR 2 1  all 12 10
+   v124r 794012114+qwen_quick_r2                        new 9 7  old 3 3  new NR 2 2  all 12 10
+   v124r 794012114+qwen_quick_m                         new 9 7  old 3 2  new NR 2 2  all 12 9
+   pooled, 5 lane-G reads + 6 sensitivity pairings      new 9 7.27  old 3 2.82  new NR 2 1.64  all 12 10.09
+
+DECISION RULE (PREREG; ADDENDUM R4-R5): SWITCH iff pooled stand-in - own >= 2 on the 9 new AND stand-in >= own on the 3 old AND >= own on the 2 new NR, under BOTH schemes
+   frozen : new 9 stand-in 7.25 vs own 9 -> diff -1.75 (< 2 FAIL); old 3 2.88 vs 2 (PASS); new NR 2 1.75 vs 2 (FAIL) -> KEEP
+   loto80 : new 9 stand-in 7.38 vs own 9 -> diff -1.62 (< 2 FAIL); old 3 2.88 vs 2 (PASS); new NR 2 1.62 vs 2 (FAIL) -> KEEP
+   DECISION: KEEP the own run (rule not met)
+   per-read stand-in minus own on the 9 new: frozen -3 -2 -1 -2 -1 -2 -1 -2 | loto80 -2 -1 -1 -2 -1 -2 -2 -2
+   balanced accuracy on all 12 Skywork rows (always robust 0.500): own v37 0.833 | own dress read 0.444 | stand-in mean over 8 reads frozen 0.868, LOTO-80 0.861
+INFORMATION ONLY (not the pre-registered decision): the same rule with the own run read from the DRESS own read, and from the mean of the two own reads (v37, dress)
+   own = dress read         frozen : new 9 7.25 vs 7.00 (+0.25); old 3 2.88 vs 1.00; new NR 2 1.75 vs 0.00 -> KEEP
+   own = dress read         loto80 : new 9 7.38 vs 7.00 (+0.38); old 3 2.88 vs 1.00; new NR 2 1.62 vs 0.00 -> KEEP
+   own = mean(v37, dress)   frozen : new 9 7.25 vs 8.00 (-0.75); old 3 2.88 vs 1.50; new NR 2 1.75 vs 1.00 -> KEEP
+   own = mean(v37, dress)   loto80 : new 9 7.38 vs 8.00 (-0.62); old 3 2.88 vs 1.50; new NR 2 1.62 vs 1.00 -> KEEP
+
+==============================================================================================================
+## Q2 (information): deployed policy (V95: high prior, Skywork own >= 1 of 3 @ 9,000, Olmo own >= 2 of 3 @ 10,000) LOTO on 80 rows
+   Skywork own readings: dress read -> dress own read; held reads -> v37; v124r reads -> dress own read (lane CONF pairing)
+   caveat: v115 / v121 stop the Olmo own run at 7,200 tokens; the Olmo readings here are at 10,000 (as in lane CONF)
+   always robust                      all 59/80 | new 9 7 | old 71 52 | bal 0.500 | Qwen 8/12 Skywork 9/12 Olmo 7/9 DeepSeek 7/10 high 13/15 low 5/7 medium 10/15
+   dress 987666                       all 67/80 | new 9 7 | old 71 60 (LOTO-71: 60) | bal 0.782 | Qwen 11/12 Skywork 8/12 Olmo 8/9 DeepSeek 8/10 high 13/15 low 5/7 medium 14/15
+   oss_low_r3+qwen_quick_r2           all 71/80 | new 9 9 | old 71 62 (LOTO-71: 62) | bal 0.862 | Qwen 11/12 Skywork 11/12 Olmo 9/9 DeepSeek 9/10 high 13/15 low 5/7 medium 13/15
+   oss_low_r4+qwen_quick_r2           all 71/80 | new 9 9 | old 71 62 (LOTO-71: 62) | bal 0.862 | Qwen 11/12 Skywork 11/12 Olmo 9/9 DeepSeek 9/10 high 13/15 low 5/7 medium 13/15
+   oss_low_m1+qwen_quick_m            all 70/80 | new 9 9 | old 71 61 (LOTO-71: 61) | bal 0.823 | Qwen 10/12 Skywork 11/12 Olmo 9/9 DeepSeek 9/10 high 13/15 low 4/7 medium 14/15
+   oss_low_m2+qwen_quick_m            all 71/80 | new 9 9 | old 71 62 (LOTO-71: 62) | bal 0.878 | Qwen 11/12 Skywork 11/12 Olmo 9/9 DeepSeek 9/10 high 13/15 low 6/7 medium 12/15
+   v124r 94286138+dress qfin          all 66/80 | new 9 7 | old 71 59 (LOTO-71: 57) | bal 0.805 | Qwen 10/12 Skywork 8/12 Olmo 8/9 DeepSeek 8/10 high 13/15 low 5/7 medium 14/15
+   v124r 681617219+dress qfin         all 65/80 | new 9 7 | old 71 58 (LOTO-71: 59) | bal 0.766 | Qwen 11/12 Skywork 8/12 Olmo 8/9 DeepSeek 8/10 high 13/15 low 5/7 medium 12/15
+   v124r 794012114+dress qfin         all 69/80 | new 9 7 | old 71 62 (LOTO-71: 62) | bal 0.830 | Qwen 11/12 Skywork 8/12 Olmo 8/9 DeepSeek 9/10 high 13/15 low 6/7 medium 14/15
+   POOLED 8 reads (mean)              all 68.75/80 = 0.859 | new 9 8.00 | old 71 60.75 | bal 0.826 | Qwen 10.75/12 Skywork 9.50/12 Olmo 8.50/9 DeepSeek 8.62/10 high 13.00/15 low 5.12/7 medium 13.25/15
+   lane G's 5 reads (mean)            all 70.00/80 | new 9 8.60 | bal 0.842
+   3 fresh v124r reads (mean)         all 66.67/80 | new 9 7.00 | bal 0.800
+   same policy with Skywork read by the stand-in (v113 / v114 route), LOTO-80, for comparison:
+   POOLED 8 reads (mean)              all 69.50/80 | Skywork 10.25/12 (own-run route 9.50/12) | bal 0.857
+   rows wrong in >= 4 of 8 reads (deployed policy, LOTO-80): T05 Qwen R 8/8, T16 Skywork R 4/8, T13 Skywork NR 8/8, T08 Olmo R 4/8, T05 DeepSeek R 8/8, T25 high NR 8/8, T26 high NR 8/8, T09 low R 8/8, T10 low NR 5/8, T09 medium R 4/8, T12 medium R 8/8, T19 Skywork NR (new) 4/8, T11 Skywork NR (new) 4/8
+
+==============================================================================================================
+## Q3 (information): decision.json refitted on CLEAR-CUT rows only (max_drop <= 0.05 or >= 0.35), out-of-fold on all 80 rows
+clear-cut rows 62/80 (robust 50 of 59, NR 12 of 21); left out of the fit: 18 rows (max_drop +0.07, +0.08, +0.09, +0.10, +0.25, +0.27, +0.30, +0.33)
+high prior over the 27 clear-cut folds: ['robust']
+   coefficients clear-cut fit, all 80  full [-1.616, -1.872, -0.853, -0.829] | agreement_only [-1.225, -2.182, -0.878]
+   coefficients all-row fit, all 80    full [-1.267, -1.767, -1.083, -1.166] | agreement_only [-0.834, -2.157, -1.254]
+   coefficients decision.json (71 rows) full [-1.27, -1.782, -1.075, -1.212] | agreement_only [-0.858, -2.179, -1.278]
+(a) stand-in on every row, fit-time reads (pair16, qfin):
+   deployed fit procedure (all training rows), LOTO     all 67/80 | new 9 6 | old 71 61 | Skywork 8/12 | bal 0.844
+   clear-cut fit, out-of-fold                           all 66/80 | new 9 6 | old 71 60 | Skywork 8/12 | bal 0.851
+   changed rows: T21 high R drop +0.01: R -> N (breaks), T12 high R drop +0.04: R -> N (breaks), T26 high NR drop +0.59: R -> N (fixes)
+(b) deployed policy (V95) per read: LOTO deployed fit vs clear-cut fit (rows right of 80; Skywork own run as in Q2)
+   dress 987666                       deployed fit 67 -> clear-cut 66 (-1); bal 0.782 -> 0.774; changed rows: T21 medium R (breaks)
+   oss_low_r3+qwen_quick_r2           deployed fit 71 -> clear-cut 70 (-1); bal 0.862 -> 0.854; changed rows: T21 medium R (breaks)
+   oss_low_r4+qwen_quick_r2           deployed fit 71 -> clear-cut 69 (-2); bal 0.862 -> 0.815; changed rows: T13 Qwen NR (breaks), T13 DeepSeek NR (breaks)
+   oss_low_m1+qwen_quick_m            deployed fit 70 -> clear-cut 71 (+1); bal 0.823 -> 0.832; changed rows: T09 low R (fixes)
+   oss_low_m2+qwen_quick_m            deployed fit 71 -> clear-cut 69 (-2); bal 0.878 -> 0.830; changed rows: T13 Qwen NR (breaks), T13 DeepSeek NR (breaks)
+   v124r 94286138+dress qfin          deployed fit 66 -> clear-cut 68 (+2); bal 0.805 -> 0.822; changed rows: T01 Qwen R (fixes), T01 DeepSeek R (fixes), T01 low R (fixes), T09 medium R (breaks)
+   v124r 681617219+dress qfin         deployed fit 65 -> clear-cut 65 (+0); bal 0.766 -> 0.766; changed rows: none
+   v124r 794012114+dress qfin         deployed fit 69 -> clear-cut 68 (-1); bal 0.830 -> 0.822; changed rows: T09 medium R (breaks)
+   pooled mean difference (clear-cut minus deployed fit): -0.50 rows of 80 (per read -1 -1 -2 +1 -2 +2 +0 -1)

@@ -1,0 +1,58 @@
+PRE-REGISTRATION: permutation null for the 'same label' claim (draft 36 of the four-page report)
+Written 2026-10-22 ~08:30 UTC, BEFORE any permutation is computed. Its md5 is recorded in PREREG_samelabel.txt.md5 before
+perm_samelabel.py is first run; the script prints this file's md5 and refuses to run if it differs.
+
+WHY. Draft 35, Section 4, says the labels "look like a property of the problem, not the model": of the 16 public problems
+labelled for more than one configuration, 15 carry one label, and 4 of the 5 with a non-robust label are non-robust for
+every configuration (80 labelled cases by exact text; 14 of 15 and 3 of 4 on the 71 cases of the 82-row file). A cold
+reader (ledger 682) asked for a null: with about 78% of labels robust, many problems would carry one label (all robust)
+by chance. This test asks whether 15 of 16 is more than each configuration's robust share alone would give.
+
+DATA AND LOADER (read-only; nothing is refitted).
+  - aimo/hf/train-main-v2.parquet (md5 3394dba3f01210c6f653ae0bea9f7de5; 82 rows) and the 15 October revision
+    work/miners19/scan/raw/hf_train_main_v2_fa8af758/train-00000-of-00001.parquet (md5 fc7e748697f128eb3dc09d0c3e452946;
+    94 rows), and work/sub_v135m/calib.json (md5 d5b98e21169c0ae100c14009340b7fca).
+  - The row table is built by the code of work/miners19/draft32/recompute_matched_v32.py, section 0 (ALLROWS: key =
+    sha1(the row's own problem text)[:12], configuration via g_common.FULLCFG, label y = 1 non-robust, 0 robust, None
+    unlabelled), copied verbatim; recompute_matched_v32.py itself is NOT imported or run (it would rewrite its .out).
+  - Case sets: LAB80 = the 80 labelled rows (71 of the 82-row file + 9 labelled on 15 October); LAB71 = the 71 labelled
+    rows of the 82-row file. Groups = rows with the same key (exact text), as in section 5 of that script.
+  - Guard: before any permutation the script must reproduce section 5's counts: 80 -> multi-configuration 16, one label
+    15, with an NR label 5, all NR 4; 71 -> 15, 14, 4, 3. If not, it stops and nothing is reported as a result.
+
+STATISTICS (on the groups whose rows span >= 2 configurations, "multi"):
+  S1 = number of multi groups whose rows all carry one label (all robust or all non-robust).
+  S2 = among multi groups with at least one non-robust label, the share whose labels are all non-robust.
+
+NULL. Labels are shuffled across problems WITHIN each configuration: for each of the seven configurations, the labels of
+that configuration's rows in the case set are randomly permuted among those rows (all its labelled rows, including rows
+on problems labelled for one configuration only). Each configuration's robust share is kept exactly; the grouping of rows
+into problems is fixed. 10,000 permutations, numpy.random.default_rng(20261022), configurations in the order Qwen,
+Skywork, Olmo, DeepSeek, high, low, medium; LAB80 first, then LAB71 with a fresh generator on the same seed.
+
+P-VALUES (one-sided).
+  p1 = share of the 10,000 permutations with S1 >= the observed S1 (the brief's P(count >= observed)); also reported:
+       (1 + that number) / 10,001.
+  p2 = share of permutations with S2 >= the observed S2 (tolerance 1e-12). A permutation in which no multi group has a
+       non-robust label has no S2; it counts as NOT reaching the observed share (primary); the share conditional on S2
+       being defined is reported beside it.
+  Also reported: the null mean and 5th / 95th percentiles of S1 and S2, and the number of permutations with S2 undefined.
+  PRIMARY: p1 on LAB80 (the definition behind the paper's "15 of the 16"). SECONDARY: p1 on LAB71; p2 on both.
+  Information only (no decision): the same on the 63 instance-matched rows of the 71 (reported, not used for wording).
+
+DECISION RULE FOR THE PAPER'S WORDING (fixed now; applies to the primary p1, and separately to p2 for the 4-of-5 clause):
+  p <= 0.05          : the claim stands, stated with its p ("more than each configuration's robust share gives by chance,
+                       permutation p = ..."). Still post hoc, still few problems; the caveats stay.
+  0.05 < p <= 0.20   : WEAKENED: "somewhat more than chance (p = ...)", "weak evidence"; "look like a property of the
+                       problem" becomes "lean towards the problem".
+  p > 0.20           : NOT SHOWN: the text must say that one label on 15 of 16 problems is about what the robust shares
+                       alone give (null mean stated), and the problem-level reading rests only on what survives (S2, if
+                       its p <= 0.20) or is dropped to "consistent with, not evidence for".
+  The abstract follows the same branch. Whatever the result, it is reported in Section 4 with the null mean and p, and
+  in CHANGES_v36.md; a reversal is reported as a reversal.
+
+KNOWN LIMITS (stated now). The null keeps each configuration's robust share but not any link between label and problem
+difficulty: if hard problems are non-robust for every model because they are hard, a small p does not separate
+"fragility of the problem" from "difficulty of the problem" (draft 35's own caveat, harsher perturbation of some
+problems, also remains). The groups are few (16 / 15), so p is coarse. Single analysis, no other statistic will be
+substituted after seeing the result.

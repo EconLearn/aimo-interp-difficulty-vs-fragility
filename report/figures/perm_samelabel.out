@@ -1,0 +1,54 @@
+# perm_samelabel.py: permutation null for the 'same label' claim (computed, post hoc claim, pre-registered test; nothing OFFICIAL)
+   PREREG_samelabel.txt md5 6afb3e0fdfa4ea7af5f455d24deb463d (recorded: recorded 2026-10-22 08:25:29 UTC before perm_samelabel.py existed or ran)
+   md5 hf/train-main-v2.parquet                   3394dba3f01210c6f653ae0bea9f7de5
+   md5 fa8af758 parquet                           fc7e748697f128eb3dc09d0c3e452946
+   md5 calib.json (v135m)                         d5b98e21169c0ae100c14009340b7fca
+   md5 calib.json (v101m)                         d5b98e21169c0ae100c14009340b7fca
+   md5 g_common.py                                3329cc5816cacb75426a502d2f9cda0f
+   md5 recompute_matched_v32.py (loader source)   e4ba83dd764ffc440be356676f178de4
+
+## 80 labelled cases by exact text (PRIMARY: the paper's 15 of 16): 80 labelled rows, 59 robust (0.738); 16 multi-configuration problems
+   observed: S1 one label 15 of 16; with an NR label 5, all NR 4 -> S2 0.8
+   guard: reproduces recompute_matched_v32.out section 5 (16, 15, 5, 4) (multi, one label, with NR, all NR)
+   per configuration (rows, NR) in the case set: Qwen 12/4, Skywork 12/3, Olmo 9/2, DeepSeek 10/3, high 15/2, low 7/2, medium 15/5
+   multi-configuration problems (template: configuration label): T01 Qwen R DeepSeek R high R low R medium R; T02 Qwen R DeepSeek R high R medium R Skywork R; T04 Qwen R Olmo R DeepSeek R high R low R medium R Skywork R; T05 Qwen R high R; T06 Qwen R Olmo R DeepSeek R high R low R medium R Skywork R; T07 Qwen R Olmo R DeepSeek R high R low R medium R Skywork R; T08 Qwen R Olmo R high R medium R Skywork R; T09 high R low R medium R; T10 high R low NR medium R Skywork R; T11 Qwen NR low NR Skywork NR; T13 Qwen NR Skywork NR Olmo NR DeepSeek NR; T15 Skywork R Olmo R; T17 Olmo R DeepSeek R; T19 DeepSeek NR Skywork NR; T21 high R medium R Skywork R; T26 high NR medium NR
+   null S1: mean 5.88 of 16; 5th / 95th percentile 4 / 8; distribution 1: 10, 2: 68, 3: 414, 4: 1275, 5: 2218, 6: 2695, 7: 2007, 8: 925, 9: 311, 10: 65, 11: 12
+   p1 = P(S1 >= 15) = 0 / 10000 = 0.0000; (1 + 0) / 10001 = 0.0001
+   null S2: defined in 10000 of 10000 (undefined: 0); mean where defined 0.033; 5th / 95th percentile 0.000 / 0.125
+   p2 = P(S2 >= 0.800) = 0 / 10000 = 0.0000 (undefined counted as not reaching); conditional on defined 0 / 10000 = 0.0000
+
+## 71 labelled cases of the 82-row file (SECONDARY: 14 of 15): 71 labelled rows, 52 robust (0.732); 15 multi-configuration problems
+   observed: S1 one label 14 of 15; with an NR label 4, all NR 3 -> S2 0.75
+   guard: reproduces recompute_matched_v32.out section 5 (15, 14, 4, 3) (multi, one label, with NR, all NR)
+   per configuration (rows, NR) in the case set: Qwen 12/4, Skywork 3/1, Olmo 9/2, DeepSeek 10/3, high 15/2, low 7/2, medium 15/5
+   multi-configuration problems (template: configuration label): T01 Qwen R DeepSeek R high R low R medium R; T02 Qwen R DeepSeek R high R medium R; T04 Qwen R Olmo R DeepSeek R high R low R medium R; T05 Qwen R high R; T06 Qwen R Olmo R DeepSeek R high R low R medium R; T07 Qwen R Olmo R DeepSeek R high R low R medium R; T08 Qwen R Olmo R high R medium R; T09 high R low R medium R; T10 high R low NR medium R; T11 Qwen NR low NR; T13 Qwen NR Skywork NR Olmo NR DeepSeek NR; T15 Skywork R Olmo R; T17 Olmo R DeepSeek R; T21 high R medium R; T26 high NR medium NR
+   null S1: mean 5.95 of 15; 5th / 95th percentile 4 / 8; distribution 1: 10, 2: 70, 3: 382, 4: 1111, 5: 2234, 6: 2688, 7: 2060, 8: 1008, 9: 363, 10: 66, 11: 8
+   p1 = P(S1 >= 14) = 0 / 10000 = 0.0000; (1 + 0) / 10001 = 0.0001
+   null S2: defined in 10000 of 10000 (undefined: 0); mean where defined 0.044; 5th / 95th percentile 0.000 / 0.182
+   p2 = P(S2 >= 0.750) = 0 / 10000 = 0.0000 (undefined counted as not reaching); conditional on defined 0 / 10000 = 0.0000
+
+## 63 instance-matched cases of the 71 (information only, no decision): 63 labelled rows, 49 robust (0.778); 15 multi-configuration problems
+   observed: S1 one label 14 of 15; with an NR label 4, all NR 3 -> S2 0.75
+   per configuration (rows, NR) in the case set: Qwen 12/4, Skywork 3/1, Olmo 8/1, DeepSeek 8/2, high 14/2, low 7/2, medium 11/2
+   multi-configuration problems (template: configuration label): T01 Qwen R DeepSeek R high R low R medium R; T02 Qwen R DeepSeek R high R medium R; T04 Qwen R Olmo R DeepSeek R high R low R medium R; T05 Qwen R high R; T06 Qwen R Olmo R DeepSeek R high R low R medium R; T07 Qwen R Olmo R DeepSeek R high R low R medium R; T08 Qwen R Olmo R high R medium R; T09 high R low R medium R; T10 high R low NR medium R; T11 Qwen NR low NR; T13 Qwen NR Skywork NR Olmo NR DeepSeek NR; T15 Skywork R Olmo R; T17 Olmo R DeepSeek R; T21 high R medium R; T26 high NR medium NR
+   null S1: mean 6.94 of 15; 5th / 95th percentile 5 / 9; distribution 2: 4, 3: 43, 4: 299, 5: 1141, 6: 2336, 7: 2783, 8: 2064, 9: 997, 10: 283, 11: 50
+   p1 = P(S1 >= 14) = 0 / 10000 = 0.0000; (1 + 0) / 10001 = 0.0001
+   null S2: defined in 10000 of 10000 (undefined: 0); mean where defined 0.035; 5th / 95th percentile 0.000 / 0.143
+   p2 = P(S2 >= 0.750) = 0 / 10000 = 0.0000 (undefined counted as not reaching); conditional on defined 0 / 10000 = 0.0000
+
+## verdict under the pre-registered rule (p <= 0.05 stands; 0.05 < p <= 0.20 weakened; p > 0.20 not shown)
+   80, S1 (primary)   p = 0.0000 -> STANDS
+   71, S1             p = 0.0000 -> STANDS
+   80, S2             p = 0.0000 -> STANDS
+   71, S2             p = 0.0000 -> STANDS
+
+## POST HOC (not pre-registered; added after the result above): the same nulls, shuffling within configuration x hard / easy template
+   80 labelled cases: S1 15 of 16: null mean 8.40, 95th percentile 11, p1 = 0 / 10000 = 0.0000
+      hard-template problems only: one label 8 of 9: null mean 2.12, p = 0 / 10000 = 0.0000
+      S2 4 of 5 all NR: null defined in 10000, mean 0.098, p2 = 0 / 10000 = 0.0000
+   71 labelled cases: S1 14 of 15: null mean 8.61, 95th percentile 11, p1 = 1 / 10000 = 0.0001
+      hard-template problems only: one label 7 of 8: null mean 2.33, p = 3 / 10000 = 0.0003
+      S2 3 of 4 all NR: null defined in 10000, mean 0.123, p2 = 1 / 10000 = 0.0001
+   63 matched cases: S1 14 of 15: null mean 8.98, 95th percentile 11, p1 = 4 / 10000 = 0.0004
+      hard-template problems only: one label 7 of 8: null mean 2.69, p = 12 / 10000 = 0.0012
+      S2 3 of 4 all NR: null defined in 10000, mean 0.104, p2 = 4 / 10000 = 0.0004

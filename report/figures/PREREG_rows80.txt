@@ -1,0 +1,13 @@
+LANE ROWS80 (ledger 617). Written 2026-10-20 BEFORE any score on the 9 new rows is computed.
+DATA: train-main-v2 HF commit fa8af758 (miners19/scan/raw/hf_train_main_v2_fa8af758/, md5 fc7e7486...): 12 Skywork-OR1-Math-7B rows
+added 15 Oct on problems already in the file (9 labelled: 7 robust, 2 NR; 3 null). Labelled rows 71 -> 80; Skywork rows 3 -> 12.
+QUESTION 1 (decision): which Skywork route reads Skywork cases better - the OWN RUN (deployed in v111 / v115 / v121 / v112 / v116 /
+v122: K 3 at cap 9,000, robust iff >= 1 of 3 ended on its own; held read runs/v37_small_968679.log as lane G uses it) or the
+STAND-IN (v113 / v114: decision.json on the gpt-oss low reading + quick finish, the reads lane G holds)?
+SCORING: the 12 labelled Skywork rows (9 new + 3 old); stand-in through lane G's machinery (decision.json frozen = no refit, AND
+the leave-one-template-out refit on all 80 rows); own run as deployed; every held stand-in read reported separately and pooled.
+DECISION RULE (fixed now): SWITCH the nominees' Skywork route to the stand-in only if the stand-in beats the own run by >= 2 rows
+on the 9 NEW rows on the pooled reads AND is not worse on the 3 old rows AND not worse on the 2 new NR rows. Otherwise keep.
+QUESTION 2 (information): the deployed entry's LOTO accuracy on all 80 rows (old 71 unchanged + new 9), per configuration.
+QUESTION 3 (information, the scan's idea 2): refit decision.json on clear-cut rows only (max_drop <= 0.05 or >= 0.35), out-of-fold
+on all 80 rows, versus the deployed fit. Reported only; no build from it without a new pre-registration.

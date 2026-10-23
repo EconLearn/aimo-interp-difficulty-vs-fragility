@@ -1,0 +1,41 @@
+# paired_v38.py: paired tests against always robust, the 0.897 - 0.872 pair counts and bootstrap ties, template counts (computed, post hoc, not pre-registered; board totals are board scores, OFFICIAL)
+   md5 hf/train-main-v2.parquet                 3394dba3f01210c6f653ae0bea9f7de5
+   md5 fa8af758 parquet                         fc7e748697f128eb3dc09d0c3e452946
+   md5 calib.json (v135m)                       d5b98e21169c0ae100c14009340b7fca
+   md5 calib.json (v101m)                       d5b98e21169c0ae100c14009340b7fca
+   md5 g_common.py                              3329cc5816cacb75426a502d2f9cda0f
+   md5 xbench.py                                dca519f0caade5032c6abf168e9fe7f3
+   md5 x_pool.json                              3551d1b5fe6cc86189334e913952d66e
+   md5 dress log                                23837f31f6b3d477177944196cb287a8
+   md5 intervals_v37.py (bootstrap source)      1aa29d264d14db1c5d7124fb1dd105c5
+   md5 recompute_matched_v32.py (LOTO source)   e4ba83dd764ffc440be356676f178de4
+
+## 1. public cases: the entry (LOTO calls, v95 rules, dress read K 32) against always robust on the same cases
+   guard: LOTO right 55/63 matched, 17/22 newer matched, errors = recompute_matched_v32.out section 2 (T05 Qwen R, T16 Skywork R, T13 Skywork NR, T08 Olmo R, T25 high NR, T26 high NR, T09 low R, T10 low NR): ok
+   the 63 matched cases: the entry 55 of 63, always robust 49 of 63 (non-robust cases 14); non-robust calls 14: right 10, wrong 4; robust calls on non-robust cases 4 (both wrong); discordant 10 against 4; exact two-sided McNemar p = 0.1796 (0.18); Clopper-Pearson 95% interval of the entry 0.765 to 0.944 (0.77 to 0.94); always robust 0.778
+   the 22 newer (AIME-2026) cases among them: the entry 17 of 22, always robust 12 of 22 (non-robust cases 10); non-robust calls 9: right 7, wrong 2; robust calls on non-robust cases 3 (both wrong); discordant 7 against 2; exact two-sided McNemar p = 0.1797 (0.18); Clopper-Pearson 95% interval of the entry 0.546 to 0.922 (0.55 to 0.92); always robust 0.545
+
+## 2. boards (totals only; hidden labels are never read): the smallest two-sided sign-test p a total allows
+   a total k against always robust's r needs at least d = k - r non-robust calls; at best all d are right and no other non-robust call is made, so p >= 2 x 0.5^d (exact two-sided sign test on the discordant cases, capped at 1)
+   main board, the entry (15 of 21): always robust 10; gain +5; smallest p 0.0625 (0.062); never <= 0.05
+   small board, the entry (9 of 14): always robust 7; gain +2; smallest p 0.5000 (0.500); never <= 0.05
+   main board, earlier build (16 of 21): always robust 10; gain +6; smallest p 0.0312 (0.031); p <= 0.05 only if the entry made at most 6 non-robust calls
+   main board, earlier build (17 of 21): always robust 10; gain +7; smallest p 0.0156 (0.016); p <= 0.05 only if the entry made at most 9 non-robust calls
+   small board, earlier build (10 of 14): always robust 7; gain +3; smallest p 0.2500 (0.250); never <= 0.05
+
+## 3. agreement (0.897) against key-scored accuracy (0.872), 80 attempts pooled, the 32 hard matched cases
+   reads pooled: 6; attempts per read: v10_main_961407.log:oss_low_r3 16, v10_main_961407.log:oss_low_r4 16, v12_main_961488.log:oss_low_m1 16, v12_main_961488.log:oss_low_m2 16, v4_main_960863.log:oss_low_ans 8, v97_cheap_992342_case1.log:lat_ans_low 8; total 80
+   the K 32 headline read (dress log v88_dress_987666.log, Codabench 987666) among them: False
+   agreement, 80 pooled attempts: pairs 39; right 35, tied 0, misordered 4; AUC 0.897
+   key-scored accuracy, same attempts: pairs 39; right 34, tied 0, misordered 5; AUC 0.872
+   pairs ordered differently by the two: 1: high T25 NR / T22 R: agreement right, key misordered
+   net difference: +1.0 of 39 pairs = +0.0256 (the printed +0.025)
+   bootstrap re-run (intervals_v37.py scheme, default_rng(20261022), 10000 resamples, 2 dropped): interval +0.000 to +0.176 and share <= 0 0.593 reproduced (guard: ok)
+   of the kept resamples: difference exactly 0 (a tie) 0.593; below 0 0.000; above 0 0.407
+   templates of the differing pairs: T22, T25 (a resample without them gives a difference of exactly 0)
+
+## 4. template counts (hard = G.HARD, ledger 267b / 278)
+   G.HARD: 17 templates; labelled templates (71 cases): 27; with a matched case (63): 25
+   hard templates with a labelled case: 17; with a matched case: 15; hard templates whose labelled cases are all on other numbers: T19, T24
+   easy templates with a labelled case: 10; with a matched case: 10
+   matched cases: hard 32 (13 non-robust) on 15 templates; easy 31 (30 robust) on 10 templates
